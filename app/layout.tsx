@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 // @ts-ignore: CSS side-effect import type declarations handled by Next.js
 import "./globals.css";
+import "@/lib/self-ping";
 
 export const metadata: Metadata = {
   title:       "Nasi Goreng Mamas Ucok",
