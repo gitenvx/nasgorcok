@@ -1,0 +1,744 @@
+@import "tailwindcss";
+
+/* ══════════════════════════════════════
+   FONT FACES — taruh TTF di public/fonts/
+   ══════════════════════════════════════ */
+@font-face {
+  font-family: "GrungeDisplay";
+  src: url("/fonts/display.ttf") format("truetype");
+  font-weight: 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "MenuMono";
+  src: url("/fonts/mono.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* ══════════════════════════════════════
+   CSS VARIABLES
+   ══════════════════════════════════════ */
+:root {
+  --c-void:   #0a0a0a;
+  --c-ash:    #e8e0d0;
+  --c-red:    #cc1a1a;
+  --c-border: rgba(232, 224, 208, 0.18);
+  --c-dim:    rgba(232, 224, 208, 0.5);
+  --font-title: "GrungeDisplay", "Impact", "Arial Black", sans-serif;
+  --font-mono:  "MenuMono", "Courier New", monospace;
+}
+
+/* ══════════════════════════════════════
+   BASE
+   ══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  background-color: var(--c-void);
+  color: var(--c-ash);
+  font-family: var(--font-mono);
+}
+::selection { background: var(--c-red); color: var(--c-ash); }
+::-webkit-scrollbar        { width: 4px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: var(--c-border); border-radius: 2px; }
+
+/* ══════════════════════════════════════
+   OPENING ANIMATION
+   Semua elemen mulai invisible,
+   animate masuk urutan: title → nama → logos → menu → ticker
+   ══════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes glitchIn {
+  0%   { opacity: 0; clip-path: inset(40% 0 40% 0); transform: skewX(-4deg); }
+  20%  { opacity: 1; clip-path: inset(0% 0 80% 0);  transform: skewX(2deg); }
+  40%  { clip-path: inset(60% 0 0% 0);  transform: skewX(-1deg); }
+  60%  { clip-path: inset(20% 0 60% 0); transform: skewX(0deg); }
+  80%  { clip-path: inset(0% 0 0% 0);   transform: skewX(0deg); }
+  100% { opacity: 1; clip-path: inset(0% 0 0% 0); transform: skewX(0deg); }
+}
+
+/* Assign ke elemen */
+.anim-title {
+  animation: glitchIn 0.9s cubic-bezier(0.22,1,0.36,1) 0.1s both;
+}
+.anim-nama {
+  animation: fadeUp 0.7s ease-out 0.85s both;
+}
+.anim-logos-left {
+  animation: fadeDown 0.6s ease-out 1.1s both;
+}
+.anim-logos-right {
+  animation: fadeDown 0.6s ease-out 1.25s both;
+}
+.anim-divider {
+  animation: fadeIn 0.5s ease-out 1.3s both;
+}
+.anim-col-1 {
+  animation: fadeUp 0.7s ease-out 1.35s both;
+}
+.anim-col-2 {
+  animation: fadeUp 0.7s ease-out 1.5s both;
+}
+.anim-col-3 {
+  animation: fadeUp 0.7s ease-out 1.65s both;
+}
+.anim-ticker {
+  animation: fadeIn 0.6s ease-out 1.9s both;
+}
+
+
+/* ══════════════════════════════════════
+   TITLE RE BOX
+   ══════════════════════════════════════ */
+.title-re {
+  display: inline-block;
+  background: var(--c-red);
+  color: var(--c-ash);
+  padding: 0 6px;
+  line-height: 1;
+}
+
+/* ══════════════════════════════════════
+   BOX DENGAN BACKGROUND GAMBAR (btn-bg)
+   Untuk: "mamas ucok" box + header menu [ Nasi Goreng ]
+   Taruh file di: public/img/btn-bg.png
+   ══════════════════════════════════════ */
+.btn-bg {
+  background-image: url("/img/btn-bg.webp");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  transition: all 0.3s ease;
+}
+
+.btn-bg:hover {
+  filter:
+    brightness(1.2)
+    drop-shadow(0 0 5px rgba(255,255,255,0.7))
+    drop-shadow(0 0 15px rgba(255,255,255,0.5));
+}
+
+/* ══════════════════════════════════════
+   NAMA WARUNG BOX
+   ══════════════════════════════════════ */
+.nama-box {
+  font-family: var(--font-mono);
+  font-size: clamp(0.85rem, 2vw, 1.15rem);
+  letter-spacing: 0.06em;
+  padding: 5px 24px;
+  color: var(--c-void);          /* teks gelap di atas bg terang */
+  display: inline-block;
+  position: relative;
+}
+
+/* ══════════════════════════════════════
+   MENU HEADER (bracket style)
+   ══════════════════════════════════════ */
+.menu-header {
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+  color: var(--c-void);         /* teks gelap di atas bg gambar */
+  padding: 4px 12px;
+  display: inline-block;
+  white-space: nowrap;
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+
+/* ══════════════════════════════════════
+   MENU LIST ITEM
+   ══════════════════════════════════════ */
+.menu-item {
+  font-family: var(--font-mono);
+  font-size: clamp(0.72rem, 1.35vw, 0.92rem);
+  color: var(--c-ash);
+  padding: 1px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  width: fit-content;
+  cursor: default;
+}
+
+/* Underline animasi */
+.menu-item::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--c-ash);
+  transform: scaleX(0);
+  transform-origin: right;   /* mulai dari kanan = hidden */
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Hover: muncul dari kanan ke kiri */
+.menu-item:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;    /* expand dari kiri */
+}
+
+/* ══════════════════════════════════════
+   TECH LOGO
+   ══════════════════════════════════════ */
+.tech-logo {
+  font-size: clamp(14px, 1.5vw, 20px);
+  color: var(--c-ash);
+  opacity: 0.75;
+  transition: opacity 0.2s, transform 0.2s;
+  cursor: default;
+}
+.tech-logo:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+/* ══════════════════════════════════════
+   HOVER TEXT═════════════ */
+.hover-text {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-text::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+
+  transform: scaleX(0);
+  transform-origin: right;
+
+  transition: transform 0.3s ease;
+}
+
+.hover-text:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+/* ══════════════════════════════════════
+   KONTAK
+   ══════════════════════════════════════ */
+.kontak-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: clamp(0.68rem, 1.35vw, 0.88rem);
+  color: var(--c-ash);
+  margin-bottom: 4px;
+}
+.qris-box {
+  border: 1px solid var(--c-border);
+  background: rgba(232,224,208,0.04);
+  padding: 8px;
+}
+.qris-label {
+  font-family: var(--font-mono);
+  font-size: clamp(0.68rem, 1.2vw, 0.82rem);
+  text-align: center;
+  margin-bottom: 6px;
+  letter-spacing: 0.08em;
+  color: var(--c-ash);
+}
+.qris-label span { color: var(--c-red); }
+
+/* ══════════════════════════════════════
+   COLUMN DIVIDERS
+   ══════════════════════════════════════ */
+.col-divider { border-left: 1px solid var(--c-border); }
+
+/* ══════════════════════════════════════
+   TICKER
+   ══════════════════════════════════════ */
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 18s linear infinite;
+}
+.ticker-track:hover { animation-play-state: paused; }
+.footer-ticker {
+  font-family: var(--font-mono);
+  font-size: clamp(0.62rem, 1.2vw, 0.82rem);
+  color: var(--c-ash);
+  white-space: nowrap;
+  overflow: hidden;
+  border-top: 1px solid var(--c-border);
+  background: rgba(0,0,0,0.5);
+}
+
+/* ══════════════════════════════════════
+   PER-LETTER DROP ANIMATION
+   Tiap huruf jatuh dari atas + fade in
+   ══════════════════════════════════════ */
+@keyframes letterDrop {
+  0%   {
+    opacity: 0;
+    transform: translateY(-60px) scaleY(1.4);
+    filter: blur(6px);
+  }
+  60%  {
+    opacity: 1;
+    transform: translateY(6px) scaleY(0.95);
+    filter: blur(0px);
+  }
+  80%  {
+    transform: translateY(-3px) scaleY(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+    filter: blur(0px);
+  }
+}
+
+/* Huruf biasa */
+.letter-drop {
+  display: inline-block;
+  opacity: 0;
+  animation: letterDrop 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ══════════════════════════════════════
+   RE BOX — animasi lebih dramatis:
+   expand dari kiri ke kanan (reveal)
+   ══════════════════════════════════════ */
+@keyframes reReveal {
+  0%   {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    transform: scaleX(0.6);
+  }
+  40%  {
+    opacity: 1;
+    clip-path: inset(0 0% 0 0);
+    transform: scaleX(1.08);
+    background-color: #ff2222;
+  }
+  70%  {
+    transform: scaleX(0.97);
+    background-color: #cc1a1a;
+  }
+  100% {
+    opacity: 1;
+    clip-path: inset(0 0% 0 0);
+    transform: scaleX(1);
+    background-color: #cc1a1a;
+  }
+}
+
+.letter-re {
+  display: inline-block;
+  opacity: 0;
+  animation: reReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  /* padding horizontal biar kotak tidak mepet ke huruf sebelah */
+  padding-left: 0.12em;
+  padding-right: 0.12em;
+  /* vertical align biar sejajar dengan huruf lain */
+  vertical-align: baseline;
+  margin-right: 0.12em;
+}
+
+/* Override title-re agar tidak ada border yang bisa geser posisi */
+.title-re {
+  display: inline-block;
+  background: var(--c-red);
+  color: var(--c-ash);
+  line-height: inherit;
+}
+
+/* ══════════════════════════════════════
+   CRACK / SCRATCH TEXTURE OVERLAY
+
+   ══════════════════════════════════════ */
+@keyframes scratchReveal {
+  0%   { opacity: 0; stroke-dashoffset: 400; }
+  60%  { opacity: 1; stroke-dashoffset: 0; }
+  80%  { opacity: 0.8; }
+  100% { opacity: 0.22; stroke-dashoffset: 0; }
+}
+
+@keyframes scratchFlicker {
+  0%, 100% { opacity: 0.22; }
+  8%        { opacity: 0.35; }
+  12%       { opacity: 0.18; }
+  28%       { opacity: 0.25; }
+  50%       { opacity: 0.20; }
+  72%       { opacity: 0.30; }
+  85%       { opacity: 0.15; }
+  92%       { opacity: 0.28; }
+}
+
+.scratch-group { mix-blend-mode: screen; }
+
+.scratch-group line { stroke-dasharray: 400; stroke-dashoffset: 400; }
+
+.scratch-0  line { animation: scratchReveal 0.6s ease-out 0.2s forwards,  scratchFlicker 8s  ease-in-out 0.8s  infinite; }
+.scratch-1  line { animation: scratchReveal 0.5s ease-out 0.35s forwards, scratchFlicker 11s ease-in-out 0.95s infinite; }
+.scratch-2  line { animation: scratchReveal 0.7s ease-out 0.5s forwards,  scratchFlicker 9s  ease-in-out 1.2s  infinite; }
+.scratch-3  line { animation: scratchReveal 0.5s ease-out 0.65s forwards, scratchFlicker 13s ease-in-out 1.15s infinite; }
+.scratch-4  line { animation: scratchReveal 0.6s ease-out 0.8s forwards,  scratchFlicker 7s  ease-in-out 1.4s  infinite; }
+.scratch-5  line { animation: scratchReveal 0.4s ease-out 0.4s forwards,  scratchFlicker 10s ease-in-out 0.9s  infinite; }
+.scratch-6  line { animation: scratchReveal 0.7s ease-out 0.55s forwards, scratchFlicker 12s ease-in-out 1.25s infinite; }
+.scratch-7  line { animation: scratchReveal 0.5s ease-out 0.9s forwards,  scratchFlicker 9s  ease-in-out 1.4s  infinite; }
+.scratch-8  line { animation: scratchReveal 0.6s ease-out 1.0s forwards,  scratchFlicker 14s ease-in-out 1.6s  infinite; }
+.scratch-9  line { animation: scratchReveal 0.5s ease-out 1.1s forwards,  scratchFlicker 8s  ease-in-out 1.6s  infinite; }
+.scratch-10 line { animation: scratchReveal 0.6s ease-out 0.3s forwards,  scratchFlicker 11s ease-in-out 0.9s  infinite; }
+.scratch-11 line { animation: scratchReveal 0.5s ease-out 0.45s forwards, scratchFlicker 9s  ease-in-out 1.0s  infinite; }
+.scratch-12 line { animation: scratchReveal 0.7s ease-out 0.7s forwards,  scratchFlicker 13s ease-in-out 1.4s  infinite; }
+.scratch-13 line { animation: scratchReveal 0.5s ease-out 0.85s forwards, scratchFlicker 10s ease-in-out 1.35s infinite; }
+.scratch-14 line { animation: scratchReveal 0.6s ease-out 1.0s forwards,  scratchFlicker 8s  ease-in-out 1.6s  infinite; }
+.scratch-15 line { animation: scratchReveal 0.5s ease-out 0.6s forwards,  scratchFlicker 15s ease-in-out 1.1s  infinite; }
+.scratch-16 line { animation: scratchReveal 0.6s ease-out 1.15s forwards, scratchFlicker 11s ease-in-out 1.75s infinite; }
+.scratch-17 line { animation: scratchReveal 0.5s ease-out 1.25s forwards, scratchFlicker 9s  ease-in-out 1.85s infinite; }
+
+
+/* ══════════════════════════════════════════════
+   1. BG GRID + PIXEL SNOW
+   ══════════════════════════════════════════════ */
+
+/* Grid kotak gelap di atas background */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Snow / pixel sparkle — pakai box-shadow masif di satu div */
+@keyframes snowFlicker {
+  0%, 100% { opacity: 0; }
+  50%       { opacity: 1; }
+}
+
+.pixel-snow {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Tiap partikel = pseudo element kecil dengan animasi berbeda */
+.pixel-snow::before,
+.pixel-snow::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  background: white;
+  border-radius: 0;
+  /* 
+    box-shadow trick: ratusan titik putih tersebar
+    format: x y blur spread color
+    spread 0 = pixel 1x1 tajam
+  */
+  box-shadow:
+    /* baris 1 */
+    120px 80px 0 0 rgba(255,255,255,0.7),
+    340px 45px 0 0 rgba(255,255,255,0.5),
+    560px 130px 0 0 rgba(255,255,255,0.8),
+    780px 60px 0 0 rgba(255,255,255,0.4),
+    920px 200px 0 0 rgba(255,255,255,0.6),
+    1100px 90px 0 0 rgba(255,255,255,0.7),
+    1280px 155px 0 0 rgba(255,255,255,0.5),
+    1380px 40px 0 0 rgba(255,255,255,0.6),
+    /* baris 2 */
+    80px 280px 0 0 rgba(255,255,255,0.4),
+    250px 310px 0 0 rgba(255,255,255,0.7),
+    430px 260px 0 0 rgba(255,255,255,0.5),
+    660px 340px 0 0 rgba(255,255,255,0.8),
+    850px 295px 0 0 rgba(255,255,255,0.4),
+    1050px 270px 0 0 rgba(255,255,255,0.6),
+    1200px 320px 0 0 rgba(255,255,255,0.5),
+    1400px 280px 0 0 rgba(255,255,255,0.7),
+    /* baris 3 */
+    45px 450px 0 0 rgba(255,255,255,0.6),
+    190px 480px 0 0 rgba(255,255,255,0.4),
+    370px 420px 0 0 rgba(255,255,255,0.7),
+    530px 500px 0 0 rgba(255,255,255,0.5),
+    720px 440px 0 0 rgba(255,255,255,0.8),
+    900px 475px 0 0 rgba(255,255,255,0.4),
+    1080px 430px 0 0 rgba(255,255,255,0.6),
+    1310px 490px 0 0 rgba(255,255,255,0.5),
+    /* baris 4 */
+    160px 620px 0 0 rgba(255,255,255,0.7),
+    310px 660px 0 0 rgba(255,255,255,0.4),
+    490px 590px 0 0 rgba(255,255,255,0.6),
+    700px 640px 0 0 rgba(255,255,255,0.8),
+    880px 610px 0 0 rgba(255,255,255,0.5),
+    1060px 670px 0 0 rgba(255,255,255,0.4),
+    1240px 600px 0 0 rgba(255,255,255,0.7),
+    1420px 650px 0 0 rgba(255,255,255,0.5),
+    /* baris 5 */
+    70px 760px 0 0 rgba(255,255,255,0.5),
+    270px 800px 0 0 rgba(255,255,255,0.7),
+    450px 740px 0 0 rgba(255,255,255,0.4),
+    630px 820px 0 0 rgba(255,255,255,0.6),
+    810px 770px 0 0 rgba(255,255,255,0.8),
+    990px 840px 0 0 rgba(255,255,255,0.4),
+    1170px 760px 0 0 rgba(255,255,255,0.6),
+    1350px 810px 0 0 rgba(255,255,255,0.5);
+  animation: snowFlicker 3.2s ease-in-out infinite;
+}
+
+/* ::after versio ke-2 — offset posisi + delay berbeda = tidak sinkron */
+.pixel-snow::after {
+  box-shadow:
+    200px 110px 0 0 rgba(255,255,255,0.5),
+    420px 70px 0 0 rgba(255,255,255,0.7),
+    640px 160px 0 0 rgba(255,255,255,0.4),
+    860px 30px 0 0 rgba(255,255,255,0.8),
+    1010px 140px 0 0 rgba(255,255,255,0.5),
+    1190px 75px 0 0 rgba(255,255,255,0.6),
+    1330px 120px 0 0 rgba(255,255,255,0.4),
+    30px 360px 0 0 rgba(255,255,255,0.7),
+    320px 395px 0 0 rgba(255,255,255,0.5),
+    500px 340px 0 0 rgba(255,255,255,0.8),
+    740px 410px 0 0 rgba(255,255,255,0.4),
+    960px 370px 0 0 rgba(255,255,255,0.6),
+    1140px 350px 0 0 rgba(255,255,255,0.5),
+    1360px 400px 0 0 rgba(255,255,255,0.7),
+    110px 540px 0 0 rgba(255,255,255,0.4),
+    290px 570px 0 0 rgba(255,255,255,0.6),
+    470px 510px 0 0 rgba(255,255,255,0.8),
+    650px 555px 0 0 rgba(255,255,255,0.4),
+    830px 520px 0 0 rgba(255,255,255,0.7),
+    1010px 565px 0 0 rgba(255,255,255,0.5),
+    1220px 530px 0 0 rgba(255,255,255,0.6),
+    1410px 570px 0 0 rgba(255,255,255,0.4),
+    50px 700px 0 0 rgba(255,255,255,0.6),
+    230px 730px 0 0 rgba(255,255,255,0.8),
+    410px 685px 0 0 rgba(255,255,255,0.4),
+    590px 720px 0 0 rgba(255,255,255,0.5),
+    770px 695px 0 0 rgba(255,255,255,0.7),
+    950px 740px 0 0 rgba(255,255,255,0.4),
+    1130px 700px 0 0 rgba(255,255,255,0.6),
+    1390px 730px 0 0 rgba(255,255,255,0.8);
+  animation: snowFlicker 4.7s ease-in-out 1.6s infinite;
+}
+
+
+/* ══════════════════════════════════════════════
+   2. H1 SCANLINE / HIGHLIGHT SWEEP EFFECT
+   ══════════════════════════════════════════════ */
+
+@keyframes scanSweep {
+  0%   { background-position: -100% center; }
+  100% { background-position: 250% center; }
+}
+
+.h1-scanline {
+  position: relative;
+  display: inline-block;
+}
+
+/* Sweep highlight yang lewat pelan */
+.h1-scanline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255,255,255,0.08) 45%,
+    rgba(255,255,255,0.18) 50%,
+    rgba(255,255,255,0.08) 55%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: scanSweep 4s ease-in-out 2s infinite;
+  pointer-events: none;
+}
+
+/* Scanline horizontal tipis yang bergerak */
+@keyframes scanLine {
+  0%   { top: -5%; opacity: 0; }
+  5%   { opacity: 0.6; }
+  95%  { opacity: 0.6; }
+  100% { top: 105%; opacity: 0; }
+}
+
+.h1-scanline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.12) 20%,
+    rgba(255,255,255,0.25) 50%,
+    rgba(255,255,255,0.12) 80%,
+    transparent
+  );
+  animation: scanLine 6s linear 1.5s infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+/* ══════════════════════════════════════════════
+   3. RED DOT PULSE ANIMATION
+   ══════════════════════════════════════════════ */
+
+@keyframes dotPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(204, 26, 26, 0.7),
+                0 0 0 0 rgba(204, 26, 26, 0.4);
+  }
+  40% {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 4px rgba(204, 26, 26, 0.2),
+                0 0 8px 2px rgba(204, 26, 26, 0.3);
+  }
+  70% {
+    transform: scale(0.92);
+    box-shadow: 0 0 0 7px rgba(204, 26, 26, 0.05),
+                0 0 12px 4px rgba(204, 26, 26, 0.15);
+  }
+}
+
+@keyframes dotGlow {
+  0%, 100% { opacity: 1; }
+  45%       { opacity: 0.6; }
+  55%       { opacity: 1; }
+}
+
+.menu-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-red);
+  flex-shrink: 0;
+  animation:
+    dotPulse 2.4s ease-in-out infinite,
+    dotGlow  2.4s ease-in-out infinite;
+}
+
+
+/* ══════════════════════════════════════
+   LYRICS DISPLAY
+   ══════════════════════════════════════ */
+.lyrics-container {
+  position: fixed;
+  bottom: 48px;        /* di atas ticker bar */
+  left: 0;
+  right: 0;
+  z-index: 40;
+  pointer-events: none;
+  padding: 0 5vw;
+  overflow: hidden;
+  max-height: 80px;
+}
+
+.lyrics-inner {
+  text-align: center;
+  line-height: 1.8;
+}
+
+.lyrics-word {
+  display: inline;
+  font-family: var(--font-mono);
+  font-size: clamp(0.8rem, 2vw, 1.1rem);
+  color: rgba(232, 224, 208, 0.25);
+  transition: color 0.15s ease, text-shadow 0.15s ease, font-size 0.1s ease;
+}
+
+/* Kata yang sedang diucapkan */
+.lyrics-active {
+  color: rgba(232, 224, 208, 1) !important;
+  text-shadow:
+    0 0 12px rgba(232, 224, 208, 0.6),
+    0 0 30px rgba(232, 224, 208, 0.2);
+  font-size: clamp(0.9rem, 2.2vw, 1.2rem);
+}
+
+/* Kata yang sudah lewat */
+.lyrics-past {
+  color: rgba(232, 224, 208, 0.12);
+}
+
+
+/* ══════════════════════════════════════
+   QRIS PHOTO FRAME — polaroid/camera style
+   ══════════════════════════════════════ */
+.qris-frame {
+  position: relative;
+  padding: 8px;
+  border: 1px solid rgba(232,224,208,0.25);
+  box-shadow:
+    0 0 0 1px rgba(232,224,208,0.08),
+    inset 0 0 0 1px rgba(232,224,208,0.06),
+    4px 4px 12px rgba(0,0,0,0.6);
+  background: rgba(10,10,10,0.8);
+}
+
+/* Corner brackets — 4 sudut */
+.qris-frame::before,
+.qris-frame::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: rgba(232,224,208,0.5);
+  border-style: solid;
+}
+
+/* Sudut kiri atas + kanan bawah */
+.qris-frame::before {
+  top: -1px; left: -1px;
+  border-width: 2px 0 0 2px;
+}
+.qris-frame::after {
+  bottom: -1px; right: -1px;
+  border-width: 0 2px 2px 0;
+}
+/* highlight text */
+.re-textbox {
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 1.4vw, 0.9rem);
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  color: #0a0a0a;
+
+  /* Highlight hanya selebar teks per baris */
+  background: rgba(200, 200, 195, 0.85);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 2px 8px;
+
+  /* Biar highlight tidak full width */
+  display: inline;
+}
