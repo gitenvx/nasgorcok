@@ -5,7 +5,7 @@
   "scripts": {
   "dev": "next dev",
   "build": "next build",
-  "start": "next start --hostname 0.0.0.0 --port $PORT"
+  "start": "node .next/standalone/server.js"
   },
   "dependencies": {
     "next": "15.5.18",
