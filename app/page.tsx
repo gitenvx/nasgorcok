@@ -30,10 +30,12 @@ export default function Home() {
     >
 
       {/* ── CRACK / SCRATCH TEXTURE ──*/}
-      <AudioAutoplay />
+      <div className="hidden md:grid h-full">
+        <AudioAutoplay />
+      </div>
       <CrackOverlay />
       <CrackOverlay />
-      {/* TAMBAH INI ↓ */}
+
       <div className="bg-grid" aria-hidden="true" />
       <div className="pixel-snow" aria-hidden="true" />
 
