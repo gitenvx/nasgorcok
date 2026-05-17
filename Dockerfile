@@ -11,7 +11,5 @@ ENV NODE_ENV=production
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
-#COPY start.sh ./
-#RUN chmod +x start.sh
-#CMD ["bash", "start.sh"]
-CMD ["node", "server.js"]
+EXPOSE 3000
+CMD ["npm", "start"]
