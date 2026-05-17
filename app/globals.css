@@ -741,4 +741,12 @@ html {
 
   /* Biar highlight tidak full width */
   display: inline;
+  transition: all 0.3s ease;
+}
+
+.re-textbox:hover {
+  filter:
+    brightness(1.2)
+    drop-shadow(0 0 5px rgba(255,255,255,0.7))
+    drop-shadow(0 0 15px rgba(255,255,255,0.5));
 }

@@ -42,7 +42,7 @@ export default function Home() {
           ══════════════════════════════════════ */}
       <div className="relative z-10 flex flex-col min-h-screen">
 
-        {/* ── HEADER: logos kiri + title + logos kanan ── */}
+        {/* ── HEADER: title ── */}
         <header className="flex items-center justify-between px-3 md:px-6 pt-3 gap-2">
 
            {/* */}
@@ -93,8 +93,8 @@ export default function Home() {
             {/* Nama warung — pakai background gambar btn-bg */}
             <div className="anim-nama flex justify-center mt-1">
               <div
-                className="nama-box btn-bg hover-text"
-                style={{ minWidth: "180px", textAlign: "center" }}
+                className="menu-header btn-bg mb-3 hover-text"
+                style={{ textAlign: "center", display: "inline"}}
               >
                 {NAMA_WARUNG}
               </div>
@@ -144,7 +144,7 @@ export default function Home() {
               {/* ← quotes */}
                 <div className="px-4 md:px-5 mt-4">
                   <p>
-                    <span className="re-textbox">
+                    <span className="re-textbox hover-text">
                       Nasi goreng kaki lima, dimasak dengan cinta.<br/>
                       Tersedia setiap hari 18:00 - 00:00 WITA, harga bisa ditanya.<br/>
                       Jualan kok, kalau tidak meriang hehe.
@@ -161,12 +161,12 @@ export default function Home() {
           </div>
 
           {/* Mobile */}
-          <div className="md:hidden flex flex-col">
+          <div className="md:hidden flex flex-col md:grid-cols-2 h-full">
 
             {/* Nasi Goreng */}
             <div className="border-b" style={{ borderColor: "var(--c-border)" }}>
               <div className="m-3">
-                <span className="menu-header btn-bg">[ Nasi Goreng ]</span>
+                <span className="menu-header btn-bg hover-text">[ Nasi Goreng ]</span>
               </div>
               <ul className="px-4 pb-4 space-y-0.5">
                 {NASI_GORENG.map(item => (
@@ -176,12 +176,8 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-            </div>
-
-            {/* Mie Capcay */}
-            <div className="border-b" style={{ borderColor: "var(--c-border)" }}>
               <div className="m-3">
-                <span className="menu-header btn-bg">[ Mie &gt; Capcay &gt; Kwetiau ]</span>
+                <span className="menu-header btn-bg hover-text">[ Mie &gt; Capcay &gt; Kwetiau ]</span>
               </div>
               <ul className="px-4 pb-4 space-y-0.5">
                 {MIE_CAPCAY.map(item => (
@@ -191,6 +187,16 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
+              {/* ← quotes */}
+                <div className="px-4 md:px-5 mt-4">
+                  <p>
+                    <span className="re-textbox hover-text">
+                      Nasi goreng kaki lima, dimasak dengan cinta.<br/>
+                      Tersedia setiap hari 18:00 - 00:00 WITA, harga bisa ditanya.<br/>
+                      Jualan kok, kalau tidak meriang hehe.
+                    </span>
+                  </p>
+                </div>
             </div>
 
             {/* Kontak */}

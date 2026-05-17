@@ -9,7 +9,7 @@ export default function KontakColumn() {
     <div className="col-divider flex flex-col py-4 px-4 md:px-5">
 
       {/* Header pakai btn-bg */}
-      <div className="menu-header btn-bg mb-3 hover-text">[ Kontak ]</div>
+      <div className="menu-header max-w-40 btn-bg mb-3 hover-text" style={{display: "inline"}}>[ Kontak ]</div>
 
       <div className="space-y-1 mb-4 hover-text">
 
@@ -35,7 +35,7 @@ export default function KontakColumn() {
 
       {/* QRIS */}
       <div className="qris-box mt-auto hover-text">
-        <div className="btn-bg mb-3 mx-1" style={{textAlign: "left", color: "black", padding: "5px", marginLeft: "-10px"}}>
+        <div className="menu-header btn-bg mb-3 hover-text">
           [ Pembayaran QRIS ]
         </div>
 
