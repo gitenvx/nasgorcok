@@ -9,7 +9,7 @@ export default function KontakColumn() {
     <div className="col-divider flex flex-col py-4 px-4 md:px-5">
 
       {/* Header pakai btn-bg */}
-      <div className="menu-header max-w-40 btn-bg mb-3 hover-text" style={{display: "inline"}}>[ Kontak ]</div>
+      <div className="menu-header max-w-45 btn-bg mb-3 hover-text" style={{display: "inline"}}>[ Kontak ]</div>
 
       <div className="space-y-1 mb-4 hover-text">
 

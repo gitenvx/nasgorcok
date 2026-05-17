@@ -10,7 +10,7 @@ import KontakColumn from "@/components/KontakColumn";
 import TickerBar    from "@/components/TickerBar";
 import CrackOverlay from "@/components/CrackOverlay";
 import AudioAutoplay from "@/components/AudioAutoplay";
-import { NAMA_WARUNG, NASI_GORENG, MIE_CAPCAY } from "@/lib/menu-data";
+import { NAMA_WARUNG, NASI_GORENG, MIE_CAPCAY, KATA } from "@/lib/menu-data";
 
 /* ─── Tech logo rows ─────────────────────────────── */
 const LOGOS_CENTER  = [SiPython, SiNodedotjs, SiTypescript, SiGit, SiGithub, SiDocker, FaUbuntu, FaWindows];
@@ -115,7 +115,7 @@ export default function Home() {
             >
               mENu
             </p>
-            {/* Logos tengsh */}
+            {/* Logos tengah */}
             <div className="w-full flex items-center justify-center gap-2 flex-wrap mt-2">
               {LOGOS_CENTER.map((Icon, i) => (
                 <Icon key={i} className="tech-logo" aria-hidden="true" />
@@ -147,9 +147,7 @@ export default function Home() {
                 <div className="px-4 md:px-5 mt-4">
                   <p>
                     <span className="re-textbox hover-text">
-                      Nasi goreng kaki lima, dimasak dengan cinta.<br/>
-                      Tersedia setiap hari 18:00 - 00:00 WITA, harga bisa ditanya.<br/>
-                      Jualan kok, kalau tidak meriang hehe.
+                      {KATA[0]}<br/>{KATA[1]}<br/>{KATA[2]}
                     </span>
                   </p>
                 </div>
@@ -193,9 +191,7 @@ export default function Home() {
                 <div className="px-4 md:px-5 mt-4">
                   <p>
                     <span className="re-textbox hover-text">
-                      Nasi goreng kaki lima, dimasak dengan cinta.<br/>
-                      Tersedia setiap hari 18:00 - 00:00 WITA, harga bisa ditanya.<br/>
-                      Jualan kok, kalau tidak meriang hehe.
+                      {KATA[0]}<br/>{KATA[1]}<br/>{KATA[2]}
                     </span>
                   </p>
                 </div>

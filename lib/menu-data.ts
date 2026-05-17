@@ -2,6 +2,13 @@
 
 export const NAMA_WARUNG = "mamas ucok";
 
+export const KATA = [
+  "Nasi goreng kaki lima, dimasak dengan cinta",
+  "Buka setiap hari 18:00 - 00:00 WITA",
+  "Harga aman merakyat dari rakyat",
+  "Jualan kok, liburnya tak menentu"
+];
+
 export const NASI_GORENG = [
   "telur dadar",
   "telur ceplok",
