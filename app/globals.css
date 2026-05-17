@@ -149,9 +149,9 @@ html {
    ══════════════════════════════════════ */
 .menu-header {
   font-family: var(--font-mono);
-  font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+  font-size: clamp(0.9rem, 1.5vw, 0.95rem);
   color: var(--c-void);         /* teks gelap di atas bg gambar */
-  padding: 4px 12px;
+  padding: 6px 14px;
   display: inline-block;
   white-space: nowrap;
   margin-bottom: 0.75rem;
@@ -163,12 +163,12 @@ html {
    ══════════════════════════════════════ */
 .menu-item {
   font-family: var(--font-mono);
-  font-size: clamp(0.72rem, 1.35vw, 0.92rem);
+  font-size: clamp(0.9rem, 1.35vw, 0.92rem);
   color: var(--c-ash);
-  padding: 1px 0;
+  padding: 3px 0;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   position: relative;
   width: fit-content;
   cursor: default;
@@ -198,7 +198,7 @@ html {
    TECH LOGO
    ══════════════════════════════════════ */
 .tech-logo {
-  font-size: clamp(14px, 1.5vw, 20px);
+  font-size: clamp(28px, 3.5vw, 40px);
   color: var(--c-ash);
   opacity: 0.75;
   transition: opacity 0.2s, transform 0.2s;
@@ -244,9 +244,9 @@ html {
   align-items: center;
   gap: 8px;
   font-family: var(--font-mono);
-  font-size: clamp(0.68rem, 1.35vw, 0.88rem);
+  font-size: clamp(0.85rem, 1.35vw, 0.88rem);
   color: var(--c-ash);
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 .qris-box {
   border: 1px solid var(--c-border);
@@ -637,8 +637,8 @@ html {
 
 .menu-dot {
   display: inline-block;
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--c-red);
   flex-shrink: 0;

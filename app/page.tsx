@@ -58,7 +58,7 @@ export default function Home() {
                          flex items-center justify-center"
               style={{
                 fontFamily:    "var(--font-title)",
-                fontSize:      "clamp(2rem, 9vw, 7rem)",
+                fontSize:      "clamp(2.8rem, 9vw, 7rem)", 
                 color:         "var(--c-ash)",
                 textShadow:    "2px 4px 0 rgba(0,0,0,0.9)",
                 letterSpacing: "0.15em",
@@ -161,14 +161,14 @@ export default function Home() {
           </div>
 
           {/* Mobile */}
-          <div className="md:hidden flex flex-col md:grid-cols-2 h-full">
+          <div className="md:hidden flex flex-col px-2 md:grid-cols-2 h-full">
 
             {/* Nasi Goreng */}
             <div className="border-b" style={{ borderColor: "var(--c-border)" }}>
               <div className="m-3">
                 <span className="menu-header btn-bg hover-text">[ Nasi Goreng ]</span>
               </div>
-              <ul className="px-4 pb-4 space-y-0.5">
+              <ul className="px-5 pb-5 space-y-1">
                 {NASI_GORENG.map(item => (
                   <li key={item} className="menu-item">
                     <span className="menu-dot" aria-hidden="true" />
@@ -179,7 +179,7 @@ export default function Home() {
               <div className="m-3">
                 <span className="menu-header btn-bg hover-text">[ Mie &gt; Capcay &gt; Kwetiau ]</span>
               </div>
-              <ul className="px-4 pb-4 space-y-0.5">
+              <ul className="px-5 pb-5 space-y-1">
                 {MIE_CAPCAY.map(item => (
                   <li key={item} className="menu-item">
                     <span className="menu-dot" aria-hidden="true" />
