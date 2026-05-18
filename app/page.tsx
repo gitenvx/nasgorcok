@@ -26,11 +26,8 @@ export default function Home() {
         backgroundAttachment: "fixed",
       }}
     >
-      {/* ── Audio ── */}
-      <AudioAutoplay />
 
       {/* ── CRACK / SCRATCH TEXTURE ── */}
-      <CrackOverlay />
       <CrackOverlay />
 
       {/* ── BG EFFECTS ── */}
@@ -41,14 +38,16 @@ export default function Home() {
           KONTEN UTAMA
           ══════════════════════════════════════ */}
       <div className="relative z-10 flex flex-col min-h-screen">
+        {/* ── Audio ── */}
+        <AudioAutoplay />
 
         {/* ── NAVBAR — sticky, blur, transparan ── */}
         <header
           className="sticky top-0 z-30 flex flex-col items-center justify-center
                      px-3 md:px-6 pt-3 pb-2"
           style={{
-            backdropFilter:       "blur(5px)",
-            WebkitBackdropFilter: "blur(5px)",
+            backdropFilter:       "blur(4px)",
+            WebkitBackdropFilter: "blur(4px)",
             background:           "rgba(10,10,10,0.40)",
             borderBottom:         "1px solid var(--c-border)",
           }}
