@@ -36,11 +36,6 @@ export default function Home() {
       <audio ref={audioRef} src="/audio/bg.mp3" preload="auto" playsInline />
       <AudioAutoplay audioRef={audioRef} />
 
-      {/* ── Desktop: lirik fixed bottom ── */}
-      <div className="hidden md:block">
-        <LyricsDisplay audioRef={audioRef} inline={false} />
-      </div>
-
       {/* ── CRACK / SCRATCH TEXTURE ── */}
       <CrackOverlay />
 
@@ -109,7 +104,7 @@ export default function Home() {
           >
             mENu
           </p>
-          <div className="w-full flex items-center justify-center gap-2 flex-wrap mt-2">
+          <div className="anim-nama w-full flex items-center justify-center gap-2 flex-wrap mt-2">
             {LOGOS_CENTER.map((Icon, i) => (
               <Icon key={i} className="tech-logo" aria-hidden="true" />
             ))}
@@ -137,9 +132,16 @@ export default function Home() {
                 <LoveAnimation />
               </div>
             </div>
-            <div className="anim-col-2">
+
+            {/* Kolom tengah — Mie + Lirik di bawah */}
+            <div className="anim-col-2 flex flex-col">
               <MenuColumn title="[ Mie > Capcay > Kwetiau ]" items={MIE_CAPCAY} hasDivider />
+              {/* Lirik + play button — sejajar teks KATA di kolom kiri */}
+              <div className="mt-4 pr-0">
+                <LyricsDisplay audioRef={audioRef} />
+              </div>
             </div>
+
             <div className="anim-col-3">
               <KontakColumn />
             </div>
@@ -192,9 +194,9 @@ export default function Home() {
               <KontakColumn />
             </div>
 
-            {/* Mobile: lirik inline di bawah kontak */}
-            <div className="px-4 mb-4">
-              <LyricsDisplay audioRef={audioRef} inline={true} />
+            {/* Mobile: lirik + play button di bawah kontak */}
+            <div className="px-4 mb-4 mt-3">
+              <LyricsDisplay audioRef={audioRef} />
             </div>
 
           </div>

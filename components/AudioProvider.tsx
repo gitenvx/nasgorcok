@@ -11,7 +11,7 @@ export default function AudioProvider() {
       <AudioAutoplay audioRef={audioRef} />
       {/* Desktop only — fixed bottom */}
       <div className="hidden md:block">
-        <LyricsDisplay audioRef={audioRef} inline={false} />
+        <LyricsDisplay audioRef={audioRef} />
       </div>
     </>
   );

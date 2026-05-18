@@ -675,7 +675,7 @@ html {
   pointer-events: none;
   padding: 0 5vw;
   overflow: hidden;
-  max-height: 80px;
+  max-height: 100px;
 }
 
 .lyrics-inner {
@@ -685,7 +685,7 @@ html {
 
 .lyrics-word {
   display: inline;
-  font-family: var(--font-mono);
+  font-family: var(--font-title);
   font-size: clamp(0.8rem, 2vw, 1.1rem);
   color: rgba(232, 224, 208, 0.25);
   transition: color 0.15s ease, text-shadow 0.15s ease, font-size 0.1s ease;

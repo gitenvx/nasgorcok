@@ -1,18 +1,18 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 interface Word { word: string; start: number; end: number; }
 interface Props {
   audioRef: React.RefObject<HTMLAudioElement | null>;
-  inline?: boolean; // ← true = render inline (mobile), false = fixed (desktop)
 }
 
 const BEFORE = 3;
 const AFTER  = 4;
 
-export default function LyricsDisplay({ audioRef, inline = false }: Props) {
+export default function LyricsDisplay({ audioRef }: Props) {
   const [words, setWords]           = useState<Word[]>([]);
   const [currentIdx, setCurrentIdx] = useState(-1);
+  const [isPlaying, setIsPlaying]   = useState(false);
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
@@ -24,7 +24,24 @@ export default function LyricsDisplay({ audioRef, inline = false }: Props) {
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio || words.length === 0) return;
+    if (!audio) return;
+    const onPlay  = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
+    setIsPlaying(!audio.paused);
+    audio.addEventListener("play",  onPlay);
+    audio.addEventListener("pause", onPause);
+    return () => {
+      audio.removeEventListener("play",  onPlay);
+      audio.removeEventListener("pause", onPause);
+    };
+  }, [audioRef]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio || words.length === 0 || !isPlaying) {
+      cancelAnimationFrame(rafRef.current);
+      return;
+    }
     const tick = () => {
       const t = audio.currentTime;
       let idx = -1;
@@ -36,78 +53,97 @@ export default function LyricsDisplay({ audioRef, inline = false }: Props) {
     };
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [audioRef, words]);
+  }, [audioRef, words, isPlaying]);
 
-  if (words.length === 0 || currentIdx === -1) return null;
+  const togglePlay = useCallback(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (audio.paused) audio.play().catch(() => {});
+    else audio.pause();
+  }, [audioRef]);
 
   const start   = Math.max(0, currentIdx - BEFORE);
   const end     = Math.min(words.length, currentIdx + AFTER + 1);
-  const visible = words.slice(start, end);
+  const visible = (isPlaying && currentIdx !== -1) ? words.slice(start, end) : [];
 
-  const content = (
-    <>
-      {visible.map((w, i) => {
-        const globalIdx = start + i;
-        const isActive  = globalIdx === currentIdx;
-        const isPast    = globalIdx < currentIdx;
-        return (
-          <span
-            key={globalIdx}
-            style={{
+  return (
+    <div style={{
+      display:      "flex",
+      alignItems:   "center",
+      gap:          "10px",
+      borderTop:    "none",
+      borderLeft:   "none",
+      borderRight:  "1px solid var(--c-border)",
+      borderBottom: "1px solid var(--c-border)",
+      background:   "rgba(232,224,208,0.04)",
+      padding:      "8px 10px 8px 0",
+    }}>
+      {/* Play/Pause button */}
+      <button
+        onClick={togglePlay}
+        aria-label={isPlaying ? "Pause music" : "Play music"}
+        style={{
+          display:        "flex",
+          alignItems:     "center",
+          justifyContent: "center",
+          width:          "30px",
+          minWidth:       "30px",
+          height:         "30px",
+          background:     isPlaying ? "var(--c-red)" : "rgba(232,224,208,0.12)",
+          border:         "1px solid rgba(232,224,208,0.3)",
+          color:          "var(--c-ash)",
+          cursor:         "pointer",
+          flexShrink:     0,
+          transition:     "background 0.2s ease",
+        }}
+      >
+        {isPlaying ? (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="5" y="3" width="4" height="18" rx="1" />
+            <rect x="15" y="3" width="4" height="18" rx="1" />
+          </svg>
+        ) : (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5,3 19,12 5,21" />
+          </svg>
+        )}
+      </button>
+
+      {/* Lyrics */}
+      <span style={{ flex: 1, textAlign: "center", minHeight: "1.4em" }}>
+        {visible.length > 0 ? visible.map((w, i) => {
+          const globalIdx = start + i;
+          const isActive  = globalIdx === currentIdx;
+          const isPast    = globalIdx < currentIdx;
+          return (
+            <span key={globalIdx} style={{
               display:         "inline",
-              fontFamily:      "var(--font-mono)",
-              fontSize:        isActive ? "clamp(0.95rem, 2.2vw, 1.2rem)" : "clamp(0.75rem, 1.8vw, 1rem)",
+              fontFamily:      "var(--font-title)",
+              letterSpacing:   "0.12em",
+              textTransform:   "uppercase",
+              fontSize:        isActive ? "clamp(1.1rem, 2.2vw, 1.3rem)" : "clamp(0.9rem, 1.8vw, 1.1rem)",
               color:           isActive ? "rgba(232,224,208,1)" : isPast ? "rgba(232,224,208,0.25)" : "rgba(232,224,208,0.5)",
               backgroundColor: isActive ? "rgba(204,26,26,1)" : "transparent",
-              padding:         isActive ? "0 5px" : "0",
+              padding:         isActive ? "0 4px" : "0",
               textShadow:      isActive
-                ? "0 0 8px rgba(255,255,255,0.9), 0 0 20px rgba(255,255,255,0.6), 0 0 40px rgba(255,255,255,0.3), 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000"
+                ? "0 0 8px rgba(255,255,255,0.9), 1px 1px 0 #000, -1px -1px 0 #000"
                 : "none",
-              transition: "color 0.15s ease, text-shadow 0.15s ease, font-size 0.1s ease, background-color 0.15s ease",
-            }}
-          >
-            {w.word}{" "}
+              transition: "color 0.15s ease, background-color 0.15s ease, font-size 0.1s ease",
+            }}>
+              {w.word}{" "}
+            </span>
+          );
+        }) : (
+          <span style={{
+            fontFamily:    "var(--font-title)",
+            fontSize:      "clamp(0.9rem, 1.8vw, 1.1rem)",
+            letterSpacing: "0.15em",
+            color:         "rgba(232,224,208,0.6)",
+          }}>
+            {isPlaying ? "♪" : "TAP ▶ TO PLAY MUSIC"}
           </span>
-        );
-      })}
-    </>
-  );
-
-  // INLINE MODE — untuk mobile, render biasa di dalam flow
-  if (inline) {
-    return (
-      <div style={{
-        textAlign:  "center",
-        padding:    "8px 16px",
-        border:     "1px solid var(--c-border)",
-        background: "rgba(232,224,208,0.04)",
-        marginTop:  "12px",
-      }}>
-        {content}
-      </div>
-    );
-  }
-
-  // FIXED MODE — untuk desktop
-  return (
-    <div
-      aria-label="Lirik"
-      style={{
-        position:      "fixed",
-        bottom:        "48px",
-        left:          "50%",
-        transform:     "translateX(-50%)",
-        zIndex:        40,
-        pointerEvents: "none",
-        textAlign:     "center",
-        width:         "47vw",
-        maxWidth:      "425px",
-        border:        "1px solid var(--c-border)",
-        background:    "rgba(232,224,208,0.04)",
-        padding:       "8px 16px",
-      }}
-    >
-      {content}
+        )}
+      </span>
     </div>
   );
 }
