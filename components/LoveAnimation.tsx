@@ -29,7 +29,7 @@ export default function LoveAnimation() {
               letter-spacing: 2px;
               white-space: nowrap;
               font-family: monospace;
-            ">i love you</div>
+            ">i love nasgor</div>
           </div>
         </div>
       `;

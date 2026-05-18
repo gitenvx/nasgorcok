@@ -83,15 +83,15 @@ export default function Home() {
             ))}
           </h1>
 
-          <div className="anim-nama flex justify-center mt-1">
-            <div className="menu-header btn-bg hover-text" style={{ textAlign: "center", display: "inline", marginBottom: 0 }}>
-              {NAMA_WARUNG}
-            </div>
-          </div>
+          
         </header>
 
+        
         {/* mENu + logos */}
         <div className="text-center pt-3 pb-1">
+          <div className="menu-header btn-bg mb-1 hover-text" style={{ textAlign: "center", display: "inline", marginBottom: 0 }}>
+              {NAMA_WARUNG}
+            </div><br/>
           <p
             className="anim-nama hover-text"
             style={{
@@ -147,8 +147,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Mobile */}
-          <div className="md:hidden flex flex-col px-2">
+          {/* START Mobile */}
+          <div className="anim-nama md:hidden flex flex-col px-2">
 
             <div className="border-b" style={{ borderColor: "var(--c-border)" }}>
               <div className="m-3">
@@ -163,7 +163,6 @@ export default function Home() {
                 ))}
               </ul>
             </div>
-
             <div className="border-b" style={{ borderColor: "var(--c-border)" }}>
               <div className="m-3">
                 <span className="menu-header btn-bg hover-text">[ Mie &gt; Capcay &gt; Kwetiau ]</span>
@@ -186,7 +185,7 @@ export default function Home() {
               </p>
             </div>
             {/* Love Animation di bawah teks */}
-            <div className="ppx-4 mt-4 mb-4" style={{ marginLeft: "-200px", marginTop: "-100px" }}>
+            <div className="ppx-4 mt-4 mb-4 hover-text" style={{ marginLeft: "-130px", marginTop: "-90px" }}>
               <LoveAnimation />
             </div>
 
@@ -200,6 +199,7 @@ export default function Home() {
             </div>
 
           </div>
+          {/* END Mobile */}
         </main>
 
         <div className="anim-divider mx-3 md:mx-6" style={{ height: "1px", background: "var(--c-border)" }} aria-hidden="true" />
