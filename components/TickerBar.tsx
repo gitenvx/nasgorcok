@@ -5,7 +5,7 @@ export default function TickerBar() {
   const items = [...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS];
 
   return (
-    <footer className="footer-ticker py-2 overflow-hidden flex items-center" aria-label="Info warung">
+    <footer className="footer-ticker py-2 overflow-hidden flex items-center w-full" aria-label="Info warung">
       
       {/* Copyright kiri — fixed, tidak ikut scroll */}
       <span

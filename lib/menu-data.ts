@@ -35,7 +35,8 @@ export const KONTAK = {
   whatsapp:  "0851-8300-9087",
   instagram: "@gitenvx",
   website:   "https://nasgorcok.com",
-  alamat: "-8.618119,115.240907"
+  alamat: "-8.618119,115.240907",
+  email: "admin@nasgorcok.com"
 };
 
 export const TICKER_ITEMS = [

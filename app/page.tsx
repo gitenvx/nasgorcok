@@ -53,8 +53,8 @@ export default function Home() {
         <header
           className="sticky top-0 z-30 flex flex-col items-center justify-center px-3 md:px-6 pt-3 pb-2"
           style={{
-            backdropFilter:       "blur(4px)",
-            WebkitBackdropFilter: "blur(4px)",
+            backdropFilter:       "blur(2px)",
+            WebkitBackdropFilter: "blur(2px)",
             background:           "rgba(10,10,10,0.40)",
             borderBottom:         "1px solid var(--c-border)",
           }}
@@ -199,14 +199,15 @@ export default function Home() {
       <div
         className="fixed bottom-0 left-0 right-0 z-30 anim-ticker"
         style={{
-          backdropFilter:       "blur(4px)",
-          WebkitBackdropFilter: "blur(4px)",
+          backdropFilter:       "blur(2px)",
+          WebkitBackdropFilter: "blur(2px)",
           background:           "rgba(10,10,10,0.40)",
         }}
       >
-        <TickerBar />
+        <div className="mx-auto w-full max-w-375">
+          <TickerBar />
+        </div>
       </div>
-
     </div>
   );
 }
