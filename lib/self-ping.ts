@@ -1,8 +1,9 @@
 const URL =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://nasgorcok.onrender.com";
+  process.env.BASE_URL;
 
 async function selfPing() {
+  if (!URL) return;
+
   try {
     const res = await fetch(URL);
 
@@ -22,6 +23,7 @@ export {};
 
 if (
   process.env.NODE_ENV === "production" &&
+  URL &&
   !(globalThis as any).__SELF_PING__
 ) {
   (globalThis as any).__SELF_PING__ = true;
@@ -30,5 +32,5 @@ if (
 
   setInterval(() => {
     selfPing();
-  }, 5 * 60 * 1000); // 5 menit
+  }, 5 * 60 * 1000);
 }

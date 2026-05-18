@@ -1,15 +1,14 @@
 import whisper
 import json
 
-model = whisper.load_model("base")  # bisa: tiny, base, small, medium
+model = whisper.load_model("base")
 
 result = model.transcribe(
     "public/audio/bg.mp3",
-    word_timestamps=True,   # timestamp per KATA
-    language="id",          # ganti "en" kalau lagu bahasa inggris
+    word_timestamps=True,
+    language="id",
 )
 
-# Flatten semua kata + timestamp-nya
 words = []
 for segment in result["segments"]:
     for word in segment.get("words", []):
@@ -19,7 +18,6 @@ for segment in result["segments"]:
             "end":   round(word["end"], 2),
         })
 
-# Simpan ke public supaya bisa di-fetch React
 with open("public/audio/lyrics.json", "w", encoding="utf-8") as f:
     json.dump(words, f, ensure_ascii=False, indent=2)
 
