@@ -12,6 +12,7 @@ import TickerBar     from "@/components/TickerBar";
 import CrackOverlay  from "@/components/CrackOverlay";
 import AudioAutoplay from "@/components/AudioAutoplay";
 import LyricsDisplay from "@/components/LyricsDisplay";
+import LoveAnimation from "@/components/LoveAnimation";
 import { NAMA_WARUNG, NASI_GORENG, MIE_CAPCAY, KATA } from "@/lib/menu-data";
 
 const LOGOS_CENTER = [SiPython, SiNodedotjs, SiTypescript, SiGit, SiGithub, SiDocker, FaUbuntu, FaWindows];
@@ -131,6 +132,10 @@ export default function Home() {
                   </span>
                 </p>
               </div>
+              {/* Love Animation di bawah teks */}
+              <div className="px-4 md:px-5 mt-4" style={{ marginLeft: "-200px", marginTop: "-50px" }}>
+                <LoveAnimation />
+              </div>
             </div>
             <div className="anim-col-2">
               <MenuColumn title="[ Mie > Capcay > Kwetiau ]" items={MIE_CAPCAY} hasDivider />
@@ -177,6 +182,10 @@ export default function Home() {
                   {KATA[0]}<br/>{KATA[1]}<br/>{KATA[2]}
                 </span>
               </p>
+            </div>
+            {/* Love Animation di bawah teks */}
+            <div className="ppx-4 mt-4 mb-4" style={{ marginLeft: "-200px", marginTop: "-100px" }}>
+              <LoveAnimation />
             </div>
 
             <div className="anim-col-3">

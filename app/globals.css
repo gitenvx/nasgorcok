@@ -158,6 +158,21 @@ html {
   position: relative;
 }
 
+@media (max-width: 767px) {
+  .menu-header {
+    font-size: clamp(0.78rem, 3.5vw, 0.92rem);
+    padding: 6px 10px;
+  }
+}
+
+/* Mobile: header kontak & QRIS ikut lebar teks */
+@media (max-width: 767px) {
+  .kontak-header-mobile {
+    width: fit-content !important;
+    display: inline-block !important;
+  }
+}
+
 /* ══════════════════════════════════════
    MENU LIST ITEM
    ══════════════════════════════════════ */
