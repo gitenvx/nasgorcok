@@ -1,9 +1,11 @@
 "use client";
 import { useEffect, useRef } from "react";
-import LyricsDisplay from "./LyricsDisplay";
 
-export default function AudioAutoplay() {
-  const audioRef    = useRef<HTMLAudioElement>(null);
+export default function AudioAutoplay({
+  audioRef,
+}: {
+  audioRef: React.RefObject<HTMLAudioElement | null>;
+}) {
   const unlockedRef = useRef(false);
 
   useEffect(() => {
@@ -23,12 +25,9 @@ export default function AudioAutoplay() {
     const events = ["click", "touchstart", "keydown", "scroll"];
     events.forEach(e => window.addEventListener(e, unlock, { once: true, passive: true }));
     return () => events.forEach(e => window.removeEventListener(e, unlock));
-  }, []);
+  }, [audioRef]);
 
   return (
-    <>
-      <audio ref={audioRef} src="/audio/bg.mp3" preload="auto" playsInline />
-      <LyricsDisplay audioRef={audioRef} />
-    </>
+    <audio ref={audioRef} src="/audio/bg.mp3" preload="auto" playsInline />
   );
 }

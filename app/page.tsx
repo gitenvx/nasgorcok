@@ -1,20 +1,24 @@
 // app/page.tsx
-import Image from "next/image";
+"use client";
+import { useRef } from "react";
 import {
   SiPython, SiNodedotjs, SiTypescript,
   SiGithub, SiDocker, SiGit,
 } from "react-icons/si";
 import { FaWindows, FaUbuntu } from "react-icons/fa";
-import MenuColumn   from "@/components/MenuColumn";
-import KontakColumn from "@/components/KontakColumn";
-import TickerBar    from "@/components/TickerBar";
-import CrackOverlay from "@/components/CrackOverlay";
+import MenuColumn    from "@/components/MenuColumn";
+import KontakColumn  from "@/components/KontakColumn";
+import TickerBar     from "@/components/TickerBar";
+import CrackOverlay  from "@/components/CrackOverlay";
 import AudioAutoplay from "@/components/AudioAutoplay";
+import LyricsDisplay from "@/components/LyricsDisplay";
 import { NAMA_WARUNG, NASI_GORENG, MIE_CAPCAY, KATA } from "@/lib/menu-data";
 
 const LOGOS_CENTER = [SiPython, SiNodedotjs, SiTypescript, SiGit, SiGithub, SiDocker, FaUbuntu, FaWindows];
 
 export default function Home() {
+  const audioRef = useRef<HTMLAudioElement>(null);
+
   return (
     <div
       className="min-h-screen flex flex-col relative"
@@ -27,6 +31,15 @@ export default function Home() {
       }}
     >
 
+      {/* ── Audio ── */}
+      <audio ref={audioRef} src="/audio/bg.mp3" preload="auto" playsInline />
+      <AudioAutoplay audioRef={audioRef} />
+
+      {/* ── Desktop: lirik fixed bottom ── */}
+      <div className="hidden md:block">
+        <LyricsDisplay audioRef={audioRef} inline={false} />
+      </div>
+
       {/* ── CRACK / SCRATCH TEXTURE ── */}
       <CrackOverlay />
 
@@ -34,17 +47,11 @@ export default function Home() {
       <div className="bg-grid" aria-hidden="true" />
       <div className="pixel-snow" aria-hidden="true" />
 
-      {/* ══════════════════════════════════════
-          KONTEN UTAMA
-          ══════════════════════════════════════ */}
       <div className="relative z-10 flex flex-col min-h-screen">
-        {/* ── Audio ── */}
-        <AudioAutoplay />
 
-        {/* ── NAVBAR — sticky, blur, transparan ── */}
+        {/* ── NAVBAR sticky blur ── */}
         <header
-          className="sticky top-0 z-30 flex flex-col items-center justify-center
-                     px-3 md:px-6 pt-3 pb-2"
+          className="sticky top-0 z-30 flex flex-col items-center justify-center px-3 md:px-6 pt-3 pb-2"
           style={{
             backdropFilter:       "blur(4px)",
             WebkitBackdropFilter: "blur(4px)",
@@ -52,10 +59,8 @@ export default function Home() {
             borderBottom:         "1px solid var(--c-border)",
           }}
         >
-          {/* NASIGORENG — per-letter animasi */}
           <h1
-            className="h1-scanline leading-none uppercase select-none
-                       flex items-center justify-center"
+            className="h1-scanline leading-none uppercase select-none flex items-center justify-center"
             style={{
               fontFamily:    "var(--font-title)",
               fontSize:      "clamp(2rem, 6vw, 4.5rem)",
@@ -66,12 +71,7 @@ export default function Home() {
             aria-label="Nasi Goreng"
           >
             {"NASIGO".split("").map((ch, i) => (
-              <span
-                key={i}
-                className="letter-drop"
-                style={{ animationDelay: `${0.05 + i * 0.07}s` }}
-                aria-hidden="true"
-              >
+              <span key={i} className="letter-drop" style={{ animationDelay: `${0.05 + i * 0.07}s` }} aria-hidden="true">
                 {ch}
               </span>
             ))}
@@ -81,29 +81,20 @@ export default function Home() {
               aria-hidden="true"
             >RE</span>
             {"NG".split("").map((ch, i) => (
-              <span
-                key={i}
-                className="letter-drop"
-                style={{ animationDelay: `${0.65 + i * 0.07}s`, letterSpacing: "0.15em" }}
-                aria-hidden="true"
-              >
+              <span key={i} className="letter-drop" style={{ animationDelay: `${0.65 + i * 0.07}s`, letterSpacing: "0.15em" }} aria-hidden="true">
                 {ch}
               </span>
             ))}
           </h1>
 
-          {/* Nama warung */}
           <div className="anim-nama flex justify-center mt-1">
-            <div
-              className="menu-header btn-bg hover-text"
-              style={{ textAlign: "center", display: "inline", marginBottom: 0 }}
-            >
+            <div className="menu-header btn-bg hover-text" style={{ textAlign: "center", display: "inline", marginBottom: 0 }}>
               {NAMA_WARUNG}
             </div>
           </div>
         </header>
 
-        {/* ── mENu + logos — scroll normal, di bawah navbar ── */}
+        {/* mENu + logos */}
         <div className="text-center pt-3 pb-1">
           <p
             className="anim-nama hover-text"
@@ -117,7 +108,6 @@ export default function Home() {
           >
             mENu
           </p>
-          {/* Logos */}
           <div className="w-full flex items-center justify-center gap-2 flex-wrap mt-2">
             {LOGOS_CENTER.map((Icon, i) => (
               <Icon key={i} className="tech-logo" aria-hidden="true" />
@@ -126,17 +116,8 @@ export default function Home() {
         </div>
 
         {/* Divider */}
-        <div
-          className="anim-divider mx-3 md:mx-6 mt-2"
-          style={{ height: "1px", background: "var(--c-border)" }}
-          aria-hidden="true"
-        />
+        <div className="anim-divider mx-3 md:mx-6 mt-2" style={{ height: "1px", background: "var(--c-border)" }} aria-hidden="true" />
 
-        {/* ══════════════════════════════════════
-            MENU GRID
-            PC  : 3 kolom
-            HP  : stack
-            ══════════════════════════════════════ */}
         <main className="flex-1 pb-10">
 
           {/* PC */}
@@ -162,7 +143,6 @@ export default function Home() {
           {/* Mobile */}
           <div className="md:hidden flex flex-col px-2">
 
-            {/* Nasi Goreng */}
             <div className="border-b" style={{ borderColor: "var(--c-border)" }}>
               <div className="m-3">
                 <span className="menu-header btn-bg hover-text">[ Nasi Goreng ]</span>
@@ -177,7 +157,6 @@ export default function Home() {
               </ul>
             </div>
 
-            {/* Mie Capcay */}
             <div className="border-b" style={{ borderColor: "var(--c-border)" }}>
               <div className="m-3">
                 <span className="menu-header btn-bg hover-text">[ Mie &gt; Capcay &gt; Kwetiau ]</span>
@@ -192,7 +171,6 @@ export default function Home() {
               </ul>
             </div>
 
-            {/* Quotes */}
             <div className="px-4 mt-4 mb-4">
               <p>
                 <span className="re-textbox hover-text">
@@ -201,20 +179,19 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Kontak */}
             <div className="anim-col-3">
               <KontakColumn />
+            </div>
+
+            {/* Mobile: lirik inline di bawah kontak */}
+            <div className="px-4 mb-4">
+              <LyricsDisplay audioRef={audioRef} inline={true} />
             </div>
 
           </div>
         </main>
 
-        {/* Bottom divider */}
-        <div
-          className="anim-divider mx-3 md:mx-6"
-          style={{ height: "1px", background: "var(--c-border)" }}
-          aria-hidden="true"
-        />
+        <div className="anim-divider mx-3 md:mx-6" style={{ height: "1px", background: "var(--c-border)" }} aria-hidden="true" />
 
       </div>
 
