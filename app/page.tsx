@@ -13,6 +13,7 @@ import CrackOverlay  from "@/components/CrackOverlay";
 import AudioAutoplay from "@/components/AudioAutoplay";
 import LyricsDisplay from "@/components/LyricsDisplay";
 import LoveAnimation from "@/components/LoveAnimation";
+import AboutSection from "@/components/AboutSection";
 import { NAMA_WARUNG, NASI_GORENG, MIE_CAPCAY, KATA } from "@/lib/menu-data";
 
 const LOGOS_CENTER = [SiPython, SiNodedotjs, SiTypescript, SiGit, SiGithub, SiDocker, FaUbuntu, FaWindows];
@@ -192,6 +193,11 @@ export default function Home() {
 
           </div>
           {/* END Mobile */}
+
+          {/* About Section — RE Requiem style */}
+          <div className="anim-nama">
+            <AboutSection />
+          </div>
 
           {/* Love Animation — centered above footer */}
           <div className="flex justify-center pb-6">
