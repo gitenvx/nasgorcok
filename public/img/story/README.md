@@ -1,7 +1,5 @@
 # Story Images
 
-Letakkan 3 foto di folder ini dengan nama:
-
 - `story-1.webp` — Chapter 01 (Awal Mula)
 - `story-2.webp` — Chapter 02 (Resep Rahasia)
 - `story-3.webp` — Chapter 03 (Untuk Semua)

@@ -67,19 +67,31 @@ export const STORY = {
       img: "/img/story/story-1.webp",
       chapter: "Chapter 01",
       heading: "Awal Mula",
-      desc: "Dari gerobak kecil di pinggir jalan, Mamas Ucok memulai perjalanannya. Bumbu warisan, api besar, dan tekad sederhana — bikin nasi goreng yang nggak cuma kenyang, tapi juga nempel di hati.",
+      desc: [
+        "Dari gerobak kecil di pinggir jalan, Mamas Ucok memulai perjalanannya.",
+        "Bumbu rahasia, api besar, dan tekad sederhana bikin nasi goreng yang nggak cuma kenyang,",
+        "tapi juga nempel di hati.",
+      ]
     },
     {
       img: "/img/story/story-2.webp",
       chapter: "Chapter 02",
       heading: "Resep Rahasia",
-      desc: "Setiap porsi dimasak satu per satu di wajan panas. Aroma smoky, rasa rempah yang dalam, dan sambal racikan sendiri yang nggak ada duanya. Inilah signature Mamas Ucok.",
+      desc: [
+        "Setiap 10 porsi dimasak satu per satu di wajan besar dan panas.",
+        "Aroma smoky, rasa rempah yang dalam, dan sambal racikan sendiri yang nggak ada duanya.",
+        "Inilah signature Mamas Ucok.",
+      ]
     },
     {
       img: "/img/story/story-3.webp",
       chapter: "Chapter 03",
       heading: "Untuk Semua",
-      desc: "Buka setiap malam, harga merakyat, rasa juara. Dari pekerja pulang larut sampai anak nongkrong, semua punya tempat di warung ini. Karena makanan terbaik adalah yang dinikmati bareng.",
+      desc: [
+        "Buka setiap malam, harga merakyat, rasa juara. Dari pekerja pulang larut sampai orang lapar, semua disambut di warung ini.",
+        "Karena makanan terbaik adalah yang dinikmati pada malam hari.",
+        "Sebaiknya 2-3 jam sebelum tidur malam, makan nasi goreng dulu.",
+      ]
     },
   ],
 };
