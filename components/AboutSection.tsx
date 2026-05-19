@@ -34,63 +34,17 @@ export default function AboutSection() {
         <div className="about-overlay" />
       </div>
 
-      {/* ── Splatter / bercak edges ── */}
+      {/* ── Liquid spill edges (top & bottom only) — transparent to show bg ── */}
       <div className="about-splatter" aria-hidden="true">
-        <svg viewBox="0 0 1440 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <filter id="splatterBlur">
-              <feGaussianBlur stdDeviation="3" />
-            </filter>
-          </defs>
-
-          {/* Top-left splatter cluster */}
-          <path d="M0,0 Q60,130 0,260 Q40,200 90,210 Q50,130 130,100 Q70,50 0,0Z" fill="#1a1410" opacity="0.95" filter="url(#splatterBlur)"/>
-          <path d="M0,0 Q160,25 200,110 Q120,60 100,130 Q55,90 0,60Z" fill="#1a1410" opacity="0.9" filter="url(#splatterBlur)"/>
-          <ellipse cx="50" cy="150" rx="30" ry="20" fill="#1a1410" opacity="0.8" filter="url(#splatterBlur)"/>
-          <circle cx="110" cy="55" r="18" fill="#1a1410" opacity="0.7" filter="url(#splatterBlur)"/>
-          <circle cx="145" cy="110" r="12" fill="#1a1410" opacity="0.6" filter="url(#splatterBlur)"/>
-          <circle cx="80" cy="200" r="8" fill="#1a1410" opacity="0.5"/>
-          <circle cx="170" cy="70" r="6" fill="#1a1410" opacity="0.45"/>
-
-          {/* Top-right splatter cluster */}
-          <path d="M1440,0 Q1370,120 1440,250 Q1400,190 1350,195 Q1385,120 1310,95 Q1370,45 1440,0Z" fill="#1a1410" opacity="0.95" filter="url(#splatterBlur)"/>
-          <path d="M1440,0 Q1280,30 1250,115 Q1320,65 1345,135 Q1390,85 1440,55Z" fill="#1a1410" opacity="0.9" filter="url(#splatterBlur)"/>
-          <ellipse cx="1390" cy="145" rx="28" ry="22" fill="#1a1410" opacity="0.8" filter="url(#splatterBlur)"/>
-          <circle cx="1330" cy="60" r="16" fill="#1a1410" opacity="0.7" filter="url(#splatterBlur)"/>
-          <circle cx="1295" cy="105" r="10" fill="#1a1410" opacity="0.55" filter="url(#splatterBlur)"/>
-
-          {/* Bottom-left splatter cluster */}
-          <path d="M0,600 Q65,470 0,350 Q45,410 95,400 Q55,480 135,510 Q70,555 0,600Z" fill="#1a1410" opacity="0.95" filter="url(#splatterBlur)"/>
-          <path d="M0,600 Q175,575 210,490 Q130,540 110,475 Q60,520 0,550Z" fill="#1a1410" opacity="0.9" filter="url(#splatterBlur)"/>
-          <ellipse cx="55" cy="460" rx="28" ry="20" fill="#1a1410" opacity="0.8" filter="url(#splatterBlur)"/>
-          <circle cx="115" cy="545" r="16" fill="#1a1410" opacity="0.7" filter="url(#splatterBlur)"/>
-          <circle cx="150" cy="500" r="10" fill="#1a1410" opacity="0.55" filter="url(#splatterBlur)"/>
-          <circle cx="85" cy="395" r="7" fill="#1a1410" opacity="0.5"/>
-
-          {/* Bottom-right splatter cluster */}
-          <path d="M1440,600 Q1375,480 1440,360 Q1400,415 1350,405 Q1390,480 1310,510 Q1375,555 1440,600Z" fill="#1a1410" opacity="0.95" filter="url(#splatterBlur)"/>
-          <path d="M1440,600 Q1270,580 1240,500 Q1320,535 1340,480 Q1395,525 1440,555Z" fill="#1a1410" opacity="0.9" filter="url(#splatterBlur)"/>
-          <ellipse cx="1385" cy="465" rx="28" ry="22" fill="#1a1410" opacity="0.8" filter="url(#splatterBlur)"/>
-          <circle cx="1325" cy="545" r="15" fill="#1a1410" opacity="0.7" filter="url(#splatterBlur)"/>
-          <circle cx="1295" cy="495" r="10" fill="#1a1410" opacity="0.55" filter="url(#splatterBlur)"/>
-
-          {/* Left edge drips / stains */}
-          <path d="M0,280 Q30,300 25,360 Q15,340 0,350Z" fill="#1a1410" opacity="0.7" filter="url(#splatterBlur)"/>
-          <circle cx="15" cy="310" r="12" fill="#1a1410" opacity="0.6" filter="url(#splatterBlur)"/>
-          <circle cx="10" cy="430" r="9" fill="#1a1410" opacity="0.5" filter="url(#splatterBlur)"/>
-
-          {/* Right edge drips / stains */}
-          <path d="M1440,290 Q1410,310 1415,370 Q1425,345 1440,355Z" fill="#1a1410" opacity="0.7" filter="url(#splatterBlur)"/>
-          <circle cx="1425" cy="320" r="12" fill="#1a1410" opacity="0.6" filter="url(#splatterBlur)"/>
-          <circle cx="1430" cy="440" r="9" fill="#1a1410" opacity="0.5" filter="url(#splatterBlur)"/>
-
-          {/* Scattered small splotches */}
-          <circle cx="200" cy="20" r="5" fill="#1a1410" opacity="0.4"/>
-          <circle cx="250" cy="45" r="3" fill="#1a1410" opacity="0.35"/>
-          <circle cx="1240" cy="25" r="5" fill="#1a1410" opacity="0.4"/>
-          <circle cx="180" cy="575" r="5" fill="#1a1410" opacity="0.4"/>
-          <circle cx="1260" cy="580" r="5" fill="#1a1410" opacity="0.4"/>
-          <circle cx="1200" cy="555" r="3" fill="#1a1410" opacity="0.35"/>
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "80px" }}>
+          {/* Top liquid spill — irregular drip edge */}
+          <path d="M0,0 L1440,0 L1440,30 Q1380,55 1320,35 Q1260,60 1200,40 Q1140,70 1080,45 Q1020,65 960,38 Q900,58 840,42 Q780,68 720,35 Q660,55 600,40 Q540,72 480,45 Q420,60 360,38 Q300,55 240,42 Q180,65 120,35 Q60,50 0,40 Z" fill="var(--c-void)" opacity="0.95"/>
+          <path d="M0,0 L1440,0 L1440,20 Q1350,40 1280,25 Q1180,48 1100,30 Q1000,50 920,28 Q820,45 740,25 Q640,42 560,28 Q460,48 380,25 Q280,40 200,22 Q100,38 0,25 Z" fill="var(--c-void)"/>
+        </svg>
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "80px" }}>
+          {/* Bottom liquid spill — irregular drip edge */}
+          <path d="M0,120 L1440,120 L1440,90 Q1380,65 1320,85 Q1260,60 1200,80 Q1140,50 1080,75 Q1020,55 960,82 Q900,62 840,78 Q780,52 720,85 Q660,65 600,80 Q540,48 480,75 Q420,60 360,82 Q300,65 240,78 Q180,55 120,85 Q60,70 0,80 Z" fill="var(--c-void)" opacity="0.95"/>
+          <path d="M0,120 L1440,120 L1440,100 Q1350,80 1280,95 Q1180,72 1100,90 Q1000,70 920,92 Q820,75 740,95 Q640,78 560,92 Q460,72 380,95 Q280,80 200,98 Q100,82 0,95 Z" fill="var(--c-void)"/>
         </svg>
       </div>
 
