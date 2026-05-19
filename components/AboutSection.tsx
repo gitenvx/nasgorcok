@@ -96,7 +96,7 @@ export default function AboutSection() {
 
       {/* ── Content ── */}
       <div className="about-content">
-        <h2 className="about-title">About</h2>
+        <h2 className="about-title">Tentang</h2>
         <p className="about-tagline">{ABOUT.tagline}</p>
         <p className="about-desc">{ABOUT.description}</p>
       </div>
