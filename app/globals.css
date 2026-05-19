@@ -958,8 +958,8 @@ html {
   color: var(--c-ash);
   cursor: pointer;
   transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
-  backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
 }
 .story-nav:hover {
   background: var(--c-red);
@@ -1061,10 +1061,10 @@ html {
   .story-carousel {
     grid-template-columns: 1fr;
     gap: 1.25rem;
-    min-height: auto;
+    min-height: 0;
   }
   .story-caption {
-    min-height: auto;
+    min-height: 0;
     padding: 0;
   }
   .story-caption-slide {
