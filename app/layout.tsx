@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: 'Nasi Goreng Mamas Ucok',
     images: [
       {
-        url: 'https://nasgorcok.com//img/logo/nasgor.webp',
+        url: 'https://nasgorcok.com/img/logo/nasgor.webp',
         width: 1200,
         height: 630,
       },
