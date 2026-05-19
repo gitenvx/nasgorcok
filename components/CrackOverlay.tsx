@@ -6,13 +6,11 @@ export default function CrackOverlay() {
       aria-hidden="true"
       className="crack-overlay"
       style={{
-        position:      "fixed",
+        position:      "absolute",
         inset:         0,
         zIndex:        50,
         pointerEvents: "none",
         overflow:      "hidden",
-        willChange:    "transform",
-        transform:     "translateZ(0)",
       }}
     >
       <svg
