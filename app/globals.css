@@ -375,14 +375,20 @@ html {
    1. BG GRID + PIXEL SNOW
    ══════════════════════════════════════════════ */
 
-/* Grid kotak gelap di atas background */
+/* Grid kotak gelap di atas background.
+   3 layer: small filled square at each intersection + horizontal + vertical lines */
 .bg-grid {
   position: fixed;
   inset: 0;
   z-index: 1;
   pointer-events: none;
   background-image:
+    /* Kotak kecil di tiap sudut/intersection — radial-gradient at corner of each tile.
+       Tiap 4 tile yang ketemu di intersection bareng-bareng bikin satu dot penuh. */
+    radial-gradient(circle at 0 0, rgba(255,255,255,0.35) 2px, transparent 2.5px),
+    /* Garis horizontal */
     linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+    /* Garis vertikal */
     linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
   background-size: 40px 40px;
   will-change: transform;
@@ -405,7 +411,8 @@ html {
   transform: translateZ(0);
 }
 
-/* Tiap partikel = pseudo element kecil dengan animasi berbeda */
+/* Tiap partikel = pseudo element kecil dengan animasi berbeda.
+   Jumlah partikel dikurangi (dari ~40 jadi ~12 per pseudo) biar gak terlalu rame. */
 .pixel-snow::before,
 .pixel-snow::after {
   content: "";
@@ -414,93 +421,37 @@ html {
   height: 3px;
   background: white;
   border-radius: 50%;
-  /* 
-    box-shadow trick: ratusan titik putih tersebar
-    format: x y blur spread color
-    blur 3px + spread 1px = partikel lebih besar & lembut
-  */
   box-shadow:
-    /* baris 1 */
-    120px 80px 3px 1px rgba(255,255,255,0.7),
-    340px 45px 3px 1px rgba(255,255,255,0.5),
-    560px 130px 3px 1px rgba(255,255,255,0.8),
-    780px 60px 3px 1px rgba(255,255,255,0.4),
-    920px 200px 3px 1px rgba(255,255,255,0.6),
-    1100px 90px 3px 1px rgba(255,255,255,0.7),
-    1280px 155px 3px 1px rgba(255,255,255,0.5),
-    1380px 40px 3px 1px rgba(255,255,255,0.6),
-    /* baris 2 */
-    80px 280px 3px 1px rgba(255,255,255,0.4),
-    250px 310px 3px 1px rgba(255,255,255,0.7),
-    430px 260px 3px 1px rgba(255,255,255,0.5),
-    660px 340px 3px 1px rgba(255,255,255,0.8),
-    850px 295px 3px 1px rgba(255,255,255,0.4),
-    1050px 270px 3px 1px rgba(255,255,255,0.6),
-    1200px 320px 3px 1px rgba(255,255,255,0.5),
-    1400px 280px 3px 1px rgba(255,255,255,0.7),
-    /* baris 3 */
-    45px 450px 3px 1px rgba(255,255,255,0.6),
-    190px 480px 3px 1px rgba(255,255,255,0.4),
-    370px 420px 3px 1px rgba(255,255,255,0.7),
-    530px 500px 3px 1px rgba(255,255,255,0.5),
-    720px 440px 3px 1px rgba(255,255,255,0.8),
-    900px 475px 3px 1px rgba(255,255,255,0.4),
-    1080px 430px 3px 1px rgba(255,255,255,0.6),
-    1310px 490px 3px 1px rgba(255,255,255,0.5),
-    /* baris 4 */
-    160px 620px 3px 1px rgba(255,255,255,0.7),
-    310px 660px 3px 1px rgba(255,255,255,0.4),
-    490px 590px 3px 1px rgba(255,255,255,0.6),
-    700px 640px 3px 1px rgba(255,255,255,0.8),
-    880px 610px 3px 1px rgba(255,255,255,0.5),
-    1060px 670px 3px 1px rgba(255,255,255,0.4),
-    1240px 600px 3px 1px rgba(255,255,255,0.7),
-    1420px 650px 3px 1px rgba(255,255,255,0.5),
-    /* baris 5 */
-    70px 760px 3px 1px rgba(255,255,255,0.5),
-    270px 800px 3px 1px rgba(255,255,255,0.7),
-    450px 740px 3px 1px rgba(255,255,255,0.4),
-    630px 820px 3px 1px rgba(255,255,255,0.6),
-    810px 770px 3px 1px rgba(255,255,255,0.8),
-    990px 840px 3px 1px rgba(255,255,255,0.4),
-    1170px 760px 3px 1px rgba(255,255,255,0.6),
-    1350px 810px 3px 1px rgba(255,255,255,0.5);
+    180px 120px 3px 1px rgba(255,255,255,0.6),
+    480px 80px 3px 1px rgba(255,255,255,0.5),
+    820px 150px 3px 1px rgba(255,255,255,0.7),
+    1180px 95px 3px 1px rgba(255,255,255,0.5),
+    1380px 220px 3px 1px rgba(255,255,255,0.6),
+    260px 380px 3px 1px rgba(255,255,255,0.5),
+    620px 320px 3px 1px rgba(255,255,255,0.7),
+    1020px 410px 3px 1px rgba(255,255,255,0.5),
+    1320px 360px 3px 1px rgba(255,255,255,0.6),
+    140px 580px 3px 1px rgba(255,255,255,0.5),
+    540px 640px 3px 1px rgba(255,255,255,0.7),
+    980px 590px 3px 1px rgba(255,255,255,0.5),
+    1280px 670px 3px 1px rgba(255,255,255,0.6),
+    320px 780px 3px 1px rgba(255,255,255,0.5),
+    760px 820px 3px 1px rgba(255,255,255,0.6);
   animation: snowFlicker 3.2s ease-in-out infinite;
 }
 
-/* ::after versio ke-2 — offset posisi + delay berbeda = tidak sinkron */
+/* ::after — lokasi berbeda + delay = tidak sinkron, juga dikurangi jumlahnya */
 .pixel-snow::after {
   box-shadow:
-    200px 110px 3px 1px rgba(255,255,255,0.5),
-    420px 70px 3px 1px rgba(255,255,255,0.7),
-    640px 160px 3px 1px rgba(255,255,255,0.4),
-    860px 30px 3px 1px rgba(255,255,255,0.8),
-    1010px 140px 3px 1px rgba(255,255,255,0.5),
-    1190px 75px 3px 1px rgba(255,255,255,0.6),
-    1330px 120px 3px 1px rgba(255,255,255,0.4),
-    30px 360px 3px 1px rgba(255,255,255,0.7),
-    320px 395px 3px 1px rgba(255,255,255,0.5),
-    500px 340px 3px 1px rgba(255,255,255,0.8),
-    740px 410px 3px 1px rgba(255,255,255,0.4),
-    960px 370px 3px 1px rgba(255,255,255,0.6),
-    1140px 350px 3px 1px rgba(255,255,255,0.5),
-    1360px 400px 3px 1px rgba(255,255,255,0.7),
-    110px 540px 3px 1px rgba(255,255,255,0.4),
-    290px 570px 3px 1px rgba(255,255,255,0.6),
-    470px 510px 3px 1px rgba(255,255,255,0.8),
-    650px 555px 3px 1px rgba(255,255,255,0.4),
-    830px 520px 3px 1px rgba(255,255,255,0.7),
-    1010px 565px 3px 1px rgba(255,255,255,0.5),
-    1220px 530px 3px 1px rgba(255,255,255,0.6),
-    1410px 570px 3px 1px rgba(255,255,255,0.4),
-    50px 700px 3px 1px rgba(255,255,255,0.6),
-    230px 730px 3px 1px rgba(255,255,255,0.8),
-    410px 685px 3px 1px rgba(255,255,255,0.4),
-    590px 720px 3px 1px rgba(255,255,255,0.5),
-    770px 695px 3px 1px rgba(255,255,255,0.7),
-    950px 740px 3px 1px rgba(255,255,255,0.4),
-    1130px 700px 3px 1px rgba(255,255,255,0.6),
-    1390px 730px 3px 1px rgba(255,255,255,0.8);
+    320px 60px 3px 1px rgba(255,255,255,0.5),
+    700px 200px 3px 1px rgba(255,255,255,0.6),
+    1100px 50px 3px 1px rgba(255,255,255,0.5),
+    420px 480px 3px 1px rgba(255,255,255,0.5),
+    900px 350px 3px 1px rgba(255,255,255,0.7),
+    1240px 500px 3px 1px rgba(255,255,255,0.5),
+    180px 720px 3px 1px rgba(255,255,255,0.6),
+    660px 760px 3px 1px rgba(255,255,255,0.5),
+    1140px 700px 3px 1px rgba(255,255,255,0.6);
   animation: snowFlicker 4.7s ease-in-out 1.6s infinite;
 }
 
