@@ -40,6 +40,7 @@ export default function Home() {
       <CrackOverlay />
 
       {/* ── BG EFFECTS ── */}
+      <div className="film-grain" aria-hidden="true" />
       <div className="bg-grid" aria-hidden="true" />
       <div className="pixel-snow" aria-hidden="true" />
 
