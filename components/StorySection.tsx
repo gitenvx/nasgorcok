@@ -57,17 +57,17 @@ export default function StorySection() {
             </filter>
           </defs>
           {/* Top edge */}
-          <ellipse cx="220" cy="14" rx="42" ry="12" fill="var(--c-void)" opacity="0.6" filter="url(#storySplatterBlur)" />
-          <circle cx="200" cy="20" r="8" fill="var(--c-void)" opacity="0.5" />
-          <circle cx="720" cy="18" r="10" fill="var(--c-void)" opacity="0.55" filter="url(#storySplatterBlur)" />
-          <ellipse cx="1230" cy="15" rx="36" ry="12" fill="var(--c-void)" opacity="0.6" filter="url(#storySplatterBlur)" />
-          <circle cx="1255" cy="22" r="7" fill="var(--c-void)" opacity="0.5" />
+          <ellipse cx="220" cy="14" rx="42" ry="12" fill="#1a1410" opacity="0.6" filter="url(#storySplatterBlur)" />
+          <circle cx="200" cy="20" r="8" fill="#1a1410" opacity="0.5" />
+          <circle cx="720" cy="18" r="10" fill="#1a1410" opacity="0.55" filter="url(#storySplatterBlur)" />
+          <ellipse cx="1230" cy="15" rx="36" ry="12" fill="#1a1410" opacity="0.6" filter="url(#storySplatterBlur)" />
+          <circle cx="1255" cy="22" r="7" fill="#1a1410" opacity="0.5" />
           {/* Bottom edge */}
-          <ellipse cx="200" cy="585" rx="40" ry="12" fill="var(--c-void)" opacity="0.6" filter="url(#storySplatterBlur)" />
-          <circle cx="180" cy="580" r="8" fill="var(--c-void)" opacity="0.5" />
-          <circle cx="720" cy="582" r="10" fill="var(--c-void)" opacity="0.55" filter="url(#storySplatterBlur)" />
-          <ellipse cx="1240" cy="585" rx="35" ry="12" fill="var(--c-void)" opacity="0.6" filter="url(#storySplatterBlur)" />
-          <circle cx="1260" cy="578" r="7" fill="var(--c-void)" opacity="0.5" />
+          <ellipse cx="200" cy="585" rx="40" ry="12" fill="#1a1410" opacity="0.6" filter="url(#storySplatterBlur)" />
+          <circle cx="180" cy="580" r="8" fill="#1a1410" opacity="0.5" />
+          <circle cx="720" cy="582" r="10" fill="#1a1410" opacity="0.55" filter="url(#storySplatterBlur)" />
+          <ellipse cx="1240" cy="585" rx="35" ry="12" fill="#1a1410" opacity="0.6" filter="url(#storySplatterBlur)" />
+          <circle cx="1260" cy="578" r="7" fill="#1a1410" opacity="0.5" />
         </svg>
       </div>
 
