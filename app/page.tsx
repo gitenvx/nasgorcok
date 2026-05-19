@@ -9,10 +9,10 @@ import { FaWindows, FaUbuntu } from "react-icons/fa";
 import MenuColumn    from "@/components/MenuColumn";
 import KontakColumn  from "@/components/KontakColumn";
 import TickerBar     from "@/components/TickerBar";
-import CrackOverlay  from "@/components/CrackOverlay";
+// import CrackOverlay  from "@/components/CrackOverlay";
 import AudioAutoplay from "@/components/AudioAutoplay";
 import LyricsDisplay from "@/components/LyricsDisplay";
-import LoveAnimation from "@/components/LoveAnimation";
+// import LoveAnimation from "@/components/LoveAnimation";
 import AboutSection from "@/components/AboutSection";
 import StorySection from "@/components/StorySection";
 import ScrollReveal  from "@/components/ScrollReveal";
@@ -39,8 +39,8 @@ export default function Home() {
       <audio ref={audioRef} src="/audio/bg.mp3" preload="auto" playsInline />
       <AudioAutoplay audioRef={audioRef} />
 
-      {/* ── CRACK / SCRATCH TEXTURE ── */}
-      <CrackOverlay />
+      {/* ── CRACK / SCRATCH TEXTURE ──
+      <CrackOverlay />*/}
 
       {/* ── BG EFFECTS ── */}
 
