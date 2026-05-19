@@ -37,6 +37,19 @@ html {
   background-color: var(--c-void);
   color: var(--c-ash);
   font-family: var(--font-mono);
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Fixed background layer (replaces background-attachment:fixed) ── */
+.fixed-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: transform;
+  transform: translateZ(0);
 }
 ::selection { background: var(--c-red); color: var(--c-ash); }
 ::-webkit-scrollbar        { width: 4px; }
@@ -458,6 +471,8 @@ html {
   pointer-events: none;
   opacity: 0.06;
   mix-blend-mode: overlay;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .film-grain::before {
@@ -493,6 +508,8 @@ html {
     linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
   background-size: 40px 40px;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Snow / pixel sparkle — pakai box-shadow masif di satu div */
@@ -507,6 +524,8 @@ html {
   z-index: 2;
   pointer-events: none;
   overflow: hidden;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Tiap partikel = pseudo element kecil dengan animasi berbeda */
@@ -939,5 +958,24 @@ html {
 
   .about-desc {
     max-width: 100%;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   MOBILE SCROLL PERFORMANCE
+   Reduce heavy overlays on mobile for smoother scrolling
+   ══════════════════════════════════════════════ */
+@media (max-width: 767px) {
+  .film-grain    { display: none; }
+  .pixel-snow    { display: none; }
+  .crack-overlay { display: none; }
+  .bg-grid       { opacity: 0.4; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

@@ -22,16 +22,16 @@ export default function Home() {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   return (
-    <div
-      className="min-h-screen flex flex-col relative"
-      style={{
-        backgroundImage:      "url('/img/bg.webp')",
-        backgroundSize:       "cover",
-        backgroundPosition:   "center",
-        backgroundRepeat:     "no-repeat",
-        backgroundAttachment: "fixed",
-      }}
-    >
+    <div className="min-h-screen flex flex-col relative">
+
+      {/* ── Fixed background — separate div for mobile perf ── */}
+      <div
+        className="fixed-bg"
+        aria-hidden="true"
+        style={{
+          backgroundImage: "url('/img/bg.webp')",
+        }}
+      />
 
       {/* ── Audio ── */}
       <audio ref={audioRef} src="/audio/bg.mp3" preload="auto" playsInline />
