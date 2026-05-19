@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "@/lib/self-ping";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title:       "Nasi Goreng Mamas Ucok",
@@ -44,6 +45,7 @@ export default function RootLayout({
       <body className="min-h-screen overflow-x-hidden">
         {children}
         <SpeedInsights />
+        <Analytics />
         </body>
     </html>
   );
