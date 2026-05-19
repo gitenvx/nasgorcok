@@ -950,6 +950,25 @@ html {
    ══════════════════════════════════════════════ */
 @media (max-width: 767px) {
   .bg-grid { opacity: 0.4; }
+
+  /* BG ikut scroll bareng konten di mobile.
+     Fixed background bikin "jumping" karena address bar browser
+     hide/show pas scroll, jadi viewport size berubah-ubah.
+     Pakai absolute biar bg ke-attach ke dokumen, bukan viewport. */
+  .fixed-bg {
+    position: absolute;
+    background-attachment: scroll;
+  }
+
+  /* Grid juga ikut scroll biar konsisten */
+  .bg-grid {
+    position: absolute;
+  }
+
+  /* Snow tetap fixed (efek atmospheric) tapi opacity dikurangi */
+  .pixel-snow {
+    opacity: 0.5;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
