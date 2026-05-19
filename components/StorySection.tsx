@@ -48,26 +48,15 @@ export default function StorySection() {
 
   return (
     <section className="story-section" aria-label="Story">
-      {/* ── Splatter edges (top & bottom only) ── */}
+      {/* ── Liquid spill edges (top & bottom only) — transparent to show bg ── */}
       <div className="story-splatter" aria-hidden="true">
-        <svg viewBox="0 0 1440 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <filter id="storySplatterBlur">
-              <feGaussianBlur stdDeviation="2" />
-            </filter>
-          </defs>
-          {/* Top edge */}
-          <ellipse cx="220" cy="14" rx="42" ry="12" fill="#1a1410" opacity="0.6" filter="url(#storySplatterBlur)" />
-          <circle cx="200" cy="20" r="8" fill="#1a1410" opacity="0.5" />
-          <circle cx="720" cy="18" r="10" fill="#1a1410" opacity="0.55" filter="url(#storySplatterBlur)" />
-          <ellipse cx="1230" cy="15" rx="36" ry="12" fill="#1a1410" opacity="0.6" filter="url(#storySplatterBlur)" />
-          <circle cx="1255" cy="22" r="7" fill="#1a1410" opacity="0.5" />
-          {/* Bottom edge */}
-          <ellipse cx="200" cy="585" rx="40" ry="12" fill="#1a1410" opacity="0.6" filter="url(#storySplatterBlur)" />
-          <circle cx="180" cy="580" r="8" fill="#1a1410" opacity="0.5" />
-          <circle cx="720" cy="582" r="10" fill="#1a1410" opacity="0.55" filter="url(#storySplatterBlur)" />
-          <ellipse cx="1240" cy="585" rx="35" ry="12" fill="#1a1410" opacity="0.6" filter="url(#storySplatterBlur)" />
-          <circle cx="1260" cy="578" r="7" fill="#1a1410" opacity="0.5" />
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "80px" }}>
+          <path d="M0,0 L1440,0 L1440,30 Q1380,55 1320,35 Q1260,60 1200,40 Q1140,70 1080,45 Q1020,65 960,38 Q900,58 840,42 Q780,68 720,35 Q660,55 600,40 Q540,72 480,45 Q420,60 360,38 Q300,55 240,42 Q180,65 120,35 Q60,50 0,40 Z" fill="var(--c-void)" opacity="0.95"/>
+          <path d="M0,0 L1440,0 L1440,20 Q1350,40 1280,25 Q1180,48 1100,30 Q1000,50 920,28 Q820,45 740,25 Q640,42 560,28 Q460,48 380,25 Q280,40 200,22 Q100,38 0,25 Z" fill="var(--c-void)"/>
+        </svg>
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style={{ position: "absolute", bottom: 0, left: 0, width: "100%", height: "80px" }}>
+          <path d="M0,120 L1440,120 L1440,90 Q1380,65 1320,85 Q1260,60 1200,80 Q1140,50 1080,75 Q1020,55 960,82 Q900,62 840,78 Q780,52 720,85 Q660,65 600,80 Q540,48 480,75 Q420,60 360,82 Q300,65 240,78 Q180,55 120,85 Q60,70 0,80 Z" fill="var(--c-void)" opacity="0.95"/>
+          <path d="M0,120 L1440,120 L1440,100 Q1350,80 1280,95 Q1180,72 1100,90 Q1000,70 920,92 Q820,75 740,95 Q640,78 560,92 Q460,72 380,95 Q280,80 200,98 Q100,82 0,95 Z" fill="var(--c-void)"/>
         </svg>
       </div>
 
