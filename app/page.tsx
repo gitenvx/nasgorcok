@@ -5,6 +5,7 @@ import {
   SiPython, SiNodedotjs, SiTypescript,
   SiGithub, SiDocker, SiGit,
 } from "react-icons/si";
+import { VscVscode } from "react-icons/vsc";
 import { FaWindows, FaUbuntu } from "react-icons/fa";
 import MenuColumn    from "@/components/MenuColumn";
 import KontakColumn  from "@/components/KontakColumn";
@@ -18,7 +19,7 @@ import StorySection from "@/components/StorySection";
 import ScrollReveal  from "@/components/ScrollReveal";
 import { NAMA_WARUNG, NASI_GORENG, MIE_CAPCAY, KATA } from "@/lib/menu-data";
 
-const LOGOS_CENTER = [SiPython, SiNodedotjs, SiTypescript, SiGit, SiGithub, SiDocker, FaUbuntu, FaWindows];
+const LOGOS_CENTER = [SiPython, SiNodedotjs, SiTypescript, SiGit, SiGithub, SiDocker, VscVscode, FaUbuntu, FaWindows];
 
 export default function Home() {
   const audioRef = useRef<HTMLAudioElement>(null);
