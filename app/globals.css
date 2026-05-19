@@ -322,7 +322,7 @@ html {
 .ticker-track {
   display: flex;
   width: max-content;
-  animation: ticker 18s linear infinite;
+  animation: ticker 40s linear infinite;
 }
 .ticker-track:hover { animation-play-state: paused; }
 .footer-ticker {
