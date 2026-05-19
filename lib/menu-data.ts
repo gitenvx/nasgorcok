@@ -39,6 +39,15 @@ export const KONTAK = {
   email: "admin@nasgorcok.com"
 };
 
+export const ABOUT = {
+  tagline: "Nasi goreng kaki lima. Dimasak dengan cinta.",
+  description:
+    "Warung Nasi Goreng Mamas Ucok hadir membawa cita rasa autentik nasi goreng kaki lima yang diracik dengan bumbu rahasia turun-temurun. " +
+    "Setiap porsi dimasak langsung di wajan panas dengan api besar, menghasilkan aroma smoky yang khas dan rasa yang bikin nagih. " +
+    "Buka setiap malam mulai pukul 18:00 hingga tengah malam, siap menemani lapar malammu dengan harga yang merakyat.",
+  videoSrc: "/video/about-bg.webm",
+};
+
 export const TICKER_ITEMS = [
   "Dibuat dengan cinta oleh MohFathuloh",
   "udah isi ayam swear",
