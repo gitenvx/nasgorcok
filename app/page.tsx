@@ -146,7 +146,7 @@ export default function Home() {
           </div>
 
           {/* START Mobile */}
-          <div className="md:hidden flex flex-col px-2">
+          <div className="anim-nama md:hidden flex flex-col px-2">
 
             <div className="border-b" style={{ borderColor: "var(--c-border)" }}>
               <div className="m-3">
