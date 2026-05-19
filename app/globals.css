@@ -375,24 +375,23 @@ html {
    1. BG GRID + PIXEL SNOW
    ══════════════════════════════════════════════ */
 
-/* Grid kotak gelap di atas background.
-   3 layer: small filled square at each intersection + horizontal + vertical lines */
+/* Grid kotak gelap di atas background — ikut scroll bareng konten (gak fixed).
+   3 layer: small filled square at each intersection + horizontal + vertical lines.
+   Kotak sudut & garis pakai opacity yang sama (0.07) biar konsisten. */
 .bg-grid {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
+  min-height: 100%;
   background-image:
-    /* Kotak kecil di tiap sudut/intersection — radial-gradient at corner of each tile.
-       Tiap 4 tile yang ketemu di intersection bareng-bareng bikin satu dot penuh. */
-    radial-gradient(circle at 0 0, rgba(255,255,255,0.35) 2px, transparent 2.5px),
+    /* Kotak kecil di tiap sudut/intersection — warna sama persis kayak garis grid */
+    radial-gradient(circle at 0 0, rgba(255,255,255,0.07) 2px, transparent 2.5px),
     /* Garis horizontal */
     linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
     /* Garis vertikal */
     linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
   background-size: 40px 40px;
-  will-change: transform;
-  transform: translateZ(0);
 }
 
 /* Snow / pixel sparkle — pakai box-shadow masif di satu div */
