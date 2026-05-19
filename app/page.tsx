@@ -51,7 +51,7 @@ export default function Home() {
 
         {/* ── NAVBAR sticky blur ── */}
         <header
-          className="sticky top-0 z-30 flex flex-col items-center justify-center px-3 md:px-6 pt-3 pb-2"
+          className="sticky top-0 z-30 flex flex-col items-center justify-center px-3 md:px-2 pt-0 pb-0"
           style={{
             backdropFilter:       "blur(2px)",
             WebkitBackdropFilter: "blur(2px)",
