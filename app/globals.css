@@ -1003,6 +1003,7 @@ html {
   margin-bottom: 1.5rem;
   border-bottom: 1px solid var(--c-border);
   padding-bottom: 0.75rem;
+  text-shadow: 2px 4px 0 rgba(0, 0, 0, 0.9);
 }
 .story-title {
   font-family: var(--font-title);
@@ -1142,6 +1143,7 @@ html {
   letter-spacing: 0.25em;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
+  text-shadow: 2px 3px 0 rgba(0, 0, 0, 0.9);
 }
 .story-heading {
   font-family: var(--font-title);

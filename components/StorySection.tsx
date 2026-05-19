@@ -75,7 +75,7 @@ export default function StorySection() {
       <div className="story-inner">
         {/* Header */}
         <div className="story-header">
-          <h2 className="story-title">{STORY.title}</h2>
+          <h2 className="about-title">{STORY.title}</h2>
           <span className="story-counter">
             <span className="story-counter-cur">{String(active + 1).padStart(2, "0")}</span>
             <span className="story-counter-sep">/</span>
@@ -136,8 +136,8 @@ export default function StorySection() {
                 aria-hidden={i !== active ? "true" : "false"}
               >
                 <span className="story-chapter">{s.chapter}</span>
-                <h3 className="story-heading">{s.heading}</h3>
-                <p className="story-desc">{s.desc}</p>
+                <h2 className="story-heading">{s.heading}</h2>
+                <p><span className="re-textbox">{s.desc[0]}<br/>{s.desc[1]}<br/>{s.desc[2]}</span></p>
               </div>
             ))}
 
