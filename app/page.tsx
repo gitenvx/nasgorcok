@@ -15,6 +15,7 @@ import LyricsDisplay from "@/components/LyricsDisplay";
 import LoveAnimation from "@/components/LoveAnimation";
 import AboutSection from "@/components/AboutSection";
 import StorySection from "@/components/StorySection";
+import ScrollReveal  from "@/components/ScrollReveal";
 import { NAMA_WARUNG, NASI_GORENG, MIE_CAPCAY, KATA } from "@/lib/menu-data";
 
 const LOGOS_CENTER = [SiPython, SiNodedotjs, SiTypescript, SiGit, SiGithub, SiDocker, FaUbuntu, FaWindows];
@@ -59,7 +60,7 @@ export default function Home() {
           }}
         >
           <h1
-            className="h1-scanline leading-none uppercase select-none flex items-center justify-center"
+            className="leading-none uppercase select-none flex items-center justify-center"
             style={{
               fontFamily:    "var(--font-title)",
               fontSize:      "clamp(2.8rem, 8vw, 4.5rem)",
@@ -96,7 +97,7 @@ export default function Home() {
               {NAMA_WARUNG}
             </div><br/>
           <p
-            className="anim-nama hover-text"
+            className="hover-text"
             style={{
               fontFamily:    "var(--font-mono)",
               fontSize:      "clamp(0.75rem, 1.8vw, 1.2rem)",
@@ -107,7 +108,7 @@ export default function Home() {
           >
             mENu
           </p>
-          <div className="anim-nama w-full flex items-center justify-center gap-2 flex-wrap mt-2">
+          <div className="w-full flex items-center justify-center gap-2 flex-wrap mt-2">
             {LOGOS_CENTER.map((Icon, i) => (
               <Icon key={i} className="tech-logo" aria-hidden="true" />
             ))}
@@ -115,13 +116,13 @@ export default function Home() {
         </div>
 
         {/* Divider */}
-        <div className="anim-divider mx-3 md:mx-6 mt-2" style={{ height: "1px", background: "var(--c-border)" }} aria-hidden="true" />
+        <div className="mx-3 md:mx-6 mt-2" style={{ height: "1px", background: "var(--c-border)" }} aria-hidden="true" />
 
         <main className="flex-1 pb-10">
 
           {/* PC */}
           <div className="hidden md:grid md:grid-cols-3 h-full">
-            <div className="anim-col-1">
+            <ScrollReveal revealClass="anim-col-1">
               <MenuColumn title="[ Nasi Goreng ]" items={NASI_GORENG} />
               <div className="px-4 md:px-5 mt-4">
                 <p>
@@ -130,24 +131,24 @@ export default function Home() {
                   </span>
                 </p>
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* Kolom tengah — Mie + Lirik di bawah */}
-            <div className="anim-col-2 flex flex-col">
+            <ScrollReveal revealClass="anim-col-2" className="flex flex-col">
               <MenuColumn title="[ Mie > Capcay > Kwetiau ]" items={MIE_CAPCAY} hasDivider />
               {/* Lirik + play button — sejajar teks KATA di kolom kiri */}
               <div className="mt-4 pr-0">
                 <LyricsDisplay audioRef={audioRef} />
               </div>
-            </div>
+            </ScrollReveal>
 
-            <div className="anim-col-3">
+            <ScrollReveal revealClass="anim-col-3">
               <KontakColumn />
-            </div>
+            </ScrollReveal>
           </div>
 
           {/* START Mobile */}
-          <div className="anim-nama md:hidden flex flex-col px-2">
+          <ScrollReveal revealClass="anim-nama" className="md:hidden flex flex-col px-2">
 
             <div className="border-b" style={{ borderColor: "var(--c-border)" }}>
               <div className="m-3">
@@ -183,7 +184,7 @@ export default function Home() {
                 </span>
               </p>
             </div>
-            <div className="anim-col-3">
+            <div>
               <KontakColumn />
             </div>
 
@@ -192,18 +193,18 @@ export default function Home() {
               <LyricsDisplay audioRef={audioRef} />
             </div>
 
-          </div>
+          </ScrollReveal>
           {/* END Mobile */}
 
           {/* About Section — RE Requiem style */}
-          <div className="anim-nama">
+          <ScrollReveal>
             <AboutSection />
-          </div>
+          </ScrollReveal>
 
           {/* Story Section — RE Requiem style carousel */}
-          <div className="anim-nama">
+          <ScrollReveal>
             <StorySection />
-          </div>
+          </ScrollReveal>
 
           {/* Love Animation — centered above footer
           <div className="flex justify-center pb-6">
@@ -211,13 +212,13 @@ export default function Home() {
           </div>}*/}
         </main>
 
-        <div className="anim-divider mx-3 md:mx-6" style={{ height: "1px", background: "var(--c-border)" }} aria-hidden="true" />
+        <div className="mx-3 md:mx-6" style={{ height: "1px", background: "var(--c-border)" }} aria-hidden="true" />
 
       </div>
 
       {/* TICKER FOOTER sticky bottom */}
       <div
-        className="fixed bottom-0 left-0 right-0 z-30 anim-ticker"
+        className="fixed bottom-0 left-0 right-0 z-30"
         style={{
           backdropFilter:       "blur(2px)",
           WebkitBackdropFilter: "blur(2px)",
