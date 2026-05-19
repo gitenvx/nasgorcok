@@ -127,10 +127,6 @@ export default function Home() {
                   </span>
                 </p>
               </div>
-              {/* Love Animation di bawah teks */}
-              <div className="px-4 md:px-5 mt-4" style={{ marginLeft: "-200px", marginTop: "-50px" }}>
-                <LoveAnimation />
-              </div>
             </div>
 
             {/* Kolom tengah — Mie + Lirik di bawah */}
@@ -184,11 +180,6 @@ export default function Home() {
                 </span>
               </p>
             </div>
-            {/* Love Animation di bawah teks */}
-            <div className="ppx-4 mt-4 mb-4 hover-text" style={{ marginLeft: "-130px", marginTop: "-90px" }}>
-              <LoveAnimation />
-            </div>
-
             <div className="anim-col-3">
               <KontakColumn />
             </div>
@@ -200,6 +191,11 @@ export default function Home() {
 
           </div>
           {/* END Mobile */}
+
+          {/* Love Animation — centered above footer */}
+          <div className="flex justify-center pb-6">
+            <LoveAnimation />
+          </div>
         </main>
 
         <div className="anim-divider mx-3 md:mx-6" style={{ height: "1px", background: "var(--c-border)" }} aria-hidden="true" />
