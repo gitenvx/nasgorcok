@@ -59,7 +59,7 @@ export default function Home() {
             className="h1-scanline leading-none uppercase select-none flex items-center justify-center"
             style={{
               fontFamily:    "var(--font-title)",
-              fontSize:      "clamp(2rem, 6vw, 4.5rem)",
+              fontSize:      "clamp(2.8rem, 8vw, 4.5rem)",
               color:         "var(--c-ash)",
               textShadow:    "2px 4px 0 rgba(0,0,0,0.9)",
               letterSpacing: "0.15em",
