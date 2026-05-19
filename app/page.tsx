@@ -59,7 +59,19 @@ export default function Home() {
             borderBottom:         "1px solid var(--c-border)",
           }}
         >
-          <h1
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/img/logo/nasgor.webp"
+            alt="Nasi Goreng"
+            className="select-none"
+            style={{
+              height: "clamp(5rem, 15vw, 5.5rem)",
+              width: "auto",
+              objectFit: "contain",
+            }}
+/>
+
+          {/*<h1
             className="leading-none uppercase select-none flex items-center justify-center"
             style={{
               fontFamily:    "var(--font-title)",
@@ -85,7 +97,7 @@ export default function Home() {
                 {ch}
               </span>
             ))}
-          </h1>
+          </h1>*/}
 
           
         </header>
