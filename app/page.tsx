@@ -199,10 +199,10 @@ export default function Home() {
             <AboutSection />
           </div>
 
-          {/* Love Animation — centered above footer */}
+          {/* Love Animation — centered above footer
           <div className="flex justify-center pb-6">
             <LoveAnimation />
-          </div>
+          </div>}*/}
         </main>
 
         <div className="anim-divider mx-3 md:mx-6" style={{ height: "1px", background: "var(--c-border)" }} aria-hidden="true" />
