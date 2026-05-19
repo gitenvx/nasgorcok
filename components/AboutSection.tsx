@@ -34,12 +34,12 @@ export default function AboutSection() {
         <div className="about-overlay" />
       </div>
 
-      {/* ── Splatter / bercak edges ── */}
+      {/* ── Splatter / bercak edges (top & bottom only - minimal) ── */}
       <div className="about-splatter" aria-hidden="true">
         <svg viewBox="0 0 1440 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <filter id="splatterBlur">
-              <feGaussianBlur stdDeviation="3" />
+              <feGaussianBlur stdDeviation="2" />
             </filter>
           </defs>
 
