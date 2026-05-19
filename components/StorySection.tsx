@@ -133,7 +133,7 @@ export default function StorySection() {
               <div
                 key={i}
                 className={`story-caption-slide ${i === active ? "is-active" : ""}`}
-                aria-hidden={i !== active}
+                aria-hidden={i !== active ? "true" : "false"}
               >
                 <span className="story-chapter">{s.chapter}</span>
                 <h3 className="story-heading">{s.heading}</h3>

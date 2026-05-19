@@ -1044,6 +1044,7 @@ html {
   background: #050505;
   border: 1px solid var(--c-border);
   aspect-ratio: 16 / 10;
+  -webkit-user-select: none;
   user-select: none;
 }
 .story-image-slide {
