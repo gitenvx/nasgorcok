@@ -1,7 +1,8 @@
 // components/KontakColumn.tsx
 "use client";
 import Image from "next/image";
-import { FaWhatsapp, FaInstagram, FaGlobe } from "react-icons/fa";
+import { FaWhatsapp, FaInstagram, FaGlobe, FaTelegram } from "react-icons/fa";
+import { TfiEmail } from "react-icons/tfi";
 import { CiLocationOn } from "react-icons/ci";
 import { KONTAK } from "@/lib/menu-data";
 //import LoveAnimation from "@/components/LoveAnimation";
@@ -23,12 +24,20 @@ export default function KontakColumn() {
           <span>{KONTAK.whatsapp}</span>
         </div>
         <div className="kontak-row">
+          <FaTelegram className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
+          <span>{KONTAK.telegram}</span>
+        </div>
+        <div className="kontak-row">
           <FaInstagram className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
           <span>{KONTAK.instagram}</span>
         </div>
         <div className="kontak-row">
           <FaGlobe className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
           <span>{KONTAK.website}</span>
+        </div>
+        <div className="kontak-row">
+          <TfiEmail className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
+          <span>{KONTAK.email}</span>
         </div>
         <div className="kontak-row">
           <CiLocationOn className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />

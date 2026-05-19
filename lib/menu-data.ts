@@ -33,7 +33,8 @@ export const MIE_CAPCAY = [
 
 export const KONTAK = {
   whatsapp:  "0851-8300-9087",
-  instagram: "@gitenvx",
+  instagram: "@nasgorcokcom",
+  telegram: "@nasgorcok",
   website:   "https://nasgorcok.com",
   alamat: "-8.618119,115.240907",
   email: "admin@nasgorcok.com"
