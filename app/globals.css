@@ -433,6 +433,37 @@ html {
 
 
 /* ══════════════════════════════════════════════
+   FILM GRAIN OVERLAY (RE Requiem style)
+   ══════════════════════════════════════════════ */
+.film-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+}
+
+.film-grain::before {
+  content: "";
+  position: absolute;
+  inset: -200%;
+  width: 400%;
+  height: 400%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  animation: grainShift 0.5s steps(4) infinite;
+}
+
+@keyframes grainShift {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-5%, -10%); }
+  50%  { transform: translate(10%, 5%); }
+  75%  { transform: translate(-10%, 15%); }
+  100% { transform: translate(5%, -5%); }
+}
+
+/* ══════════════════════════════════════════════
    1. BG GRID + PIXEL SNOW
    ══════════════════════════════════════════════ */
 
