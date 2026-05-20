@@ -1,5 +1,16 @@
+// components/CrackOverlay.tsx
+/**
+ * Komponen untuk menampilkan overlay tekstur retak/goresan di halaman
+ * Menggunakan SVG dengan filter untuk efek goresan yang lebih natural dan animasi
+ */
 "use client";
 
+/**
+ * Komponen CrackOverlay - Menampilkan efek goresan/retak di atas halaman
+ * Menggunakan SVG dengan feTurbulence dan feDisplacementMap untuk efek yang dinamis
+ * Sebagai dekorasi visual yang tidak interaktif (aria-hidden=true)
+ * @returns JSX element SVG overlay dengan efek goresan
+ */
 export default function CrackOverlay() {
   return (
     <div

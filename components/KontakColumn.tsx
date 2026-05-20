@@ -7,6 +7,11 @@ import { CiLocationOn } from "react-icons/ci";
 import { KONTAK } from "@/lib/menu-data";
 //import LoveAnimation from "@/components/LoveAnimation";
 
+/**
+ * Komponen kolom kontak yang menampilkan informasi kontak warung
+ * Mencakup WhatsApp, Telegram, Instagram, Website, Email, Alamat, dan QRIS pembayaran
+ * @returns JSX element berisi daftar kontak dengan icon dan QR code QRIS
+ */
 export default function KontakColumn() {
   return (
     <div className="col-divider flex flex-col py-4 px-4 md:px-5">

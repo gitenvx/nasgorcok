@@ -1,11 +1,23 @@
+// components/AudioAutoplay.tsx
+/**
+ * Komponen untuk mengatur autoplay musik latar
+ * Memanfaatkan user interaction (click, touch, scroll) untuk unlock autoplay
+ * Browser modern mengharuskan user interaction sebelum audio bisa autoplay dengan suara
+ */
 "use client";
 import { useEffect, useRef } from "react";
 
+/**
+ * Komponen AudioAutoplay - Menjalankan audio secara otomatis setelah interaksi user
+ * @param audioRef - Referensi ke element audio HTML
+ * @returns JSX element audio (biasanya tidak ditampilkan secara visual)
+ */
 export default function AudioAutoplay({
   audioRef,
 }: {
   audioRef: React.RefObject<HTMLAudioElement | null>;
 }) {
+  // Flag untuk memastikan unlock hanya terjadi sekali
   const unlockedRef = useRef(false);
 
   useEffect(() => {

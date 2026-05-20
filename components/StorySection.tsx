@@ -1,14 +1,32 @@
 // components/StorySection.tsx
+/**
+ * Komponen Story Section yang menampilkan carousel dengan slide story warung
+ * Mendukung navigasi dengan tombol, keyboard arrow, dan swipe gesture
+ */
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { STORY } from "@/lib/menu-data";
 
+/**
+ * Komponen StorySection - Menampilkan carousel story dengan gambar dan caption
+ * Fitur: navigasi tombol, keyboard arrow, touch swipe, dan dot indicator
+ * @returns JSX element section dengan carousel story interaktif
+ */
 export default function StorySection() {
+  // Index slide yang sedang aktif ditampilkan
   const [active, setActive] = useState(0);
+  // Total jumlah slide dalam carousel
   const total = STORY.slides.length;
+  // Referensi untuk touch start X position saat swipe mulai
   const touchStartX = useRef<number | null>(null);
+  // Referensi untuk touch end X position saat swipe selesai
   const touchEndX = useRef<number | null>(null);
 
+  /**
+   * Fungsi untuk navigasi ke slide tertentu
+   * Menggunakan modulo untuk wrap around ke awal/akhir secara circular
+   * @param idx - Index slide yang dituju
+   */
   const goTo = useCallback((idx: number) => {
     setActive(((idx % total) + total) % total);
   }, [total]);

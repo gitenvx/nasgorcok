@@ -1,7 +1,21 @@
-// lib/menu-data.ts — Edit ini untuk ubah semua konten
+// lib/menu-data.ts
+/**
+ * File data konfigurasi untuk semua konten halaman utama
+ * Berisi: nama warung, menu items, kontak, about, story, dan ticker items
+ * EDIT FILE INI untuk mengubah semua konten di halaman
+ */
 
+/**
+ * Nama warung yang ditampilkan di halaman
+ * @const
+ */
 export const NAMA_WARUNG = "mamas ucok";
 
+/**
+ * Array kata/tagline yang ditampilkan di kolom kiri halaman utama
+ * Berisi 3 baris teks promosi warung
+ * @const
+ */
 export const KATA = [
   "Nasi goreng kaki lima, dimasak dengan cinta",
   "Buka setiap hari 18:00 - 00:00 WITA",
@@ -9,6 +23,11 @@ export const KATA = [
   "Jualan kok, liburnya tak menentu"
 ];
 
+/**
+ * Array menu Nasi Goreng dengan berbagai pilihan topping
+ * Ditampilkan di kolom kiri halaman utama (desktop) dan mobile
+ * @const
+ */
 export const NASI_GORENG = [
   "telur dadar",
   "telur ceplok",
@@ -20,6 +39,11 @@ export const NASI_GORENG = [
   "spesial edition",
 ];
 
+/**
+ * Array menu Mie, Capcay, dan Kwetiau dengan berbagai pilihan topping
+ * Ditampilkan di kolom tengah halaman utama (desktop) dan mobile
+ * @const
+ */
 export const MIE_CAPCAY = [
   "goreng / kuah",
   "telur dadar",
@@ -31,6 +55,12 @@ export const MIE_CAPCAY = [
   "spesial edition",
 ];
 
+/**
+ * Object berisi data kontak warung
+ * Mencakup WhatsApp, Instagram, Telegram, Website, Alamat, dan Email
+ * Ditampilkan di kolom kanan halaman utama
+ * @const
+ */
 export const KONTAK = {
   whatsapp:  "0851-8300-9087",
   instagram: "@nasgorcokcom",
@@ -40,6 +70,12 @@ export const KONTAK = {
   email: "admin@nasgorcok.com"
 };
 
+/**
+ * Object berisi data About section warung
+ * Mencakup tagline, deskripsi, dan video background source
+ * Ditampilkan di bagian About section halaman utama
+ * @const
+ */
 export const ABOUT = {
   tagline: "Nasi goreng kaki lima. Dimasak dengan cinta.",
   description:
@@ -49,6 +85,12 @@ export const ABOUT = {
   videoSrc: "/video/about_bg.webm",
 };
 
+/**
+ * Array item yang ditampilkan di ticker/scrolling footer
+ * Berisi informasi, promo, dan tagline warung
+ * Menampilkan teks yang bergulir terus-menerus di bawah halaman
+ * @const
+ */
 export const TICKER_ITEMS = [
   "Dibuat dengan cinta oleh MohFathuloh",
   "udah isi ayam swear",
@@ -61,6 +103,12 @@ export const TICKER_ITEMS = [
 ];
 
 
+/**
+ * Object berisi data Story section dengan array slide carousel
+ * Setiap slide memiliki: image, chapter, heading, dan description (3 baris)
+ * Ditampilkan di bagian Story section halaman utama dengan carousel interaktif
+ * @const
+ */
 export const STORY = {
   title: "Story",
   slides: [

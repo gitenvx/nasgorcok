@@ -1,10 +1,22 @@
 // components/MenuColumn.tsx
+/**
+ * Antarmuka untuk props komponen MenuColumn
+ * @param title - Judul menu (misal: "[ Nasi Goreng ]")
+ * @param items - Array string berisi item-item menu
+ * @param hasDivider - Opsional, menambahkan garis pemisah kanan jika true
+ */
 interface MenuColumnProps {
   title:      string;
   items:      string[];
   hasDivider?: boolean;
 }
 
+/**
+ * Komponen kolom menu yang menampilkan judul dan daftar item
+ * Digunakan untuk menampilkan daftar nasi goreng dan mie di halaman utama
+ * @param props - Props MenuColumnProps
+ * @returns JSX element berisi menu dengan styling
+ */
 export default function MenuColumn({ title, items, hasDivider }: MenuColumnProps) {
   return (
     <div className={`flex flex-col py-4 px-4 md:px-5 ${hasDivider ? "col-divider" : ""}`}>

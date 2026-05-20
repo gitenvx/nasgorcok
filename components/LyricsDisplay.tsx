@@ -9,10 +9,20 @@ interface Props {
 const BEFORE = 3;
 const AFTER  = 4;
 
+/**
+ * Komponen LyricsDisplay - Menampilkan lirik musik yang tersinkronisasi
+ * Mengambil data lirik dari file JSON, track position audio, dan display lirik secara real-time
+ * @param props - Props dengan audioRef
+ * @returns JSX element berisi tombol play/pause dan display lirik
+ */
 export default function LyricsDisplay({ audioRef }: Props) {
+  // Array berisi semua kata/lirik dari file lyrics.json
   const [words, setWords]           = useState<Word[]>([]);
+  // Index lirik yang sedang dimainkan
   const [currentIdx, setCurrentIdx] = useState(-1);
+  // Flag status audio apakah sedang diputar atau tidak
   const [isPlaying, setIsPlaying]   = useState(false);
+  // Referensi untuk requestAnimationFrame tracking
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
@@ -55,6 +65,10 @@ export default function LyricsDisplay({ audioRef }: Props) {
     return () => cancelAnimationFrame(rafRef.current);
   }, [audioRef, words, isPlaying]);
 
+  /**
+   * Fungsi untuk toggle play/pause audio
+   * Memutar audio jika sedang pause, atau memause jika sedang bermain
+   */
   const togglePlay = useCallback(() => {
     const audio = audioRef.current;
     if (!audio) return;

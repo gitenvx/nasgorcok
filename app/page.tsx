@@ -21,13 +21,20 @@ import { NAMA_WARUNG, NASI_GORENG, MIE_CAPCAY, KATA } from "@/lib/menu-data";
 
 const LOGOS_CENTER = [SiPython, SiNodedotjs, SiTypescript, SiGit, SiGithub, SiDocker, VscVscode, FaUbuntu, FaWindows];
 
+/**
+ * Fungsi komponen utama halaman beranda
+ * Menampilkan layout responsif dengan header, menu nasi goreng & mie,
+ * kolom kontak, lirik musik, dan bagian about & story.
+ * Mendukung tampilan desktop (3 kolom) dan mobile (scrollable vertical).
+ */
 export default function Home() {
+  // Referensi untuk element audio di halaman
   const audioRef = useRef<HTMLAudioElement>(null);
 
   return (
     <div className="min-h-screen flex flex-col relative">
 
-      {/* ── Fixed background — separate div for mobile perf ── */}
+      {/* ── Background tetap — div terpisah untuk performa mobile ── */}
       <div
         className="fixed-bg"
         aria-hidden="true"
@@ -40,17 +47,17 @@ export default function Home() {
       <audio ref={audioRef} src="/audio/bg.mp3" preload="auto" playsInline />
       <AudioAutoplay audioRef={audioRef} />
 
-      {/* ── CRACK / SCRATCH TEXTURE ──
+      {/* ── TEKSTUR RETAK / GORESAN ──
       <CrackOverlay />*/}
 
-      {/* ── BG EFFECTS ── */}
+      {/* ── EFEK LATAR BELAKANG ── */}
 
       <div className="bg-grid" aria-hidden="true" />
       <div className="pixel-snow" aria-hidden="true" />
 
       <div className="relative z-10 flex flex-col min-h-screen">
 
-        {/* ── NAVBAR sticky blur ── */}
+        {/* ── NAVBAR merekat dengan blur ── */}
         <header
           className="sticky top-0 z-30 flex flex-col items-center justify-center px-3 md:px-2 pt-0 pb-0"
           style={{
@@ -104,7 +111,7 @@ export default function Home() {
         </header>
 
         
-        {/* mENu + logos */}
+        {/* mENu + logo ── */}
         <div className="text-center pt-3 pb-1">
           <div className="menu-header btn-bg mb-1 hover-text" style={{ textAlign: "center", display: "inline", marginBottom: 0 }}>
               {NAMA_WARUNG}
@@ -128,12 +135,12 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Divider */}
+        {/* Pemisah ── */}
         <div className="mx-3 md:mx-6 mt-2" style={{ height: "1px", background: "var(--c-border)" }} aria-hidden="true" />
 
         <main className="flex-1 pb-10">
 
-          {/* PC */}
+          {/* Tampilan Desktop */}
           <div className="hidden md:grid md:grid-cols-3 h-full">
             <ScrollReveal revealClass="anim-col-1">
               <MenuColumn title="[ Nasi Goreng ]" items={NASI_GORENG} />
@@ -160,7 +167,7 @@ export default function Home() {
             </ScrollReveal>
           </div>
 
-          {/* START Mobile */}
+          {/* MULAI Tampilan Mobile */}
           <ScrollReveal revealClass="anim-nama" className="md:hidden flex flex-col px-2">
 
             <div className="border-b" style={{ borderColor: "var(--c-border)" }}>
@@ -207,19 +214,19 @@ export default function Home() {
             </div>
 
           </ScrollReveal>
-          {/* END Mobile */}
+          {/* AKHIR Tampilan Mobile */}
 
-          {/* About Section — RE Requiem style */}
+          {/* Bagian Tentang — Gaya RE Requiem */}
           <ScrollReveal>
             <AboutSection />
           </ScrollReveal>
 
-          {/* Story Section — RE Requiem style carousel */}
+          {/* Bagian Cerita — Karusel Gaya RE Requiem */}
           <ScrollReveal>
             <StorySection />
           </ScrollReveal>
 
-          {/* Love Animation — centered above footer
+          {/* Animasi Cinta — tengah di atas footer
           <div className="flex justify-center pb-6">
             <LoveAnimation />
           </div>}*/}
@@ -229,7 +236,7 @@ export default function Home() {
 
       </div>
 
-      {/* TICKER FOOTER sticky bottom */}
+      {/* TICKER FOOTER merekat di bawah */}
       <div
         className="fixed bottom-0 left-0 right-0 z-30"
         style={{

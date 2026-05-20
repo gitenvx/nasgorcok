@@ -1,12 +1,24 @@
 // components/AboutSection.tsx
+/**
+ * Komponen About Section yang menampilkan video background dan konten tentang warung
+ * Mencakup video latar, overlay, dan teks deskripsi dari ABOUT data
+ */
 "use client";
 import { useRef, useEffect, useState } from "react";
 import { ABOUT } from "@/lib/menu-data";
 
+/**
+ * Komponen AboutSection - Menampilkan bagian tentang warung dengan video background
+ * Mencoba memutar video, jika error tampilkan fallback dengan overlay
+ * @returns JSX element section dengan video dan konten tentang warung
+ */
 export default function AboutSection() {
+  // Referensi ke element video
   const videoRef = useRef<HTMLVideoElement>(null);
+  // State untuk tracking apakah video bisa dimuat atau error
   const [hasVideo, setHasVideo] = useState(true);
 
+  // Coba mainkan video dan set fallback jika ada error
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;

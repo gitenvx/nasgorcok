@@ -1,11 +1,22 @@
 // components/LoveAnimation.tsx
+/**
+ * Komponen animasi cinta yang menampilkan teks "i love nasgor" yang bergerak animasi
+ * Membuat 100 elemen dengan animasi horizontal dan vertical yang berbeda
+ */
 "use client";
 import { useEffect, useRef } from "react";
 
+/**
+ * Komponen LoveAnimation - Menampilkan animasi teks cinta yang bergerak
+ * Membuat 100 instance teks dengan delay berbeda untuk efek waterfall
+ * Menggunakan keyframe animation untuk gerakan horizontal dan vertikal
+ * @returns JSX element container dengan animasi teks cinta
+ */
 export default function LoveAnimation() {
+  // Referensi ke container div untuk DOM manipulation
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  /**\n   * useEffect hook untuk generate dan setup animasi teks
     const container = containerRef.current;
     if (!container) return;
     container.innerHTML = "";
