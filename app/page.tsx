@@ -54,7 +54,6 @@ export default function Home() {
       {/* ── EFEK LATAR BELAKANG ── */}
 
       <div className="bg-grid" aria-hidden="true" />
-      <div className="pixel-snow" aria-hidden="true" />
 
       <div className="relative z-10 flex flex-col min-h-screen">
 

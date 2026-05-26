@@ -57,10 +57,11 @@ export default function RootLayout({
   return (
     <html lang="id" className="scroll-smooth">
       <body className="min-h-screen overflow-x-hidden">
+        <div className="film-grain" aria-hidden="true" />
         {children}
         <SpeedInsights />
         <Analytics />
-        </body>
+      </body>
     </html>
   );
 }

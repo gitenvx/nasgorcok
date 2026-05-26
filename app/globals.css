@@ -404,66 +404,6 @@ html {
   background-size: 40px 40px;
 }
 
-/* Snow / pixel sparkle — pakai box-shadow masif di satu div */
-@keyframes snowFlicker {
-  0%, 100% { opacity: 0; }
-  50%       { opacity: 1; }
-}
-
-.pixel-snow {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  overflow: hidden;
-  will-change: transform;
-  transform: translateZ(0);
-  min-height: 100%;
-}
-
-/* Tiap partikel = pseudo element kecil dengan animasi berbeda.
-   Jumlah partikel dikurangi (dari ~40 jadi ~12 per pseudo) biar gak terlalu rame. */
-.pixel-snow::before,
-.pixel-snow::after {
-  content: "";
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: white;
-  border-radius: 50%;
-  box-shadow:
-    180px 120px 3px 1px rgba(255,255,255,0.6),
-    480px 80px 3px 1px rgba(255,255,255,0.5),
-    820px 150px 3px 1px rgba(255,255,255,0.7),
-    1180px 95px 3px 1px rgba(255,255,255,0.5),
-    1380px 220px 3px 1px rgba(255,255,255,0.6),
-    260px 380px 3px 1px rgba(255,255,255,0.5),
-    620px 320px 3px 1px rgba(255,255,255,0.7),
-    1020px 410px 3px 1px rgba(255,255,255,0.5),
-    1320px 360px 3px 1px rgba(255,255,255,0.6),
-    140px 580px 3px 1px rgba(255,255,255,0.5),
-    540px 640px 3px 1px rgba(255,255,255,0.7),
-    980px 590px 3px 1px rgba(255,255,255,0.5),
-    1280px 670px 3px 1px rgba(255,255,255,0.6),
-    320px 780px 3px 1px rgba(255,255,255,0.5),
-    760px 820px 3px 1px rgba(255,255,255,0.6);
-  animation: snowFlicker 3.2s ease-in-out infinite;
-}
-
-/* ::after — lokasi berbeda + delay = tidak sinkron, juga dikurangi jumlahnya */
-.pixel-snow::after {
-  box-shadow:
-    320px 60px 3px 1px rgba(255,255,255,0.5),
-    700px 200px 3px 1px rgba(255,255,255,0.6),
-    1100px 50px 3px 1px rgba(255,255,255,0.5),
-    420px 480px 3px 1px rgba(255,255,255,0.5),
-    900px 350px 3px 1px rgba(255,255,255,0.7),
-    1240px 500px 3px 1px rgba(255,255,255,0.5),
-    180px 720px 3px 1px rgba(255,255,255,0.6),
-    660px 760px 3px 1px rgba(255,255,255,0.5),
-    1140px 700px 3px 1px rgba(255,255,255,0.6);
-  animation: snowFlicker 4.7s ease-in-out 1.6s infinite;
-}
 
 
 /* ══════════════════════════════════════════════
@@ -818,10 +758,7 @@ html {
 @media (max-width: 767px) {
   .bg-grid { opacity: 0.4; }
 
-  /* Snow tetap fixed (efek atmospheric) tapi opacity dikurangi */
-  .pixel-snow {
-    opacity: 0.5;
-  }
+
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1143,3 +1080,22 @@ html {
   .story-nav-prev { right: 3rem; }
   .story-nav-next { right: 0.5rem; }
 }
+
+/* ── FILM GRAIN EFFECT ── */
+.film-grain {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain-breath 4s ease-in-out infinite;
+  will-change: opacity;
+}
+
+@keyframes grain-breath {
+  0%, 100% { opacity: 0.046; }
+  50% { opacity: 0.056; }
+}
+
