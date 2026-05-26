@@ -60,7 +60,7 @@ export default function Home() {
 
         {/* ── NAVBAR merekat dengan blur ── */}
         <header
-          className="sticky top-0 z-30 flex flex-col items-center justify-center px-3 lg:px-2 pt-0 pb-0"
+          className="sticky top-0 z-30 flex flex-col items-center justify-center px-3 md:px-2 pt-0 pb-0"
           style={{
             backdropFilter:       "blur(2px)",
             WebkitBackdropFilter: "blur(2px)",
@@ -137,15 +137,15 @@ export default function Home() {
         </div>
 
         {/* Pemisah ── */}
-        <div className="mx-3 lg:mx-6 mt-2" style={{ height: "1px", background: "var(--c-border)" }} aria-hidden="true" />
+        <div className="mx-3 md:mx-6 mt-2" style={{ height: "1px", background: "var(--c-border)" }} aria-hidden="true" />
 
         <main className="flex-1 pb-10">
 
           {/* Tampilan Desktop */}
-          <div className="hidden lg:grid lg:grid-cols-3 h-full">
+          <div className="hidden md:grid md:grid-cols-3 h-full">
             <ScrollReveal revealClass="anim-col-1">
               <MenuColumn title="[ Nasi Goreng ]" items={NASI_GORENG} />
-              <div className="px-4 lg:px-5 mt-4">
+              <div className="px-4 md:px-5 mt-4">
                 <p>
                   <span className="re-textbox hover-text">
                     {KATA[0]}<br/>{KATA[1]}<br/>{KATA[2]}
@@ -169,7 +169,7 @@ export default function Home() {
           </div>
 
           {/* MULAI Tampilan Mobile */}
-          <ScrollReveal revealClass="anim-nama" className="lg:hidden flex flex-col px-2">
+          <ScrollReveal revealClass="anim-nama" className="md:hidden flex flex-col px-2">
 
             <div className="border-b" style={{ borderColor: "var(--c-border)" }}>
               <div className="m-3">
@@ -238,7 +238,7 @@ export default function Home() {
           </div>}*/}
         </main>
 
-        <div className="mx-3 lg:mx-6" style={{ height: "1px", background: "var(--c-border)" }} aria-hidden="true" />
+        <div className="mx-3 md:mx-6" style={{ height: "1px", background: "var(--c-border)" }} aria-hidden="true" />
 
       </div>
 
@@ -251,7 +251,7 @@ export default function Home() {
           background:           "rgba(10,10,10,0.40)",
         }}
       >
-        <div className="mx-auto w-full max-w-screen-xl">
+        <div className="mx-auto w-full max-w-375">
           <TickerBar />
         </div>
       </div>

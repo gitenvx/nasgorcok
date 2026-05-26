@@ -787,7 +787,7 @@ html {
 }
 
 /* ── mobile responsive ── */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .about-section {
     min-height: 360px;
   }
@@ -1105,7 +1105,7 @@ html {
 }
 
 /* tablet & mobile */
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .story-carousel {
     grid-template-columns: 1fr;
     gap: 1.25rem;
@@ -1120,7 +1120,7 @@ html {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .story-section {
     padding: 2rem 0;
     margin-top: 1.25rem;
