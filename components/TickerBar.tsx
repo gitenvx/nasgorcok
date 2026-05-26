@@ -19,7 +19,6 @@ export default function TickerBar() {
       {/* Copyright kiri — fixed, tidak ikut scroll */}
       <span
         style={{
-          fontFamily:    "var(--font-mono)",
           fontSize:      "clamp(0.70rem, 2vw, 0.90rem)",
           color:         "white",
           whiteSpace:    "nowrap",

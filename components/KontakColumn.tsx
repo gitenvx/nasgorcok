@@ -24,27 +24,27 @@ export default function KontakColumn() {
       </div>
 
       <div className="space-y-1 mb-4 hover-text">
-        <div className="kontak-row">
+        <div className="menu-item">
           <FaWhatsapp className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
           <span>{KONTAK.whatsapp}</span>
         </div>
-        <div className="kontak-row">
+        <div className="menu-item">
           <FaTelegram className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
           <span>{KONTAK.telegram}</span>
         </div>
-        <div className="kontak-row">
+        <div className="menu-item">
           <FaInstagram className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
           <span>{KONTAK.instagram}</span>
         </div>
-        <div className="kontak-row">
+        <div className="menu-item">
           <FaGlobe className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
           <span>{KONTAK.website}</span>
         </div>
-        <div className="kontak-row">
+        <div className="menu-item">
           <TfiEmail className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
           <span>{KONTAK.email}</span>
         </div>
-        <div className="kontak-row">
+        <div className="menu-item">
           <CiLocationOn className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
           <span>{KONTAK.alamat}</span>
         </div>

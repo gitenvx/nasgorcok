@@ -1,17 +1,18 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 /* ══════════════════════════════════════
    FONT FACES — taruh TTF di public/fonts/
    ══════════════════════════════════════ */
 @font-face {
   font-family: "GrungeDisplay";
-  src: url("/fonts/display.ttf") format("truetype");
+  src: url("/fonts/re9_big.ttf") format("truetype");
   font-weight: 900;
   font-display: swap;
 }
 @font-face {
   font-family: "MenuMono";
-  src: url("/fonts/mono.ttf") format("truetype");
+  src: url("/fonts/re9_small.ttf") format("truetype");
   font-weight: 400;
   font-display: swap;
 }
@@ -27,6 +28,7 @@
   --c-dim:    rgba(232, 224, 208, 0.5);
   --font-title: "GrungeDisplay", "Impact", "Arial Black", sans-serif;
   --font-mono:  "MenuMono", "Courier New", monospace;
+  --font-submenu: "Roboto Condensed", sans-serif;
 }
 
 /* ══════════════════════════════════════
@@ -36,7 +38,7 @@
 html {
   background-color: var(--c-void);
   color: var(--c-ash);
-  font-family: var(--font-mono);
+  font-family: var(--font-submenu);
   -webkit-overflow-scrolling: touch;
 }
 
@@ -168,7 +170,7 @@ html {
    MENU LIST ITEM
    ══════════════════════════════════════ */
 .menu-item {
-  font-family: var(--font-mono);
+  font-family: var(--font-submenu);
   font-size: clamp(0.9rem, 1.35vw, 0.92rem);
   color: var(--c-ash);
   padding: 3px 0;
@@ -249,7 +251,7 @@ html {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-mono);
+  font-family: var(--font-submenu);
   font-size: clamp(0.85rem, 1.35vw, 0.88rem);
   color: var(--c-ash);
   margin-bottom: 8px;
@@ -260,7 +262,7 @@ html {
   padding: 8px;
 }
 .qris-label {
-  font-family: var(--font-mono);
+  font-family: var(--font-submenu);
   font-size: clamp(0.68rem, 1.2vw, 0.82rem);
   text-align: center;
   margin-bottom: 6px;
@@ -288,7 +290,7 @@ html {
 }
 .ticker-track:hover { animation-play-state: paused; }
 .footer-ticker {
-  font-family: var(--font-mono);
+  font-family: var(--font-submenu);
   font-size: clamp(0.62rem, 1.2vw, 0.82rem);
   color: var(--c-ash);
   white-space: nowrap;
@@ -579,7 +581,7 @@ html {
 
 .lyrics-word {
   display: inline;
-  font-family: var(--font-title);
+  font-family: var(--font-submenu);
   font-size: clamp(0.8rem, 2vw, 1.1rem);
   color: rgba(232, 224, 208, 0.25);
   transition: color 0.15s ease, text-shadow 0.15s ease, font-size 0.1s ease;
@@ -662,7 +664,6 @@ html {
 
 /* highlight text */
 .re-textbox {
-  font-family: var(--font-mono);
   font-size: clamp(0.75rem, 1.4vw, 0.9rem);
   line-height: 1.9;
   letter-spacing: 0.02em;
@@ -755,7 +756,7 @@ html {
 }
 
 .about-tagline {
-  font-family: var(--font-mono);
+  font-family: var(--font-submenu);
   font-size: clamp(1rem, 2.5vw, 1.4rem);
   color: var(--c-ash);
   background: rgba(200, 200, 195, 0.85);
@@ -769,7 +770,6 @@ html {
 }
 
 .about-desc {
-  font-family: var(--font-mono);
   font-size: clamp(0.8rem, 1.3vw, 0.95rem);
   color: rgba(232, 224, 208, 0.85);
   line-height: 1.7;

@@ -6,8 +6,8 @@ interface Props {
   audioRef: React.RefObject<HTMLAudioElement | null>;
 }
 
-const BEFORE = 3;
-const AFTER  = 4;
+const BEFORE = 2;
+const AFTER  = 2;
 
 /**
  * Komponen LyricsDisplay - Menampilkan lirik musik yang tersinkronisasi
@@ -132,10 +132,8 @@ export default function LyricsDisplay({ audioRef }: Props) {
           return (
             <span key={globalIdx} style={{
               display:         "inline",
-              fontFamily:      "var(--font-title)",
-              letterSpacing:   "0.12em",
               textTransform:   "uppercase",
-              fontSize:        isActive ? "clamp(1.1rem, 2.2vw, 1.3rem)" : "clamp(0.9rem, 1.8vw, 1.1rem)",
+              fontSize:        isActive ? "clamp(1rem, 2vw, 1rem)" : "clamp(0.9rem, 1.8vw, 1.1rem)",
               color:           isActive ? "rgba(232,224,208,1)" : isPast ? "rgba(232,224,208,0.25)" : "rgba(232,224,208,0.5)",
               backgroundColor: isActive ? "rgba(204,26,26,1)" : "transparent",
               padding:         isActive ? "0 4px" : "0",
