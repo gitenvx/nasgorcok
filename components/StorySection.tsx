@@ -15,6 +15,7 @@ import { STORY } from "@/lib/menu-data";
 export default function StorySection() {
   // Index slide yang sedang aktif ditampilkan
   const [active, setActive] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(20);
   // Total jumlah slide dalam carousel
   const total = STORY.slides.length;
   // Referensi untuk touch start X position saat swipe mulai
@@ -43,6 +44,22 @@ export default function StorySection() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [next, prev]);
+
+  // Reset timer & jalankan interval tiap kali slide aktif berubah
+  useEffect(() => {
+    setTimeLeft(15);
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [active]);
+
+  // Kalau waktu habis, lanjut ke slide berikutnya
+  useEffect(() => {
+    if (timeLeft === 0) {
+      next();
+    }
+  }, [timeLeft, next]);
 
   // Touch swipe
   const onTouchStart = (e: React.TouchEvent) => {
@@ -84,7 +101,8 @@ export default function StorySection() {
           onTouchEnd={onTouchEnd}
         >
           {/* Image side */}
-          <div className="story-image-wrap">
+          <div className="story-image-stack">
+            <div className="story-image-wrap">
             {STORY.slides.map((s, i) => (
               <div
                 key={i}
@@ -98,26 +116,35 @@ export default function StorySection() {
             ))}
 
             {/* Prev / Next buttons */}
-            <button
-              type="button"
-              className="story-nav story-nav-prev"
-              onClick={prev}
-              aria-label="Previous slide"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter">
-                <polyline points="15 6 9 12 15 18" />
-              </svg>
-            </button>
-            <button
-              type="button"
-              className="story-nav story-nav-next"
-              onClick={next}
-              aria-label="Next slide"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter">
-                <polyline points="9 6 15 12 9 18" />
-              </svg>
-            </button>
+            <div className="story-nav-container">
+              <button
+                type="button"
+                className="story-nav story-nav-prev"
+                onClick={prev}
+                aria-label="Previous slide"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter">
+                  <polyline points="15 6 9 12 15 18" />
+                </svg>
+              </button>
+
+              <div className="story-nav-timer" aria-hidden="true">
+                {timeLeft}s
+              </div>
+
+              <button
+                type="button"
+                className="story-nav story-nav-next"
+                onClick={next}
+                aria-label="Next slide"
+              >
+                <svg width="
+                " height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter">
+                  <polyline points="9 6 15 12 9 18" />
+                </svg>
+              </button>
+            </div>
+          </div>
           </div>
 
           {/* Caption side */}

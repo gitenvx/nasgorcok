@@ -144,3 +144,19 @@ export const STORY = {
     },
   ],
 };
+
+/**
+ * Object berisi data Lokasi section
+ * @const
+ */
+export const LOCATION_DATA = {
+  title: "Lokasi Warung",
+  description: "Lapak saya sekarang di depan Indomaret, lokasi lengkapnya bisa cari kordinat ini di Gmaps: -8.618119,115.240907",
+  images: [
+    "/img/story/story-1.webp",
+    "/img/story/story-2.webp",
+    "/img/story/story-3.webp",
+    "/img/story/story-1.webp",
+    "/img/story/story-2.webp",
+  ]
+};
