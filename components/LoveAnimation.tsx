@@ -16,7 +16,7 @@ export default function LoveAnimation() {
   // Referensi ke container div untuk DOM manipulation
   const containerRef = useRef<HTMLDivElement>(null);
 
-  /**\n   * useEffect hook untuk generate dan setup animasi teks
+  useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
     container.innerHTML = "";
