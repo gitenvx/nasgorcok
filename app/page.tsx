@@ -45,7 +45,6 @@ export default function Home() {
       />
 
       {/* ── Audio ── */}
-      <audio ref={audioRef} src="/audio/bg.mp3" preload="auto" playsInline />
       <AudioAutoplay audioRef={audioRef} />
 
       {/* ── TEKSTUR RETAK / GORESAN ──
@@ -243,7 +242,7 @@ export default function Home() {
 
       {/* TICKER FOOTER merekat di bawah */}
       <div
-        className="fixed bottom-0 left-0 right-0 z-30"
+        className="fixed bottom-0 left-0 right-0 z-30 main-footer"
         style={{
           backdropFilter:       "blur(2px)",
           WebkitBackdropFilter: "blur(2px)",
