@@ -69,8 +69,8 @@ export default function CookieConsent() {
         width: "calc(100% - 20px)",
         maxWidth: "480px",
         background: "rgba(10, 10, 10, 0.65)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
+        backdropFilter: "blur(10px)",
+        WebkitBackdropFilter: "blur(10px)",
         border: "2px solid var(--c-border, #cca266)",
         padding: "16px",
         color: "var(--c-ash, #e8e0d0)",
@@ -138,8 +138,8 @@ export default function CookieConsent() {
           onClick={handleDecline}
           style={{
             background: "transparent",
-            border: "1px solid rgba(232,224,208,0.3)",
-            color: "rgba(232,224,208,0.5)",
+            border: "1px solid var(--c-red, #cc1a1a)",
+            color: "var(--c-red, #cc1a1a)",
             padding: "6px 12px",
             cursor: "pointer",
             fontSize: "11px",
@@ -148,13 +148,9 @@ export default function CookieConsent() {
             transition: "all 0.2s ease",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.color = "var(--c-red, #cc1a1a)";
-            e.currentTarget.style.borderColor = "var(--c-red, #cc1a1a)";
             e.currentTarget.style.boxShadow = "0 0 8px rgba(204, 26, 26, 0.25)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.color = "rgba(232,224,208,0.5)";
-            e.currentTarget.style.borderColor = "rgba(232,224,208,0.3)";
             e.currentTarget.style.boxShadow = "none";
           }}
         >
@@ -164,8 +160,8 @@ export default function CookieConsent() {
           onClick={handleAccept}
           style={{
             background: "transparent",
-            border: "1px solid var(--c-border, #cca266)",
-            color: "var(--c-border, #cca266)",
+            border: "1px solid #00ff66",
+            color: "#00ff66",
             padding: "6px 12px",
             cursor: "pointer",
             fontSize: "11px",
@@ -175,13 +171,9 @@ export default function CookieConsent() {
             transition: "all 0.2s ease",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.color = "#00ff66";
-            e.currentTarget.style.borderColor = "#00ff66";
             e.currentTarget.style.boxShadow = "0 0 10px rgba(0, 255, 102, 0.35)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.color = "var(--c-border, #cca266)";
-            e.currentTarget.style.borderColor = "var(--c-border, #cca266)";
             e.currentTarget.style.boxShadow = "none";
           }}
         >
