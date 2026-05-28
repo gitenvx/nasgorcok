@@ -24,6 +24,8 @@ export default function LyricsDisplay({ audioRef }: Props) {
   const [isPlaying, setIsPlaying]   = useState(false);
   // Referensi untuk requestAnimationFrame tracking
   const rafRef = useRef<number>(0);
+  // State untuk menyimpan element audio yang dideteksi
+  const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     fetch("/audio/lyrics.json")
@@ -32,28 +34,37 @@ export default function LyricsDisplay({ audioRef }: Props) {
       .catch(() => {});
   }, []);
 
+  // Polling secara berkala untuk mendeteksi kapan audioRef terisi secara asinkron
   useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    const onPlay  = () => setIsPlaying(true);
-    const onPause = () => setIsPlaying(false);
-    setIsPlaying(!audio.paused);
-    audio.addEventListener("play",  onPlay);
-    audio.addEventListener("pause", onPause);
-    return () => {
-      audio.removeEventListener("play",  onPlay);
-      audio.removeEventListener("pause", onPause);
-    };
+    const checkAudio = setInterval(() => {
+      if (audioRef.current) {
+        setAudioElement(audioRef.current);
+        clearInterval(checkAudio);
+      }
+    }, 100);
+    return () => clearInterval(checkAudio);
   }, [audioRef]);
 
   useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio || words.length === 0 || !isPlaying) {
+    if (!audioElement) return;
+    const onPlay  = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
+    setIsPlaying(!audioElement.paused);
+    audioElement.addEventListener("play",  onPlay);
+    audioElement.addEventListener("pause", onPause);
+    return () => {
+      audioElement.removeEventListener("play",  onPlay);
+      audioElement.removeEventListener("pause", onPause);
+    };
+  }, [audioElement]);
+
+  useEffect(() => {
+    if (!audioElement || words.length === 0 || !isPlaying) {
       cancelAnimationFrame(rafRef.current);
       return;
     }
     const tick = () => {
-      const t = audio.currentTime;
+      const t = audioElement.currentTime;
       let idx = -1;
       for (let i = 0; i < words.length; i++) {
         if (t >= words[i].start && t <= words[i].end) { idx = i; break; }
@@ -63,18 +74,17 @@ export default function LyricsDisplay({ audioRef }: Props) {
     };
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [audioRef, words, isPlaying]);
+  }, [audioElement, words, isPlaying]);
 
   /**
    * Fungsi untuk toggle play/pause audio
    * Memutar audio jika sedang pause, atau memause jika sedang bermain
    */
   const togglePlay = useCallback(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    if (audio.paused) audio.play().catch(() => {});
-    else audio.pause();
-  }, [audioRef]);
+    if (!audioElement) return;
+    if (audioElement.paused) audioElement.play().catch(() => {});
+    else audioElement.pause();
+  }, [audioElement]);
 
   const start   = Math.max(0, currentIdx - BEFORE);
   const end     = Math.min(words.length, currentIdx + AFTER + 1);

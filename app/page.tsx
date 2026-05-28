@@ -18,6 +18,7 @@ import AboutSection from "@/components/AboutSection";
 import StorySection from "@/components/StorySection";
 import LocationSection from "@/components/LocationSection";
 import ScrollReveal  from "@/components/ScrollReveal";
+import CookieConsent from "@/components/CookieConsent";
 import { NAMA_WARUNG, NASI_GORENG, MIE_CAPCAY, KATA } from "@/lib/menu-data";
 
 const LOGOS_CENTER = [SiPython, SiNodedotjs, SiTypescript, SiGit, SiGithub, SiDocker, VscVscode, FaUbuntu, FaWindows];
@@ -46,6 +47,9 @@ export default function Home() {
 
       {/* ── Audio ── */}
       <AudioAutoplay audioRef={audioRef} />
+
+      {/* ── Cookie Consent (Retro System Style) ── */}
+      <CookieConsent />
 
       {/* ── TEKSTUR RETAK / GORESAN ──
       <CrackOverlay />*/}

@@ -25,9 +25,13 @@ export default function TickerBar() {
           padding:       "0 12px",
           flexShrink:    0,
           borderRight:   "1px solid red",
+          display:       "flex",
+          gap:           "12px",
+          alignItems:    "center",
         }}
       >
-        © {new Date().getFullYear()} Mohammad Fathuloh
+        <span>© {new Date().getFullYear()} Mohammad Fathuloh</span>
+        <a href="/privacy-policy" style={{ color: "var(--c-ash, #e8e0d0)", textDecoration: "none", fontSize: "0.80rem" }} className="hover-text">Privacy Policy</a>
       </span>
 
       {/* Ticker scroll */}

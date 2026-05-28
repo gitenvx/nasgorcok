@@ -9,12 +9,12 @@ import { ABOUT } from "@/lib/menu-data";
 
 /**
  * Komponen AboutSection - Menampilkan bagian tentang warung dengan video background
- * Terenkapsulasi dalam closed Shadow DOM untuk menghindari deteksi IDM
+ * Mencoba memutar video, jika error tampilkan fallback dengan overlay
  * @returns JSX element section dengan video dan konten tentang warung
  */
 export default function AboutSection() {
-  // Referensi ke element kontainer shadow DOM
-  const containerRef = useRef<HTMLDivElement>(null);
+  // Referensi ke element video
+  const videoRef = useRef<HTMLVideoElement>(null);
   // State untuk tracking apakah video bisa dimuat atau error
   const [hasVideo, setHasVideo] = useState(true);
   // State untuk menyimpan Blob URL video
@@ -47,68 +47,14 @@ export default function AboutSection() {
     };
   }, []);
 
-  // Memasang video di dalam closed Shadow DOM setelah videoUrl didapatkan
+  // Coba mainkan video dan set fallback jika ada error
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container || !videoUrl) return;
-
-    // Bersihkan isi kontainer terlebih dahulu
-    container.innerHTML = "";
-
-    // Buat wrapper div yang akan dipasangi shadow root
-    // Hal ini agar kita selalu memasang shadow root baru pada elemen wrapper yang baru,
-    // menghindari error DOMException karena memanggil attachShadow dua kali pada elemen yang sama.
-    const wrapper = document.createElement("div");
-    wrapper.style.width = "100%";
-    wrapper.style.height = "100%";
-    container.appendChild(wrapper);
-
-    // Attach shadow root dalam mode 'closed' agar extension browser tidak bisa mendeteksinya
-    const shadow = wrapper.attachShadow({ mode: "closed" });
-
-    // Buat tag video secara dinamis
-    const video = document.createElement("video");
-    video.src = videoUrl;
-    video.autoplay = true;
-    video.loop = true;
-    video.muted = true;
-    video.playsInline = true;
-    video.setAttribute("disableRemotePlayback", "true");
-    video.setAttribute("controlsList", "nodownload");
-
-    // Cegah klik kanan/context menu untuk mempersulit interaksi extension
-    video.addEventListener("contextmenu", (e) => e.preventDefault());
-
-    // Berikan styling internal di dalam shadow DOM agar video berukuran penuh
-    const style = document.createElement("style");
-    style.textContent = `
-      video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    `;
-
-    shadow.appendChild(style);
-    shadow.appendChild(video);
-
-    // Coba putar video
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.catch((err) => {
-        console.log("Autoplay video dicegah atau gagal:", err);
-      });
-    }
-
+    const v = videoRef.current;
+    if (!v || !videoUrl) return;
+    v.play().catch(() => {});
     const onError = () => setHasVideo(false);
-    video.addEventListener("error", onError);
-
-    return () => {
-      video.removeEventListener("error", onError);
-      if (container) {
-        container.innerHTML = "";
-      }
-    };
+    v.addEventListener("error", onError);
+    return () => v.removeEventListener("error", onError);
   }, [videoUrl]);
 
   return (
@@ -116,7 +62,17 @@ export default function AboutSection() {
       {/* ── Video / fallback background ── */}
       <div className="about-bg">
         {hasVideo && videoUrl && (
-          <div ref={containerRef} style={{ width: "100%", height: "100%" }} />
+          <video
+            ref={videoRef}
+            src={videoUrl}
+            autoPlay
+            loop
+            muted
+            playsInline
+            disableRemotePlayback
+            controlsList="nodownload"
+            className="about-video"
+          />
         )}
         <div className="about-overlay" />
       </div>
