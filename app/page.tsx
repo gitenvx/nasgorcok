@@ -9,6 +9,8 @@ import { VscVscode } from "react-icons/vsc";
 import { FaWindows, FaUbuntu } from "react-icons/fa";
 import MenuColumn    from "@/components/MenuColumn";
 import KontakColumn  from "@/components/KontakColumn";
+import VideoBackgroundFallback from "@/components/VideoBackgroundFallback";
+import DustOverlay from "@/components/DustOverlay";
 import TickerBar     from "@/components/TickerBar";
 // import CrackOverlay  from "@/components/CrackOverlay";
 import AudioAutoplay from "@/components/AudioAutoplay";
@@ -34,14 +36,14 @@ export default function Home() {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   return (
-    <div className="min-h-screen flex flex-col relative">
+    <div className="min-h-screen flex flex-col relative" style={{ backgroundColor: "#0a0a0a", color: "#e8e0d0" }}>
 
       {/* ── Background tetap — div terpisah untuk performa mobile ── */}
       <div
         className="fixed-bg"
         aria-hidden="true"
         style={{
-          backgroundImage: "url('/img/bg.webp')",
+          backgroundImage: "url('/img/common/bg/bg.webp')",
         }}
       />
 
@@ -57,6 +59,7 @@ export default function Home() {
       {/* ── EFEK LATAR BELAKANG ── */}
 
       <div className="bg-grid" aria-hidden="true" />
+      <DustOverlay />
 
       <div className="relative z-10 flex flex-col min-h-screen">
 
@@ -220,19 +223,13 @@ export default function Home() {
           {/* AKHIR Tampilan Mobile */}
 
           {/* Bagian Tentang — Gaya RE Requiem */}
-          <ScrollReveal>
-            <AboutSection />
-          </ScrollReveal>
+          <AboutSection />
 
           {/* Bagian Cerita — Karusel Gaya RE Requiem */}
-          <ScrollReveal>
-            <StorySection />
-          </ScrollReveal>
+          <StorySection />
 
           {/* Bagian Lokasi */}
-          <ScrollReveal>
-            <LocationSection />
-          </ScrollReveal>
+          <LocationSection />
 
           {/* Animasi Cinta — tengah di atas footer
           <div className="flex justify-center pb-6">

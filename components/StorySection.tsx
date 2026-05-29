@@ -6,6 +6,8 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { STORY } from "@/lib/menu-data";
+import JitterTitle from "@/components/JitterTitle";
+import ScrollReveal from "@/components/ScrollReveal";
 
 /**
  * Komponen StorySection - Menampilkan carousel story dengan gambar dan caption
@@ -84,14 +86,16 @@ export default function StorySection() {
       {/* ── Inner container ── */}
       <div className="story-inner">
         {/* Header */}
-        <div className="story-header">
-          <h2 className="about-title">{STORY.title}</h2>
-          <span className="story-counter">
-            <span className="story-counter-cur">{String(active + 1).padStart(2, "0")}</span>
-            <span className="story-counter-sep">/</span>
-            <span className="story-counter-tot">{String(total).padStart(2, "0")}</span>
-          </span>
-        </div>
+        <ScrollReveal revealClass="anim-col-1">
+          <div className="story-header">
+            <JitterTitle text={STORY.title} />
+            <span className="story-counter">
+              <span className="story-counter-cur">{String(active + 1).padStart(2, "0")}</span>
+              <span className="story-counter-sep">/</span>
+              <span className="story-counter-tot">{String(total).padStart(2, "0")}</span>
+            </span>
+          </div>
+        </ScrollReveal>
 
         {/* Carousel */}
         <div
@@ -101,54 +105,53 @@ export default function StorySection() {
           onTouchEnd={onTouchEnd}
         >
           {/* Image side */}
-          <div className="story-image-stack">
+          <ScrollReveal revealClass="anim-col-2">
             <div className="story-image-wrap">
-            {STORY.slides.map((s, i) => (
-              <div
-                key={i}
-                className={`story-image-slide ${i === active ? "is-active" : ""}`}
-                aria-hidden={i !== active}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={s.img} alt={s.heading} className="story-img" loading="lazy" />
-                <div className="story-image-overlay" />
+              {STORY.slides.map((s, i) => (
+                <div
+                  key={i}
+                  className={`story-image-slide ${i === active ? "is-active" : ""}`}
+                  aria-hidden={i !== active}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={s.img} alt={s.heading} className="story-img" loading="lazy" />
+                  <div className="story-image-overlay" />
+                </div>
+              ))}
+
+              {/* Prev / Next buttons */}
+              <div className="story-nav-container">
+                <button
+                  type="button"
+                  className="story-nav story-nav-prev"
+                  onClick={prev}
+                  aria-label="Previous slide"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter">
+                    <polyline points="15 6 9 12 15 18" />
+                  </svg>
+                </button>
+
+                <div className="story-nav-timer" aria-hidden="true">
+                  {timeLeft}s
+                </div>
+
+                <button
+                  type="button"
+                  className="story-nav story-nav-next"
+                  onClick={next}
+                  aria-label="Next slide"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter">
+                    <polyline points="9 6 15 12 9 18" />
+                  </svg>
+                </button>
               </div>
-            ))}
-
-            {/* Prev / Next buttons */}
-            <div className="story-nav-container">
-              <button
-                type="button"
-                className="story-nav story-nav-prev"
-                onClick={prev}
-                aria-label="Previous slide"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter">
-                  <polyline points="15 6 9 12 15 18" />
-                </svg>
-              </button>
-
-              <div className="story-nav-timer" aria-hidden="true">
-                {timeLeft}s
-              </div>
-
-              <button
-                type="button"
-                className="story-nav story-nav-next"
-                onClick={next}
-                aria-label="Next slide"
-              >
-                <svg width="
-                " height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter">
-                  <polyline points="9 6 15 12 9 18" />
-                </svg>
-              </button>
             </div>
-          </div>
-          </div>
+          </ScrollReveal>
 
           {/* Caption side */}
-          <div className="story-caption">
+          <ScrollReveal revealClass="anim-col-3" className="story-caption">
             {STORY.slides.map((s, i) => (
               <div
                 key={i}
@@ -175,7 +178,7 @@ export default function StorySection() {
                 />
               ))}
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

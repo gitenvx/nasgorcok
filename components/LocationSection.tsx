@@ -1,6 +1,8 @@
 "use client";
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import { LOCATION_DATA } from "@/lib/menu-data";
+import JitterTitle from "@/components/JitterTitle";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function LocationSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -99,19 +101,17 @@ export default function LocationSection() {
       <div className="location-inner max-w-7xl mx-auto px-4 md:px-8">
         
         {/* Header and Description */}
-        <div className="flex flex-col mb-8 gap-4 border-b border-[var(--c-border)] pb-6">
-          <h2 className="location-title text-[var(--c-ash)] uppercase tracking-wider text-4xl md:text-5xl lg:text-6xl text-left" style={{ fontFamily: "var(--font-title)", textShadow: "2px 4px 0 rgba(0,0,0,0.9)" }}>
-            {LOCATION_DATA.title}
-          </h2>
+        <ScrollReveal revealClass="anim-col-1" className="flex flex-col mb-8 gap-4 border-b border-[var(--c-border)] pb-6">
+          <JitterTitle text={LOCATION_DATA.title} className="text-left" />
           <div className="location-desc max-w-2xl text-left">
             <p className="about-tagline re-textbox inline-block text-left">
               {LOCATION_DATA.description}
             </p>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Horizontal Gallery */}
-        <div className="location-gallery-wrapper relative -mx-4 md:-mx-8">
+        <ScrollReveal revealClass="anim-col-3" className="location-gallery-wrapper relative -mx-4 md:-mx-8">
           {/* Fading edges */}
           <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
@@ -124,7 +124,6 @@ export default function LocationSection() {
             onMouseLeave={handleMouseLeave}
             onMouseUp={handleMouseUp}
             onMouseMove={handleMouseMove}
-            style={{ scrollBehavior: "smooth" }}
           >
             {images.map((img, i) => (
               <div 
@@ -157,7 +156,7 @@ export default function LocationSection() {
               />
             ))}
           </div>
-        </div>
+        </ScrollReveal>
 
       </div>
     </section>

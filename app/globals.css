@@ -117,7 +117,7 @@ html {
    Taruh file di: public/img/btn-bg.png
    ══════════════════════════════════════ */
 .btn-bg {
-  background-image: url("/img/btn-bg.webp");
+  background-image: url("/img/common/bg/btn-bg.webp");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -642,7 +642,8 @@ html {
 .about-section {
   position: relative;
   overflow: hidden;
-  min-height: 420px;
+  min-height: 600px;
+  width: 100%;
   margin-top: 2rem;
 }
 
@@ -661,6 +662,7 @@ html {
   /* Tambahan filter untuk mengurangi kesan burem / buram */
   filter: contrast(1.15) saturate(1.1) brightness(1.05);
 }
+
 
 .about-overlay {
   position: absolute;
@@ -696,6 +698,7 @@ html {
 }
 
 .about-title {
+  position: relative;
   font-family: var(--font-title);
   font-size: clamp(2.2rem, 5vw, 3.5rem);
   color: var(--c-ash);
@@ -703,6 +706,45 @@ html {
   letter-spacing: 0.12em;
   text-shadow: 2px 4px 0 rgba(0, 0, 0, 0.9);
   margin-bottom: 0.75rem;
+}
+
+.about-title::before {
+  content: "";
+  position: absolute;
+  top: 25%;
+  left: -20px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-red);
+  animation: dotPulse 2.4s ease-in-out infinite, dotGlow 2.4s ease-in-out infinite;
+}
+
+/* ── Efek ketikan glitch (huruf terakhir lompat) ── */
+.jitter-char {
+  display: inline-block;
+  animation: jitter-anim 3s infinite;
+  transform-origin: bottom left;
+}
+
+@keyframes jitter-anim {
+  0%, 94% {
+    transform: none;
+    color: inherit;
+  }
+  95% {
+    transform: translate(-3px, -3px) scale(1.15) rotate(-4deg);
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255,255,255,0.8);
+  }
+  96% {
+    transform: translate(2px, 1px) scale(1.05) rotate(2deg);
+    color: #fff;
+  }
+  97%, 100% {
+    transform: none;
+    color: inherit;
+  }
 }
 
 .about-tagline {
@@ -877,7 +919,7 @@ html {
   position: relative;
   overflow: hidden;
   background: #050505;
-  border: 8px solid var(--c-ash);
+  border: 3px solid var(--c-ash);
   aspect-ratio: 16 / 10;
   -webkit-user-select: none;
   user-select: none;
@@ -1112,4 +1154,58 @@ html {
   }
 }
 
+/* ══════════════════════════════════════
+   DUST OVERLAY EFFECTS
+   ══════════════════════════════════════ */
+.dust-container {
+  position: fixed;
+  inset: 0;
+  z-index: 2; /* Below content but above background */
+  pointer-events: none;
+  overflow: hidden;
+  mix-blend-mode: screen; /* Assumes dust is light particles on dark bg */
+}
+
+.dust-layer {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-repeat: repeat;
+  opacity: 0.4;
+}
+
+.dust-1 {
+  background-image: url('/img/common/dust/dust_1.webp');
+  animation: dustDrift 60s linear infinite;
+}
+
+.dust-2 {
+  background-image: url('/img/common/dust/dust_2.webp');
+  animation: dustDriftReverse 80s linear infinite;
+  opacity: 0.3;
+}
+
+.dust-3 {
+  background-image: url('/img/common/dust/dust_3.webp');
+  animation: dustDrift 100s linear infinite;
+  opacity: 0.5;
+}
+
+.dust-4 {
+  background-image: url('/img/common/dust/dust_4.webp');
+  animation: dustDriftReverse 70s linear infinite;
+  opacity: 0.4;
+}
+
+@keyframes dustDrift {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(10%, 10%) rotate(5deg); }
+}
+
+@keyframes dustDriftReverse {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(-10%, -10%) rotate(-5deg); }
+}
 

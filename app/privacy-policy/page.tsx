@@ -1,6 +1,7 @@
 // app/privacy-policy/page.tsx
 import Link from "next/link";
 import { Metadata } from "next";
+import DustOverlay from "@/components/DustOverlay";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Nasi Goreng Cok",
@@ -15,12 +16,13 @@ export default function PrivacyPolicyPage() {
         className="fixed-bg"
         aria-hidden="true"
         style={{
-          backgroundImage: "url('/img/bg.webp')",
+          backgroundImage: "url('/img/common/bg/bg.webp')",
         }}
       />
       
       {/* ── EFEK LATAR BELAKANG ── */}
       <div className="bg-grid" aria-hidden="true" />
+      <DustOverlay />
       
       {/* ── Content Container ── */}
       <div className="relative z-10 flex flex-col min-h-screen">

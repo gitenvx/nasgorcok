@@ -18,9 +18,9 @@ export const metadata: Metadata = {
   description: "Nasi Goreng Mamas Ucok, nasi goreng yang dibuat dengan cinta oleh Mohammad Fathuloh, berlokasi di Denpasar Bali.",
   keywords: ['nasigoreng', 'nasi goreng', 'mohammadfathuloh'],
   icons: {
-  icon:   "/img/logo.png",
-  apple:  "/img/logo.png",
-  shortcut: "/img/logo.png",
+  icon:   "/img/favicon/logo.png",
+  apple:  "/img/favicon/logo.png",
+  shortcut: "/img/favicon/logo.png",
   },
   robots: {
     index: true,
