@@ -9,7 +9,6 @@ import { VscVscode } from "react-icons/vsc";
 import { FaWindows, FaUbuntu } from "react-icons/fa";
 import MenuColumn    from "@/components/MenuColumn";
 import KontakColumn  from "@/components/KontakColumn";
-import VideoBackgroundFallback from "@/components/VideoBackgroundFallback";
 import DustOverlay from "@/components/DustOverlay";
 import TickerBar     from "@/components/TickerBar";
 // import CrackOverlay  from "@/components/CrackOverlay";
@@ -223,13 +222,19 @@ export default function Home() {
           {/* AKHIR Tampilan Mobile */}
 
           {/* Bagian Tentang — Gaya RE Requiem */}
-          <AboutSection />
+          <ScrollReveal>
+            <AboutSection />
+          </ScrollReveal>
 
           {/* Bagian Cerita — Karusel Gaya RE Requiem */}
-          <StorySection />
+          <ScrollReveal>
+            <StorySection />
+          </ScrollReveal>
 
           {/* Bagian Lokasi */}
-          <LocationSection />
+          <ScrollReveal>
+            <LocationSection />
+          </ScrollReveal>
 
           {/* Animasi Cinta — tengah di atas footer
           <div className="flex justify-center pb-6">
