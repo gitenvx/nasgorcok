@@ -117,7 +117,7 @@ export default function AboutSection() {
 
         {/* ── Content (Overlay on Video) ── */}
         <ScrollReveal revealClass="anim-col-2">
-          <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 pt-48 md:pt-12 pb-12">
+          <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 pt-[380px] md:pt-12 pb-12">
             <p className="about-desc text-[rgba(232,224,208,0.85)] leading-relaxed tracking-wide text-sm md:text-base max-w-2xl">
               {ABOUT.description}
             </p>
