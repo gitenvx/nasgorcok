@@ -700,19 +700,21 @@ html {
 .about-title {
   position: relative;
   font-family: var(--font-title);
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-size: clamp(2rem, 5vw, 3.5rem);
   color: var(--c-ash);
   text-transform: uppercase;
   letter-spacing: 0.12em;
   text-shadow: 2px 4px 0 rgba(0, 0, 0, 0.9);
   margin-bottom: 0.75rem;
+  padding-left: 28px; /* Memberi ruang di kiri agar titik tidak keluar layar di HP */
 }
 
 .about-title::before {
   content: "";
   position: absolute;
-  top: 25%;
-  left: -20px;
+  top: 45%;
+  transform: translateY(-50%);
+  left: 0; /* Titik sekarang berada di dalam area padding */
   width: 8px;
   height: 8px;
   border-radius: 50%;
