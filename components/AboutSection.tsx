@@ -75,7 +75,7 @@ export default function AboutSection() {
         
         {/* ── Background Video Container (Capped Width for Zoom Out) ── */}
         <div className="absolute inset-0 z-0 flex justify-center w-full bg-[#0a0a0a]">
-          <div className="relative w-full max-w-[1400px] h-full">
+          <div className="relative w-full max-w-350 h-full">
             {hasVideo && videoUrl && (
               <video
                 ref={videoRef}
@@ -92,7 +92,7 @@ export default function AboutSection() {
             )}
             
             {/* Dark gradient overlay so text remains readable */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[rgba(10,10,10,0.85)] via-[rgba(10,10,10,0.55)] to-[rgba(10,10,10,0.30)] pointer-events-none" />
+            <div className="absolute inset-0 bg-linear-to-r from-[rgba(10,10,10,0.85)] via-[rgba(10,10,10,0.55)] to-[rgba(10,10,10,0.30)] pointer-events-none" />
             
             {/* ── Grunge Edge Frame (Jagged borders) ── */}
             <svg width="0" height="0" style={{ position: 'absolute' }}>
@@ -117,7 +117,7 @@ export default function AboutSection() {
 
         {/* ── Content (Overlay on Video) ── */}
         <ScrollReveal revealClass="anim-col-2">
-          <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 pt-[380px] md:pt-12 pb-12">
+          <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 pt-95 md:pt-12 pb-12">
             <p className="about-desc text-[rgba(232,224,208,0.85)] leading-relaxed tracking-wide text-sm md:text-base max-w-2xl">
               {ABOUT.description}
             </p>
