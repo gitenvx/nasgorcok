@@ -189,16 +189,28 @@ export default function Home() {
           </div>
           {/* AKHIR Tampilan Mobile */}
 
+          <ScrollReveal revealClass="anim-line-expand">
+            <div className="re-divider-line my-8 md:my-16" aria-hidden="true" />
+          </ScrollReveal>
+
           {/* Bagian Tentang — Gaya RE Requiem */}
           <div id="about" className="pt-8 -mt-8" />
           <ScrollReveal>
             <AboutSection />
           </ScrollReveal>
 
+          <ScrollReveal revealClass="anim-line-expand">
+            <div className="re-divider-line mt-10 mb-6 md:mt-20 md:mb-10" aria-hidden="true" />
+          </ScrollReveal>
+
           {/* Bagian Cerita — Karusel Gaya RE Requiem */}
           <div id="story" className="relative top-32" />
           <ScrollReveal>
             <StorySection />
+          </ScrollReveal>
+
+          <ScrollReveal revealClass="anim-line-expand">
+            <div className="re-divider-line -my-4 md:-my-12" aria-hidden="true" />
           </ScrollReveal>
 
           {/* Bagian Lokasi */}

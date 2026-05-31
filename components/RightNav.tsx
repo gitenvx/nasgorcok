@@ -66,7 +66,7 @@ export default function RightNav() {
 
       {/* ── KONTENER NAVIGASI UTAMA ── */}
       <nav 
-        className={`fixed top-16 lg:top-[3%] right-4 lg:right-8 z-50 flex flex-col gap-4 lg:gap-2.5 items-end font-mono pointer-events-none transition-all duration-500 ${
+        className={`fixed top-24 md:top-28 lg:top-[3%] right-4 lg:right-8 z-50 flex flex-col gap-3 lg:gap-2 items-end font-mono pointer-events-auto transition-all duration-500 max-h-[calc(100vh-7rem)] md:max-h-[calc(100vh-8rem)] lg:max-h-[94vh] overflow-y-auto overflow-x-hidden pr-2 py-4 -my-4 ${
           isMobileOpen 
             ? "translate-x-0 opacity-100" 
             : `translate-x-10 opacity-0 lg:translate-x-0 ${isVisible ? "lg:opacity-100" : "lg:opacity-0"}`
@@ -79,7 +79,7 @@ export default function RightNav() {
             onClick={() => scrollTo(item.id)}
             className="group relative flex items-center justify-end text-right text-[var(--c-ash)] hover:text-white transition-colors pointer-events-auto"
             style={{ 
-              fontSize: "clamp(0.9rem, 1.5vw, 1.15rem)",
+              fontSize: "clamp(0.75rem, 1.2vw, 1rem)",
               letterSpacing: "0.05em"
             }}
           >

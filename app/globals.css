@@ -57,6 +57,16 @@ html {
 ::-webkit-scrollbar-track  { background: transparent; }
 ::-webkit-scrollbar-thumb  { background: var(--c-border); border-radius: 2px; }
 
+/* ── PEMISAH SEKSI GANDA (Double Line Divider) ── */
+.re-divider-line {
+  width: 100%;
+  height: 4px;
+  border-top: 1px solid rgba(232, 224, 208, 0.4);
+  border-bottom: 1px solid rgba(232, 224, 208, 0.15);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
 /* ══════════════════════════════════════
    SCROLL-TRIGGERED REVEAL
    No opening animations — elements fade in on scroll via IntersectionObserver
@@ -64,6 +74,18 @@ html {
 
 /* ── Scroll-triggered reveal animations ──
    Elements start hidden, get .is-visible when they enter viewport */
+/* ── Efek Melebar dari Tengah (Khusus Garis Pemisah) ── */
+.anim-line-expand {
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-out;
+}
+.anim-line-expand.is-visible {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
 .anim-title,
 .anim-nama,
 .anim-logos-left,

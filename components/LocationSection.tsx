@@ -10,37 +10,42 @@ export default function LocationSection() {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeftPos, setScrollLeftPos] = useState(0);
+  const [hasDragged, setHasDragged] = useState(false);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const images = LOCATION_DATA.images;
 
-  // Handle manual scroll to snap to nearest image and update active index
+  // Handle manual scroll to snap to nearest image and update active index (Debounced for 120FPS smoothness)
   const handleScroll = () => {
     if (!scrollRef.current) return;
     
-    const container = scrollRef.current;
-    const scrollLeft = container.scrollLeft;
-    const itemWidth = container.clientWidth * 0.6; // assuming items are around 60% width
-    const centerPosition = scrollLeft + (container.clientWidth / 2);
+    if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
     
-    // Calculate which item is closest to the center
-    let closestIndex = 0;
-    let minDistance = Infinity;
-
-    const items = container.querySelectorAll(".loc-item");
-    items.forEach((item, index) => {
-      const rect = item.getBoundingClientRect();
-      const itemCenter = item.parentElement!.scrollLeft + rect.left + (rect.width / 2) - container.getBoundingClientRect().left;
-      const distance = Math.abs(centerPosition - itemCenter);
+    scrollTimeout.current = setTimeout(() => {
+      if (!scrollRef.current) return;
+      const container = scrollRef.current;
+      const scrollLeft = container.scrollLeft;
+      const centerPosition = scrollLeft + (container.clientWidth / 2);
       
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestIndex = index;
-      }
-    });
+      let closestIndex = 0;
+      let minDistance = Infinity;
 
-    if (activeIdx !== closestIndex) {
-      setActiveIdx(closestIndex);
-    }
+      const items = container.querySelectorAll(".loc-item");
+      items.forEach((item, index) => {
+        const rect = item.getBoundingClientRect();
+        const itemCenter = item.parentElement!.scrollLeft + rect.left + (rect.width / 2) - container.getBoundingClientRect().left;
+        const distance = Math.abs(centerPosition - itemCenter);
+        
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      if (activeIdx !== closestIndex) {
+        setActiveIdx(closestIndex);
+      }
+    }, 30); // 30ms debounce for buttery smooth drag
   };
 
   const scrollTo = (index: number) => {
@@ -72,6 +77,7 @@ export default function LocationSection() {
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!scrollRef.current) return;
     setIsDragging(true);
+    setHasDragged(false);
     setStartX(e.pageX - scrollRef.current.offsetLeft);
     setScrollLeftPos(scrollRef.current.scrollLeft);
     // Disable scroll snapping during drag
@@ -101,7 +107,8 @@ export default function LocationSection() {
     if (!isDragging || !scrollRef.current) return;
     e.preventDefault();
     const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 2; // Scroll speed multiplier
+    const walk = (x - startX) * 1.5; // Natural speed multiplier
+    if (Math.abs(walk) > 5 && !hasDragged) setHasDragged(true);
     scrollRef.current.scrollLeft = scrollLeftPos - walk;
   };
 
@@ -123,6 +130,22 @@ export default function LocationSection() {
 
         {/* Horizontal Gallery */}
         <ScrollReveal revealClass="anim-col-3" className="location-gallery-wrapper relative -mx-4 md:-mx-8">
+          
+          {/* ── Blueprint Grid Overlay (Framing Center Image) ── */}
+          <div className="absolute inset-0 pointer-events-none z-0 hidden md:block overflow-hidden opacity-80">
+            {/* Horizontal Grid Lines */}
+            <div className="absolute top-[12%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--c-red)] to-transparent opacity-70" />
+            <div className="absolute bottom-[18%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--c-red)] to-transparent opacity-70" />
+            
+            {/* Vertical Framing Grid Lines (Matches active image width + 1.5rem padding) */}
+            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+1.5rem)] w-[1px] bg-gradient-to-b from-transparent via-[var(--c-red)] to-transparent opacity-80" />
+            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+1.5rem)] w-[1px] bg-gradient-to-b from-transparent via-[var(--c-red)] to-transparent opacity-80" />
+            
+            {/* Center Crosshair Markers at intersections */}
+            <div className="absolute top-[12%] left-[50%] w-[5px] h-[5px] bg-white -translate-x-1/2 -translate-y-1/2 rounded-full opacity-80 shadow-[0_0_8px_rgba(255,255,255,1)]" />
+            <div className="absolute bottom-[18%] left-[50%] w-[5px] h-[5px] bg-white -translate-x-1/2 -translate-y-1/2 rounded-full opacity-80 shadow-[0_0_8px_rgba(255,255,255,1)]" />
+          </div>
+
           {/* Fading edges */}
           <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
@@ -135,6 +158,7 @@ export default function LocationSection() {
             onMouseLeave={handleMouseLeave}
             onMouseUp={handleMouseUp}
             onMouseMove={handleMouseMove}
+            onContextMenu={(e) => e.preventDefault()}
           >
             {images.map((img, i) => (
               <div 
@@ -144,7 +168,14 @@ export default function LocationSection() {
                   width: 'min(70vw, 600px)', 
                   aspectRatio: '16/10'
                 }}
-                onClick={() => scrollTo(i)}
+                onClick={(e) => {
+                  if (hasDragged) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  } else {
+                    scrollTo(i);
+                  }
+                }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
@@ -156,16 +187,51 @@ export default function LocationSection() {
             ))}
           </div>
 
-          {/* Navigation Dots */}
-          <div className="flex justify-center gap-3 mt-4">
-            {images.map((_, i) => (
-              <button
-                key={i}
-                className={`w-3 h-3 transition-colors duration-300 border ${i === activeIdx ? 'bg-[var(--c-red)] border-[var(--c-red)]' : 'bg-transparent border-[var(--c-dim)] hover:border-[var(--c-ash)]'}`}
-                onClick={() => scrollTo(i)}
-                aria-label={`Go to image ${i + 1}`}
+          {/* Scroll Navigation (Left / Right) */}
+          <div className="flex justify-center items-center gap-4 md:gap-8 mt-6 z-20 relative">
+            <button 
+              onClick={() => scrollTo(Math.max(0, activeIdx - 1))}
+              className={`group flex items-center transition-all duration-300 ${activeIdx === 0 ? 'opacity-30 cursor-not-allowed' : 'opacity-80 hover:opacity-100'}`}
+              disabled={activeIdx === 0}
+              aria-label="Previous location"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/img/common/icon/arrow.webp" alt="Left" className={`w-6 md:w-10 h-auto transition-transform ${activeIdx === 0 ? '' : 'group-hover:-translate-x-2'}`} />
+            </button>
+            
+            {/* Scroll Track & Thumb */}
+            <div 
+               className="relative w-32 md:w-64 h-6 flex items-center cursor-pointer group/track mx-2"
+               onClick={(e) => {
+                 const rect = e.currentTarget.getBoundingClientRect();
+                 const x = e.clientX - rect.left;
+                 const percentage = x / rect.width;
+                 const newIdx = Math.floor(percentage * images.length);
+                 scrollTo(Math.min(images.length - 1, Math.max(0, newIdx)));
+               }}
+               aria-label="Scroll track"
+            >
+              {/* Background Track Line */}
+              <div className="w-full h-[2px] bg-[var(--c-dim)] opacity-40 rounded-full transition-opacity group-hover/track:opacity-80" />
+              {/* Moving Thumb */}
+              <div 
+                className="absolute h-[4px] bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)] rounded-full transition-all duration-500 ease-out"
+                style={{ 
+                  width: `${100 / images.length}%`,
+                  left: `${(activeIdx / images.length) * 100}%` 
+                }}
               />
-            ))}
+            </div>
+            
+            <button 
+              onClick={() => scrollTo(Math.min(images.length - 1, activeIdx + 1))}
+              className={`group flex items-center transition-all duration-300 ${activeIdx === images.length - 1 ? 'opacity-30 cursor-not-allowed' : 'opacity-80 hover:opacity-100'}`}
+              disabled={activeIdx === images.length - 1}
+              aria-label="Next location"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/img/common/icon/arrow.webp" alt="Right" className={`w-6 md:w-10 h-auto scale-x-[-1] transition-transform ${activeIdx === images.length - 1 ? '' : 'group-hover:translate-x-2'}`} />
+            </button>
           </div>
         </ScrollReveal>
 
