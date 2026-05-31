@@ -59,6 +59,15 @@ export default function LocationSection() {
     }
   };
 
+  // Posisikan otomatis foto kedua (index 1) ke tengah saat pertama kali dimuat
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      scrollTo(1);
+    }, 200);
+    return () => clearTimeout(timer);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Drag logic for mouse
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!scrollRef.current) return;
@@ -104,9 +113,11 @@ export default function LocationSection() {
         <ScrollReveal revealClass="anim-col-1" className="flex flex-col mb-8 gap-4 border-b border-[var(--c-border)] pb-6">
           <JitterTitle text={LOCATION_DATA.title} className="text-left" />
           <div className="location-desc max-w-2xl text-left">
-            <p className="about-tagline re-textbox inline-block text-left">
-              {LOCATION_DATA.description}
-            </p>
+            <div className="text-zoom-reveal" style={{ transformOrigin: "left center" }}>
+              <p className="about-tagline re-textbox">
+                {LOCATION_DATA.description}
+              </p>
+            </div>
           </div>
         </ScrollReveal>
 

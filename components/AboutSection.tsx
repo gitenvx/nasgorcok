@@ -64,9 +64,11 @@ export default function AboutSection() {
       {/* ── Title and Tagline outside the video ── */}
       <ScrollReveal revealClass="anim-col-1" className="relative z-20">
         <div className="max-w-7xl mx-auto px-4 md:px-8 mb-0">
-          <JitterTitle text="Tentang" />
+          <JitterTitle text="About" />
           <div className="mt-3">
-            <p className="about-tagline re-textbox">{ABOUT.tagline}</p>
+            <p className="about-tagline re-textbox">
+              <span className="text-zoom-reveal">{ABOUT.tagline}</span>
+            </p>
           </div>
         </div>
       </ScrollReveal>
@@ -107,7 +109,7 @@ export default function AboutSection() {
                 inset: 0,
                 pointerEvents: 'none',
                 zIndex: 10,
-                boxShadow: 'inset 0 0 0 30px #0a0a0a',
+                boxShadow: 'inset 0 10px 0 0 #0a0a0a, inset -10px 0 0 0 #0a0a0a, inset 0 -30px 0 0 #0a0a0a, inset 30px 0 0 0 #0a0a0a',
                 filter: 'url(#grunge-edge-filter)',
                 transform: 'scale(1.05)', /* Prevent outer edges from bleeding */
               }} 
@@ -116,7 +118,7 @@ export default function AboutSection() {
         </div>
 
         {/* ── Content (Overlay on Video) ── */}
-        <ScrollReveal revealClass="anim-col-2">
+        <ScrollReveal revealClass="anim-slide-right">
           <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 pt-95 md:pt-12 pb-12">
             <p className="about-desc text-[rgba(232,224,208,0.85)] leading-relaxed tracking-wide text-sm md:text-base max-w-2xl">
               {ABOUT.description}

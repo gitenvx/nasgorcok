@@ -1,6 +1,7 @@
-// app/page.tsx
 "use client";
 import { useRef } from "react";
+import Image from "next/image";
+import RightNav from "@/components/RightNav";
 import {
   SiPython, SiNodedotjs, SiTypescript,
   SiGithub, SiDocker, SiGit,
@@ -35,7 +36,7 @@ export default function Home() {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   return (
-    <div className="min-h-screen flex flex-col relative" style={{ backgroundColor: "#0a0a0a", color: "#e8e0d0" }}>
+    <div className="min-h-screen flex flex-col relative pb-48 md:pb-64" style={{ backgroundColor: "#0a0a0a", color: "#e8e0d0" }}>
 
       {/* ── Background tetap — div terpisah untuk performa mobile ── */}
       <div
@@ -48,6 +49,9 @@ export default function Home() {
 
       {/* ── Audio ── */}
       <AudioAutoplay audioRef={audioRef} />
+
+      {/* ── RIGHT NAV ── */}
+      <RightNav />
 
       {/* ── Cookie Consent (Retro System Style) ── */}
       <CookieConsent />
@@ -62,62 +66,25 @@ export default function Home() {
 
       <div className="relative z-10 flex flex-col min-h-screen">
 
-        {/* ── NAVBAR merekat dengan blur ── */}
-        <header
-          className="sticky top-0 z-30 flex flex-col items-center justify-center px-3 md:px-2 pt-0 pb-0"
-          style={{
-            backdropFilter:       "blur(2px)",
-            WebkitBackdropFilter: "blur(2px)",
-            background:           "rgba(10,10,10,0.40)",
-            borderBottom:         "1px solid var(--c-border)",
-          }}
-        >
+        {/* ── NAVBAR mentahan ── */}
+        <header className="absolute top-0 left-0 w-full z-50 flex flex-col items-center justify-center pt-6 pb-0 pointer-events-none">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/img/logo/nasgor.webp"
             alt="Nasi Goreng"
-            className="select-none"
+            className="select-none pointer-events-auto"
             style={{
-              height: "clamp(5rem, 15vw, 5.5rem)",
+              height: "clamp(8rem, 25vw, 11rem)",
               width: "auto",
               objectFit: "contain",
+              filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.8))"
             }}
-/>
-
-          {/*<h1
-            className="leading-none uppercase select-none flex items-center justify-center"
-            style={{
-              fontFamily:    "var(--font-title)",
-              fontSize:      "clamp(2.8rem, 8vw, 4.5rem)",
-              color:         "var(--c-ash)",
-              textShadow:    "2px 4px 0 rgba(0,0,0,0.9)",
-              letterSpacing: "0.15em",
-            }}
-            aria-label="Nasi Goreng"
-          >
-            {"NASIGO".split("").map((ch, i) => (
-              <span key={i} className="letter-drop" style={{ animationDelay: `${0.05 + i * 0.07}s` }} aria-hidden="true">
-                {ch}
-              </span>
-            ))}
-            <span
-              className="title-re letter-re"
-              style={{ fontFamily: "var(--font-title)", letterSpacing: "0.04em", animationDelay: "0.55s" }}
-              aria-hidden="true"
-            >RE</span>
-            {"NG".split("").map((ch, i) => (
-              <span key={i} className="letter-drop" style={{ animationDelay: `${0.65 + i * 0.07}s`, letterSpacing: "0.15em" }} aria-hidden="true">
-                {ch}
-              </span>
-            ))}
-          </h1>*/}
-
-          
+          />
         </header>
 
         
         {/* mENu + logo ── */}
-        <div className="text-center pt-3 pb-1">
+        <div className="text-center pt-[220px] pb-1">
           <div className="menu-header btn-bg mb-1 hover-text" style={{ textAlign: "center", display: "inline", marginBottom: 0 }}>
               {NAMA_WARUNG}
             </div><br/>
@@ -143,11 +110,12 @@ export default function Home() {
         {/* Pemisah ── */}
         <div className="mx-3 md:mx-6 mt-2" style={{ height: "1px", background: "var(--c-border)" }} aria-hidden="true" />
 
-        <main className="flex-1 pb-10">
+        {/* ── SEKSI KONTEN UTAMA ── */}
+        <main id="menu" className="flex-1 pb-10">
 
           {/* Tampilan Desktop */}
           <div className="hidden md:grid md:grid-cols-3 h-full">
-            <ScrollReveal revealClass="anim-col-1">
+            <div>
               <MenuColumn title="[ Nasi Goreng ]" items={NASI_GORENG} />
               <div className="px-4 md:px-5 mt-4">
                 <p>
@@ -156,24 +124,24 @@ export default function Home() {
                   </span>
                 </p>
               </div>
-            </ScrollReveal>
+            </div>
 
             {/* Kolom tengah — Mie + Lirik di bawah */}
-            <ScrollReveal revealClass="anim-col-2" className="flex flex-col">
+            <div className="flex flex-col">
               <MenuColumn title="[ Mie > Capcay > Kwetiau ]" items={MIE_CAPCAY} hasDivider />
               {/* Lirik + play button — sejajar teks KATA di kolom kiri */}
               <div className="mt-4 pr-0">
                 <LyricsDisplay audioRef={audioRef} />
               </div>
-            </ScrollReveal>
+            </div>
 
-            <ScrollReveal revealClass="anim-col-3">
+            <div>
               <KontakColumn />
-            </ScrollReveal>
+            </div>
           </div>
 
           {/* MULAI Tampilan Mobile */}
-          <ScrollReveal revealClass="anim-nama" className="md:hidden flex flex-col px-2">
+          <div className="md:hidden flex flex-col px-2">
 
             <div className="border-b" style={{ borderColor: "var(--c-border)" }}>
               <div className="m-3">
@@ -218,20 +186,23 @@ export default function Home() {
               <LyricsDisplay audioRef={audioRef} />
             </div>
 
-          </ScrollReveal>
+          </div>
           {/* AKHIR Tampilan Mobile */}
 
           {/* Bagian Tentang — Gaya RE Requiem */}
+          <div id="about" className="pt-8 -mt-8" />
           <ScrollReveal>
             <AboutSection />
           </ScrollReveal>
 
           {/* Bagian Cerita — Karusel Gaya RE Requiem */}
+          <div id="story" className="relative top-32" />
           <ScrollReveal>
             <StorySection />
           </ScrollReveal>
 
           {/* Bagian Lokasi */}
+          <div id="locations" className="pt-8 -mt-8" />
           <ScrollReveal>
             <LocationSection />
           </ScrollReveal>
@@ -248,15 +219,45 @@ export default function Home() {
 
       {/* TICKER FOOTER merekat di bawah */}
       <div
-        className="fixed bottom-0 left-0 right-0 z-30 main-footer"
+        className="absolute bottom-0 left-0 right-0 z-30 main-footer flex flex-col items-center pb-8"
         style={{
           backdropFilter:       "blur(2px)",
           WebkitBackdropFilter: "blur(2px)",
           background:           "rgba(10,10,10,0.40)",
         }}
       >
-        <div className="mx-auto w-full max-w-375">
-          <TickerBar />
+        <div className="w-full border-b border-[rgba(232,224,208,0.15)] mb-8 bg-black/20">
+          <div className="mx-auto w-full max-w-375">
+            <TickerBar />
+          </div>
+        </div>
+        
+        {/* ── FOOTER LOGOS ── */}
+        <div className="mb-6 flex flex-col items-center gap-0">
+          <Image 
+            src="/img/logo/nasgor.webp" 
+            alt="NasgorCok Logo" 
+            width={300} 
+            height={300} 
+            className="opacity-80 hover:opacity-100 transition-opacity duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)] grayscale hover:grayscale-0" 
+          />
+          <Image 
+            src="/img/logo/mamasucok.webp" 
+            alt="Mamas Ucok Logo" 
+            width={150} 
+            height={150} 
+            className="-mt-6 opacity-80 hover:opacity-100 transition-opacity duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)] grayscale hover:grayscale-0" 
+          />
+        </div>
+        
+        {/* ── COPYRIGHT & POLICIES ── */}
+        <div className="flex flex-col items-center gap-2 text-center px-4">
+          <span className="text-sm text-white font-medium">
+            © {new Date().getFullYear()} Mohammad Fathuloh. All rights reserved.
+          </span>
+          <div className="flex justify-center gap-6 mt-1 text-xs">
+            <a href="/privacy-policy" className="text-white/80 hover:text-white transition-colors duration-300">Privacy Policy</a>
+          </div>
         </div>
       </div>
     </div>

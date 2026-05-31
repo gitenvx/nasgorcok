@@ -9,6 +9,8 @@ interface ScrollRevealProps {
   revealClass?: string;
   /** Threshold 0-1, default 0.05 */
   threshold?: number;
+  /** If true, the reveal effect will only apply on mobile screens, and always be visible on desktop */
+  mobileOnly?: boolean;
 }
 
 /**
@@ -20,6 +22,7 @@ interface ScrollRevealProps {
  * @param className - Class CSS tambahan untuk element wrapper
  * @param revealClass - Class untuk animasi reveal (misal: anim-col-1)
  * @param threshold - Threshold visibility untuk IntersectionObserver (0-1)
+ * @param mobileOnly - Jika true, animasi reveal hanya aktif di HP. Di PC akan langsung tampil.
  * @returns JSX element div dengan scroll reveal behavior
  */
 export default function ScrollReveal({
@@ -27,6 +30,7 @@ export default function ScrollReveal({
   className = "",
   revealClass = "anim-nama",
   threshold = 0.05,
+  mobileOnly = false,
 }: ScrollRevealProps) {
   // Referensi ke element div wrapper
   const ref = useRef<HTMLDivElement>(null);
@@ -40,9 +44,9 @@ export default function ScrollReveal({
       ([entry]) => {
         if (entry.isIntersecting) {
           el.classList.add("is-visible");
-          // Berhenti mengamati setelah elemen terlihat agar elemen tetap tampil selamanya
-          // dan menghemat penggunaan resource CPU
-          observer.unobserve(el);
+        } else {
+          // Hapus class agar bisa dianimasikan ulang saat di-scroll kembali
+          el.classList.remove("is-visible");
         }
       },
       { threshold }
@@ -53,7 +57,7 @@ export default function ScrollReveal({
   }, [threshold]);
 
   return (
-    <div ref={ref} className={`${revealClass} ${className}`}>
+    <div ref={ref} className={`${revealClass} ${className} ${mobileOnly ? 'mobile-only-reveal' : ''}`}>
       {children}
     </div>
   );

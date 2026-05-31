@@ -6,8 +6,8 @@ interface Props {
   audioRef: React.RefObject<HTMLAudioElement | null>;
 }
 
-const BEFORE = 2;
-const AFTER  = 2;
+const BEFORE = 0;
+const AFTER  = 0;
 
 /**
  * Komponen LyricsDisplay - Menampilkan lirik musik yang tersinkronisasi
