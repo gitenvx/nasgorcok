@@ -66,10 +66,10 @@ export default function RightNav() {
 
       {/* ── KONTENER NAVIGASI UTAMA ── */}
       <nav 
-        className={`fixed top-24 md:top-28 lg:top-[3%] right-4 lg:right-8 z-50 flex flex-col gap-3 lg:gap-2 items-end font-mono pointer-events-auto transition-all duration-500 max-h-[calc(100vh-7rem)] md:max-h-[calc(100vh-8rem)] lg:max-h-[94vh] overflow-y-auto overflow-x-hidden pr-2 py-4 -my-4 ${
+        className={`fixed top-24 md:top-28 lg:top-[3%] right-4 lg:right-8 z-50 flex flex-col gap-3 lg:gap-2 items-end font-mono pointer-events-auto transition-all duration-1000 ease-out max-h-[calc(100vh-7rem)] md:max-h-[calc(100vh-8rem)] lg:max-h-[94vh] overflow-y-auto overflow-x-hidden pr-2 py-4 -my-4 ${
           isMobileOpen 
             ? "translate-x-0 opacity-100" 
-            : `translate-x-10 opacity-0 lg:translate-x-0 ${isVisible ? "lg:opacity-100" : "lg:opacity-0"}`
+            : `translate-x-10 opacity-0 ${isVisible ? "lg:translate-x-0 lg:opacity-100" : "lg:translate-x-12 lg:opacity-0"}`
         }`}
         aria-label="Right Side Navigation"
       >
@@ -98,10 +98,13 @@ export default function RightNav() {
       {/* ── BACKDROP GELAP (Muncul saat menu mobile dibuka) ── */}
       {isMobileOpen && (
         <div 
-          className="lg:hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-40 animate-in fade-in duration-300"
+          className="lg:hidden fixed inset-0 z-40 animate-in fade-in duration-300"
           onClick={() => setIsMobileOpen(false)}
           aria-hidden="true"
-        />
+        >
+          {/* Half screen blur visual (Softened) */}
+          <div className="absolute top-0 right-0 bottom-0 w-[55%] bg-black/50 backdrop-blur-sm shadow-[-10px_0_30px_rgba(0,0,0,0.8)] border-l border-[var(--c-border)]" />
+        </div>
       )}
     </>
   );

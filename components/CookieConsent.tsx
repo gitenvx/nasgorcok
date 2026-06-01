@@ -13,7 +13,7 @@ export default function CookieConsent() {
   // State untuk melacak teks mesin ketik yang sedang berjalan
   const [text, setText] = useState("");
   // Teks peringatan yang akan ditampilkan secara berurutan
-  const fullText = "SYSTEM CAUTION: WE USE COOKIES TO ENSURE YOUR SURVIVAL EXPERIENCE IS OPTIMIZED. PROTOCOL REQUIRES USER CONSENT.";
+  const fullText = "SYSTEM MESSAGE: WE USE COOKIES TO ENSURE YOUR BROWSING EXPERIENCE IS OPTIMIZED. PROTOCOL REQUIRES USER CONSENT.";
 
   useEffect(() => {
     // Periksa apakah pengguna sudah pernah merespon
@@ -71,24 +71,24 @@ export default function CookieConsent() {
         background: "rgba(10, 10, 10, 0.65)",
         backdropFilter: "blur(10px)",
         WebkitBackdropFilter: "blur(10px)",
-        border: "2px solid var(--c-border, #cca266)",
+        border: "1px solid var(--c-border, #cca266)",
         padding: "16px",
         color: "var(--c-ash, #e8e0d0)",
         fontSize: "12px",
         zIndex: 50,
-        boxShadow: "0 0 20px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(204, 162, 102, 0.15)",
+        boxShadow: "0 0 20px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(232, 224, 208, 0.05)",
         borderRadius: "0px",
         transition: "all 0.5s ease",
       }}
     >
-      {/* SYSTEM WARNING Header dengan indikator LED merah berdenyut */}
+      {/* SYSTEM MESSAGE Header dengan indikator LED hijau berdenyut */}
       <div
         style={{
-          color: "var(--c-red, #cc1a1a)",
+          color: "var(--c-border, #cca266)",
           fontWeight: "bold",
           letterSpacing: "0.15em",
           marginBottom: "10px",
-          borderBottom: "1px solid rgba(204, 162, 102, 0.3)",
+          borderBottom: "1px solid rgba(232, 224, 208, 0.2)",
           paddingBottom: "6px",
           display: "flex",
           alignItems: "center",
@@ -100,13 +100,13 @@ export default function CookieConsent() {
             display: "inline-block",
             width: "8px",
             height: "8px",
-            background: "var(--c-red, #cc1a1a)",
+            background: "#00ff66",
             borderRadius: "50%",
-            boxShadow: "0 0 6px var(--c-red, #cc1a1a)",
+            boxShadow: "0 0 6px #00ff66",
             animation: "pulse-led 1s infinite alternate",
           }}
         />
-        [ SYSTEM WARNING: COOKIES REQUESTED ]
+        [ SYSTEM MESSAGE: COOKIES REQUESTED ]
       </div>
 
       {/* Bidang teks typewriter */}
@@ -138,8 +138,8 @@ export default function CookieConsent() {
           onClick={handleDecline}
           style={{
             background: "transparent",
-            border: "1px solid var(--c-red, #cc1a1a)",
-            color: "var(--c-red, #cc1a1a)",
+            border: "1px solid rgba(232, 224, 208, 0.5)",
+            color: "rgba(232, 224, 208, 0.8)",
             padding: "6px 12px",
             cursor: "pointer",
             fontSize: "11px",
@@ -148,7 +148,7 @@ export default function CookieConsent() {
             transition: "all 0.2s ease",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.boxShadow = "0 0 8px rgba(204, 26, 26, 0.25)";
+            e.currentTarget.style.boxShadow = "0 0 8px rgba(232, 224, 208, 0.2)";
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.boxShadow = "none";

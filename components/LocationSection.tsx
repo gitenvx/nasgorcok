@@ -6,7 +6,10 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 export default function LocationSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const thumbRef = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState(1); // Default center image
+  const [isScrubbing, setIsScrubbing] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeftPos, setScrollLeftPos] = useState(0);
@@ -18,6 +21,17 @@ export default function LocationSection() {
   // Handle manual scroll to snap to nearest image and update active index (Debounced for 120FPS smoothness)
   const handleScroll = () => {
     if (!scrollRef.current) return;
+
+    // 60fps Butter Smooth Scroll Thumb Update (Direct DOM, No React State Lag)
+    if (thumbRef.current) {
+      const container = scrollRef.current;
+      const maxScroll = container.scrollWidth - container.clientWidth;
+      if (maxScroll > 0) {
+        const progress = container.scrollLeft / maxScroll;
+        const maxLeft = 100 - (100 / images.length);
+        thumbRef.current.style.left = `${progress * maxLeft}%`;
+      }
+    }
     
     if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
     
@@ -63,6 +77,45 @@ export default function LocationSection() {
       setActiveIdx(index);
     }
   };
+
+  const handleScrub = useCallback((clientX: number) => {
+    if (!scrollRef.current || !progressBarRef.current) return;
+    const rect = progressBarRef.current.getBoundingClientRect();
+    let percent = (clientX - rect.left) / rect.width;
+    percent = Math.max(0, Math.min(1, percent));
+    
+    const scrollWidth = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
+    scrollRef.current.scrollTo({
+      left: scrollWidth * percent,
+      behavior: 'auto'
+    });
+  }, []);
+
+  const onPointerDown = useCallback((e: React.PointerEvent) => {
+    setIsScrubbing(true);
+    e.currentTarget.setPointerCapture(e.pointerId);
+    if (scrollRef.current) {
+      scrollRef.current.style.scrollSnapType = 'none';
+      scrollRef.current.style.scrollBehavior = 'auto';
+    }
+    handleScrub(e.clientX);
+  }, [handleScrub]);
+
+  const onPointerMove = useCallback((e: React.PointerEvent) => {
+    if (isScrubbing) {
+      handleScrub(e.clientX);
+    }
+  }, [isScrubbing, handleScrub]);
+
+  const onPointerUp = useCallback((e: React.PointerEvent) => {
+    setIsScrubbing(false);
+    e.currentTarget.releasePointerCapture(e.pointerId);
+    if (scrollRef.current) {
+      scrollRef.current.style.scrollSnapType = 'x mandatory';
+      scrollRef.current.style.scrollBehavior = 'smooth';
+      handleScroll(); // Trigger snap to nearest image
+    }
+  }, []);
 
   // Posisikan otomatis foto kedua (index 1) ke tengah saat pertama kali dimuat
   useEffect(() => {
@@ -113,7 +166,7 @@ export default function LocationSection() {
   };
 
   return (
-    <section className="location-section py-16 mt-8 relative">
+    <section className="location-section py-4 mt-2 relative overflow-hidden">
       <div className="location-inner max-w-7xl mx-auto px-4 md:px-8">
         
         {/* Header and Description */}
@@ -132,18 +185,18 @@ export default function LocationSection() {
         <ScrollReveal revealClass="anim-col-3" className="location-gallery-wrapper relative -mx-4 md:-mx-8">
           
           {/* ── Blueprint Grid Overlay (Framing Center Image) ── */}
-          <div className="absolute inset-0 pointer-events-none z-0 hidden md:block overflow-hidden opacity-80">
-            {/* Horizontal Grid Lines */}
-            <div className="absolute top-[12%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--c-red)] to-transparent opacity-70" />
-            <div className="absolute bottom-[18%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--c-red)] to-transparent opacity-70" />
+          <div className="absolute inset-0 pointer-events-none z-0 block overflow-hidden opacity-80">
+            {/* Horizontal Grid Lines (Loosened by 1rem around active image) */}
+            <div className="absolute left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--c-red)] to-transparent opacity-70 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" style={{ top: '0rem' }} />
+            <div className="absolute left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--c-red)] to-transparent opacity-70 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" style={{ top: 'calc(1rem + min(70vw, 600px) * 0.625 + 1rem)' }} />
             
-            {/* Vertical Framing Grid Lines (Matches active image width + 1.5rem padding) */}
-            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+1.5rem)] w-[1px] bg-gradient-to-b from-transparent via-[var(--c-red)] to-transparent opacity-80" />
-            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+1.5rem)] w-[1px] bg-gradient-to-b from-transparent via-[var(--c-red)] to-transparent opacity-80" />
+            {/* Inner Vertical Framing Grid Lines (Loosened by 1rem) */}
+            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+1rem)] w-[1px] bg-gradient-to-b from-transparent via-[var(--c-red)] to-transparent opacity-80 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-300" />
+            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+1rem)] w-[1px] bg-gradient-to-b from-transparent via-[var(--c-red)] to-transparent opacity-80 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-300" />
             
-            {/* Center Crosshair Markers at intersections */}
-            <div className="absolute top-[12%] left-[50%] w-[5px] h-[5px] bg-white -translate-x-1/2 -translate-y-1/2 rounded-full opacity-80 shadow-[0_0_8px_rgba(255,255,255,1)]" />
-            <div className="absolute bottom-[18%] left-[50%] w-[5px] h-[5px] bg-white -translate-x-1/2 -translate-y-1/2 rounded-full opacity-80 shadow-[0_0_8px_rgba(255,255,255,1)]" />
+            {/* Outer Vertical Framing Grid Lines (Extra HUD Bracket) */}
+            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+3rem)] w-[1px] bg-gradient-to-b from-transparent via-[var(--c-red)] to-transparent opacity-40 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-[400ms]" />
+            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+3rem)] w-[1px] bg-gradient-to-b from-transparent via-[var(--c-red)] to-transparent opacity-40 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-[400ms]" />
           </div>
 
           {/* Fading edges */}
@@ -151,7 +204,7 @@ export default function LocationSection() {
           <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
 
           <div 
-            className="location-gallery flex overflow-x-auto gap-4 px-[10%] md:px-[25%] pb-8 pt-4 hide-scrollbar snap-x snap-mandatory select-none"
+            className="location-gallery flex overflow-x-auto gap-4 px-[10%] md:px-[25%] pb-4 md:pb-8 pt-4 hide-scrollbar snap-x snap-mandatory select-none"
             ref={scrollRef}
             onScroll={handleScroll}
             onMouseDown={handleMouseDown}
@@ -163,7 +216,7 @@ export default function LocationSection() {
             {images.map((img, i) => (
               <div 
                 key={i} 
-                className={`loc-item snap-center flex-shrink-0 relative transition-all duration-500 ease-out cursor-grab active:cursor-grabbing overflow-hidden bg-black border ${i === activeIdx ? 'border-[var(--c-ash)] z-20 scale-100 opacity-100 shadow-2xl' : 'border-[var(--c-border)] z-10 scale-90 opacity-40 hover:opacity-70'}`}
+                className={`loc-item snap-center flex-shrink-0 relative transition-all duration-500 ease-out overflow-hidden bg-black border ${i === activeIdx ? 'border-[var(--c-ash)] z-20 scale-100 opacity-100 shadow-2xl' : 'border-[var(--c-border)] z-10 scale-90 opacity-40 hover:opacity-70'}`}
                 style={{ 
                   width: 'min(70vw, 600px)', 
                   aspectRatio: '16/10'
@@ -188,51 +241,57 @@ export default function LocationSection() {
           </div>
 
           {/* Scroll Navigation (Left / Right) */}
-          <div className="flex justify-center items-center gap-4 md:gap-8 mt-6 z-20 relative">
-            <button 
-              onClick={() => scrollTo(Math.max(0, activeIdx - 1))}
-              className={`group flex items-center transition-all duration-300 ${activeIdx === 0 ? 'opacity-30 cursor-not-allowed' : 'opacity-80 hover:opacity-100'}`}
-              disabled={activeIdx === 0}
-              aria-label="Previous location"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/img/common/icon/arrow.webp" alt="Left" className={`w-6 md:w-10 h-auto transition-transform ${activeIdx === 0 ? '' : 'group-hover:-translate-x-2'}`} />
-            </button>
-            
-            {/* Scroll Track & Thumb */}
-            <div 
-               className="relative w-32 md:w-64 h-6 flex items-center cursor-pointer group/track mx-2"
-               onClick={(e) => {
-                 const rect = e.currentTarget.getBoundingClientRect();
-                 const x = e.clientX - rect.left;
-                 const percentage = x / rect.width;
-                 const newIdx = Math.floor(percentage * images.length);
-                 scrollTo(Math.min(images.length - 1, Math.max(0, newIdx)));
-               }}
-               aria-label="Scroll track"
-            >
-              {/* Background Track Line */}
-              <div className="w-full h-[2px] bg-[var(--c-dim)] opacity-40 rounded-full transition-opacity group-hover/track:opacity-80" />
-              {/* Moving Thumb */}
+          <ScrollReveal revealClass="" className="relative w-full flex flex-col justify-center items-center mt-1 md:mt-2 z-20">
+            {/* Single Fading Framing Line (Stays at bottom) */}
+            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--c-red)] to-transparent opacity-60 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" />
+
+            <div className="flex items-center justify-between w-[250px] md:w-[400px] relative z-10 mb-2 md:mb-3">
+              <button 
+                onClick={() => scrollTo(Math.max(0, activeIdx - 1))}
+                className={`group flex items-center transition-all duration-300 ${activeIdx === 0 ? 'opacity-30' : 'opacity-80 hover:opacity-100'}`}
+                disabled={activeIdx === 0}
+                aria-label="Previous location"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/img/common/icon/arrow.webp" alt="Left" className={`w-6 md:w-10 h-auto transition-transform ${activeIdx === 0 ? '' : 'group-hover:-translate-x-2'}`} />
+              </button>
+              
+              {/* Scroll Track & Thumb */}
               <div 
-                className="absolute h-[4px] bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)] rounded-full transition-all duration-500 ease-out"
-                style={{ 
-                  width: `${100 / images.length}%`,
-                  left: `${(activeIdx / images.length) * 100}%` 
-                }}
-              />
+                 ref={progressBarRef}
+                 className="relative flex-1 h-8 flex items-center cursor-pointer select-none group/track mx-4 touch-none"
+                 onPointerDown={onPointerDown}
+                 onDragStart={(e) => e.preventDefault()}
+                 onPointerMove={onPointerMove}
+                 onPointerUp={onPointerUp}
+                 onPointerCancel={onPointerUp}
+                 aria-label="Scroll track"
+              >
+                {/* Background Track Line (Inactive Progress) */}
+                <div className="w-full h-[2px] bg-[var(--c-dim)] opacity-40 transition-opacity group-hover/track:opacity-80" />
+                
+                {/* Proportional thumb indicator */}
+                <div 
+                  ref={thumbRef}
+                  className="absolute h-[2px] md:h-[3px] bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)] rounded-full will-change-[left]"
+                  style={{ 
+                    width: `${100 / images.length}%`,
+                    left: `${(activeIdx / images.length) * 100}%` 
+                  }}
+                />
+              </div>
+              
+              <button 
+                onClick={() => scrollTo(Math.min(images.length - 1, activeIdx + 1))}
+                className={`group flex items-center transition-all duration-300 ${activeIdx === images.length - 1 ? 'opacity-30' : 'opacity-80 hover:opacity-100'}`}
+                disabled={activeIdx === images.length - 1}
+                aria-label="Next location"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/img/common/icon/arrow.webp" alt="Right" className={`w-6 md:w-10 h-auto scale-x-[-1] transition-transform ${activeIdx === images.length - 1 ? '' : 'group-hover:translate-x-2'}`} />
+              </button>
             </div>
-            
-            <button 
-              onClick={() => scrollTo(Math.min(images.length - 1, activeIdx + 1))}
-              className={`group flex items-center transition-all duration-300 ${activeIdx === images.length - 1 ? 'opacity-30 cursor-not-allowed' : 'opacity-80 hover:opacity-100'}`}
-              disabled={activeIdx === images.length - 1}
-              aria-label="Next location"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/img/common/icon/arrow.webp" alt="Right" className={`w-6 md:w-10 h-auto scale-x-[-1] transition-transform ${activeIdx === images.length - 1 ? '' : 'group-hover:translate-x-2'}`} />
-            </button>
-          </div>
+          </ScrollReveal>
         </ScrollReveal>
 
       </div>

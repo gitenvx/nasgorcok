@@ -19,6 +19,7 @@ import LyricsDisplay from "@/components/LyricsDisplay";
 import AboutSection from "@/components/AboutSection";
 import StorySection from "@/components/StorySection";
 import LocationSection from "@/components/LocationSection";
+import LatestCommit from "@/components/LatestCommit";
 import ScrollReveal  from "@/components/ScrollReveal";
 import CookieConsent from "@/components/CookieConsent";
 import { NAMA_WARUNG, NASI_GORENG, MIE_CAPCAY, KATA } from "@/lib/menu-data";
@@ -36,7 +37,7 @@ export default function Home() {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   return (
-    <div className="min-h-screen flex flex-col relative pb-48 md:pb-64" style={{ backgroundColor: "#0a0a0a", color: "#e8e0d0" }}>
+    <div className="min-h-screen flex flex-col relative" style={{ backgroundColor: "#0a0a0a", color: "#e8e0d0" }}>
 
       {/* ── Background tetap — div terpisah untuk performa mobile ── */}
       <div
@@ -67,7 +68,7 @@ export default function Home() {
       <div className="relative z-10 flex flex-col min-h-screen">
 
         {/* ── NAVBAR mentahan ── */}
-        <header className="absolute top-0 left-0 w-full z-50 flex flex-col items-center justify-center pt-6 pb-0 pointer-events-none">
+        <header className="relative w-full z-50 flex flex-col items-center justify-center pt-20 md:pt-10 pb-0 pointer-events-none">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/img/logo/nasgor.webp"
@@ -84,8 +85,8 @@ export default function Home() {
 
         
         {/* mENu + logo ── */}
-        <div className="text-center pt-[220px] pb-1">
-          <div className="menu-header btn-bg mb-1 hover-text" style={{ textAlign: "center", display: "inline", marginBottom: 0 }}>
+        <div className="text-center mt-2 md:mt-4 pb-1 relative z-50">
+          <div className="menu-header btn-bg mb-1 hover-text relative -top-6 md:-top-10" style={{ textAlign: "center", display: "inline-block", marginBottom: 0 }}>
               {NAMA_WARUNG}
             </div><br/>
           <p
@@ -135,8 +136,14 @@ export default function Home() {
               </div>
             </div>
 
-            <div>
+            {/* Kolom Kanan — QRIS (bikin span 2 row biar nggak kepotong baris baru) */}
+            <div className="row-span-2">
               <KontakColumn />
+            </div>
+
+            {/* Baris baru khusus Desktop yang membentang di bawah Kolom 1 & 2 */}
+            <div className="col-span-2 px-4 md:px-5 mt-4">
+              <LatestCommit />
             </div>
           </div>
 
@@ -185,12 +192,16 @@ export default function Home() {
             <div className="px-4 mb-4 mt-3">
               <LyricsDisplay audioRef={audioRef} />
             </div>
+            
+            <div className="px-4 mb-4">
+              <LatestCommit />
+            </div>
 
           </div>
           {/* AKHIR Tampilan Mobile */}
 
           <ScrollReveal revealClass="anim-line-expand">
-            <div className="re-divider-line my-8 md:my-16" aria-hidden="true" />
+            <div className="re-divider-line my-4 md:my-8" aria-hidden="true" />
           </ScrollReveal>
 
           {/* Bagian Tentang — Gaya RE Requiem */}
@@ -200,7 +211,7 @@ export default function Home() {
           </ScrollReveal>
 
           <ScrollReveal revealClass="anim-line-expand">
-            <div className="re-divider-line mt-10 mb-6 md:mt-20 md:mb-10" aria-hidden="true" />
+            <div className="re-divider-line my-10 md:my-16" aria-hidden="true" />
           </ScrollReveal>
 
           {/* Bagian Cerita — Karusel Gaya RE Requiem */}
@@ -210,7 +221,7 @@ export default function Home() {
           </ScrollReveal>
 
           <ScrollReveal revealClass="anim-line-expand">
-            <div className="re-divider-line -my-4 md:-my-12" aria-hidden="true" />
+            <div className="re-divider-line my-4 md:my-8" aria-hidden="true" />
           </ScrollReveal>
 
           {/* Bagian Lokasi */}
@@ -229,9 +240,9 @@ export default function Home() {
 
       </div>
 
-      {/* TICKER FOOTER merekat di bawah */}
+      {/* TICKER FOOTER merekat di bawah secara natural */}
       <div
-        className="absolute bottom-0 left-0 right-0 z-30 main-footer flex flex-col items-center pb-8"
+        className="relative w-full z-30 main-footer flex flex-col items-center pb-8 mt-16 md:mt-24"
         style={{
           backdropFilter:       "blur(2px)",
           WebkitBackdropFilter: "blur(2px)",
@@ -268,7 +279,7 @@ export default function Home() {
             © {new Date().getFullYear()} Mohammad Fathuloh. All rights reserved.
           </span>
           <div className="flex justify-center gap-6 mt-1 text-xs">
-            <a href="/privacy-policy" className="text-white/80 hover:text-white transition-colors duration-300">Privacy Policy</a>
+            <a href="/privacy-policy" className="hover-text text-white/80 hover:text-white transition-colors duration-300">Privacy Policy</a>
           </div>
         </div>
       </div>

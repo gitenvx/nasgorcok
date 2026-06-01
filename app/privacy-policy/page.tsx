@@ -39,7 +39,6 @@ export default function PrivacyPolicyPage() {
             style={{
               height: "clamp(5rem, 15vw, 5.5rem)",
               width: "auto",
-              filter: "drop-shadow(0px 0px 4px rgba(204, 26, 26, 0.5))",
             }}
           />
         </header>

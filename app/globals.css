@@ -53,9 +53,7 @@ html {
   min-height: 100%;
 }
 ::selection { background: var(--c-red); color: var(--c-ash); }
-::-webkit-scrollbar        { width: 4px; }
-::-webkit-scrollbar-track  { background: transparent; }
-::-webkit-scrollbar-thumb  { background: var(--c-border); border-radius: 2px; }
+
 
 /* ── PEMISAH SEKSI GANDA (Double Line Divider) ── */
 .re-divider-line {
@@ -84,6 +82,14 @@ html {
 .anim-line-expand.is-visible {
   opacity: 1;
   transform: scaleX(1);
+}
+
+/* ── HUD Lines Entrance Animation (Tailwind Variable Toggle) ── */
+.is-visible .hud-line-x {
+  --tw-scale-x: 1 !important;
+}
+.is-visible .hud-line-y {
+  --tw-scale-y: 1 !important;
 }
 
 .anim-title,
@@ -326,7 +332,7 @@ html {
 .ticker-track {
   display: flex;
   width: max-content;
-  animation: ticker 40s linear infinite;
+  animation: ticker 90s linear infinite;
 }
 .ticker-track:hover { animation-play-state: paused; }
 .footer-ticker {
@@ -650,7 +656,7 @@ html {
   color: #0a0a0a;
 
   /* Highlight hanya selebar teks per baris */
-  background: rgba(200, 200, 195, 0.85);
+  background: rgba(255, 255, 255, 0.85);
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
   padding: 2px 8px;
@@ -757,25 +763,25 @@ html {
 /* ── Efek ketikan glitch (huruf terakhir lompat) ── */
 .jitter-char {
   display: inline-block;
-  animation: jitter-anim 3s infinite;
+  animation: jitter-anim 1.5s infinite;
   transform-origin: bottom left;
 }
 
 @keyframes jitter-anim {
-  0%, 94% {
+  0%, 88% {
     transform: none;
     color: inherit;
   }
-  95% {
+  90% {
     transform: translate(-3px, -3px) scale(1.15) rotate(-4deg);
     color: #fff;
     text-shadow: 0 0 8px rgba(255,255,255,0.8);
   }
-  96% {
+  92% {
     transform: translate(2px, 1px) scale(1.05) rotate(2deg);
     color: #fff;
   }
-  97%, 100% {
+  94%, 100% {
     transform: none;
     color: inherit;
   }
@@ -785,7 +791,7 @@ html {
   font-family: var(--font-submenu);
   font-size: clamp(1rem, 2.5vw, 1.4rem);
   color: var(--c-ash);
-  background: rgba(200, 200, 195, 0.85);
+  background: rgba(255, 255, 255, 0.85);
   color: #0a0a0a;
   display: inline;
   padding: 2px 8px;
@@ -1006,65 +1012,5 @@ html {
     z-index: 10 !important;
     margin-top: 1rem;
   }
-}
-
-/* ══════════════════════════════════════
-   DUST OVERLAY EFFECTS
-   ══════════════════════════════════════ */
-.dust-container {
-  position: fixed;
-  inset: 0;
-  z-index: 2; /* Below content but above background */
-  pointer-events: none;
-  overflow: hidden;
-  mix-blend-mode: screen; /* Assumes dust is light particles on dark bg */
-}
-
-.dust-layer {
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background-repeat: repeat;
-  /* opacity base dihapus karena sekarang diatur oleh keyframe blink */
-}
-
-.dust-1 {
-  background-image: url('/img/common/dust/dust_1.webp');
-  animation: dustDrift 60s linear infinite, dustBlink 6s ease-in-out infinite;
-}
-
-.dust-2 {
-  background-image: url('/img/common/dust/dust_2.webp');
-  animation: dustDriftReverse 80s linear infinite, dustBlink 8s ease-in-out infinite 2s;
-}
-
-.dust-3 {
-  background-image: url('/img/common/dust/dust_3.webp');
-  animation: dustDrift 100s linear infinite, dustBlink 5s ease-in-out infinite 1s;
-}
-
-.dust-4 {
-  background-image: url('/img/common/dust/dust_4.webp');
-  animation: dustDriftReverse 70s linear infinite, dustBlink 9s ease-in-out infinite 3s;
-}
-
-@keyframes dustDrift {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  100% { transform: translate(10%, 10%) rotate(5deg); }
-}
-
-@keyframes dustDriftReverse {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  100% { transform: translate(-10%, -10%) rotate(-5deg); }
-}
-
-@keyframes dustBlink {
-  0% { opacity: 0; }
-  35% { opacity: 0; }
-  50% { opacity: 0.25; }
-  65% { opacity: 0; }
-  100% { opacity: 0; }
 }
 

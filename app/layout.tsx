@@ -9,6 +9,7 @@ import "./globals.css";
 import "@/lib/self-ping";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/next"
+import BackToTop from "@/components/BackToTop";
 
 /**\n * Metadata untuk SEO dan Open Graph
 n * Mencakup title, description, keywords, robots config, dan OpenGraph settings
@@ -56,9 +57,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id" className="scroll-smooth">
+      <head>
+        {/* Preload background images */}
+        <link rel="preload" href="/img/common/bg/bg.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/img/common/bg/btn-bg.webp" as="image" type="image/webp" />
+        {/* Preload logos */}
+        <link rel="preload" href="/img/logo/nasgor.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/img/logo/mamasucok.webp" as="image" type="image/webp" />
+        {/* Preload custom fonts */}
+        <link rel="preload" href="/fonts/re9_big.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/re9_small.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
+      </head>
       <body className="min-h-screen overflow-x-hidden relative">
         <div className="film-grain" aria-hidden="true" />
         {children}
+        <BackToTop />
         <SpeedInsights />
         <Analytics />
       </body>
