@@ -215,7 +215,7 @@ export default function Home() {
           </ScrollReveal>
 
           {/* Bagian Cerita — Karusel Gaya RE Requiem */}
-          <div id="story" className="relative top-32" />
+          <div id="story" className="pt-24 -mt-24" />
           <ScrollReveal>
             <StorySection />
           </ScrollReveal>
