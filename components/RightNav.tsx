@@ -66,10 +66,10 @@ export default function RightNav() {
 
       {/* ── KONTENER NAVIGASI UTAMA ── */}
       <nav 
-        className={`fixed top-24 md:top-28 lg:top-[3%] right-4 lg:right-8 z-50 flex flex-col gap-3 lg:gap-2 items-end font-mono pointer-events-auto transition-all duration-1000 ease-out max-h-[calc(100vh-7rem)] md:max-h-[calc(100vh-8rem)] lg:max-h-[94vh] overflow-y-auto overflow-x-hidden pr-2 py-4 -my-4 ${
+        className={`fixed top-24 md:top-28 lg:top-[3%] right-4 lg:right-8 z-50 flex flex-col gap-3 lg:gap-2 items-end font-mono transition-all duration-1000 ease-out max-h-[calc(100vh-7rem)] md:max-h-[calc(100vh-8rem)] lg:max-h-[94vh] overflow-y-auto overflow-x-hidden pr-2 py-4 -my-4 ${
           isMobileOpen 
-            ? "translate-x-0 opacity-100" 
-            : `translate-x-10 opacity-0 ${isVisible ? "lg:translate-x-0 lg:opacity-100" : "lg:translate-x-12 lg:opacity-0"}`
+            ? "translate-x-0 opacity-100 pointer-events-auto" 
+            : `translate-x-10 opacity-0 pointer-events-none ${isVisible ? "lg:translate-x-0 lg:opacity-100 lg:pointer-events-auto" : "lg:translate-x-12 lg:opacity-0 lg:pointer-events-none"}`
         }`}
         aria-label="Right Side Navigation"
       >
@@ -77,7 +77,7 @@ export default function RightNav() {
           <button
             key={index}
             onClick={() => scrollTo(item.id)}
-            className="group relative flex items-center justify-end text-right text-(--c-ash) hover:text-white transition-colors pointer-events-auto"
+            className="group relative flex items-center justify-end text-right text-[var(--c-ash)] hover:text-white transition-colors"
             style={{ 
               fontSize: "clamp(0.75rem, 1.2vw, 1rem)",
               letterSpacing: "0.05em"
