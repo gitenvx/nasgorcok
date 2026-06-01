@@ -136,7 +136,7 @@ export default function AboutSection() {
           </filter>
         </svg>
         <div 
-          className="absolute w-full h-[16px] z-20 pointer-events-none"
+          className="absolute w-full h-4 z-20 pointer-events-none"
           style={{
             top: 0, // Wrapper top is exactly the section top
             marginTop: '-8px', // Center the 16px splatter exactly on the line
@@ -156,7 +156,7 @@ export default function AboutSection() {
           </filter>
         </svg>
         <div 
-          className="absolute w-full h-[50px] z-0 pointer-events-none"
+          className="absolute w-full h-12.5 z-0 pointer-events-none"
           style={{
             bottom: '-25px', // Straddles the bottom edge, extending outwards
             left: 0,

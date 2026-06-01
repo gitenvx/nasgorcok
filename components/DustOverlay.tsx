@@ -39,7 +39,7 @@ export default function DustOverlay() {
   const frame4 = generateStaticFrame(5, 4000);
 
   return (
-    <div className="fixed inset-0 z-[2] pointer-events-none mix-blend-screen opacity-80 overflow-hidden">
+    <div className="fixed inset-0 z-2 pointer-events-none mix-blend-screen opacity-80 overflow-hidden">
       <style>{`
         .static-noise-layer {
           position: absolute;

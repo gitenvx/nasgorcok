@@ -28,7 +28,7 @@ export default function BackToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className={`lg:hidden fixed bottom-2 right-2 z-[90] flex items-center justify-center w-10 h-10 transition-all duration-500 pointer-events-auto group ${
+      className={`lg:hidden fixed bottom-2 right-2 z-90 flex items-center justify-center w-10 h-10 transition-all duration-500 pointer-events-auto group ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
       }`}
       style={{ 
@@ -40,7 +40,7 @@ export default function BackToTop() {
       aria-label="Back to top"
     >
       <span 
-        className="text-[var(--c-ash)] text-2xl font-mono leading-none transition-transform group-hover:-translate-y-1 group-hover:text-white" 
+        className="text-(--c-ash) text-2xl font-mono leading-none transition-transform group-hover:-translate-y-1 group-hover:text-white" 
         style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.9)" }}
       >
         &uarr;

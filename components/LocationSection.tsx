@@ -170,7 +170,7 @@ export default function LocationSection() {
       <div className="location-inner max-w-7xl mx-auto px-4 md:px-8">
         
         {/* Header and Description */}
-        <ScrollReveal revealClass="anim-col-1" className="flex flex-col mb-8 gap-4 border-b border-[var(--c-border)] pb-6">
+        <ScrollReveal revealClass="anim-col-1" className="flex flex-col mb-8 gap-4 border-b border-(--c-border) pb-6">
           <JitterTitle text={LOCATION_DATA.title} className="text-left" />
           <div className="location-desc max-w-2xl text-left">
             <div className="text-zoom-reveal" style={{ transformOrigin: "left center" }}>
@@ -187,21 +187,21 @@ export default function LocationSection() {
           {/* ── Blueprint Grid Overlay (Framing Center Image) ── */}
           <div className="absolute inset-0 pointer-events-none z-0 block overflow-hidden opacity-80">
             {/* Horizontal Grid Lines (Loosened by 1rem around active image) */}
-            <div className="absolute left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--c-red)] to-transparent opacity-70 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" style={{ top: '0rem' }} />
-            <div className="absolute left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--c-red)] to-transparent opacity-70 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" style={{ top: 'calc(1rem + min(70vw, 600px) * 0.625 + 1rem)' }} />
+            <div className="absolute left-0 w-full h-px bg-linear-to-r from-transparent via-(--c-red) to-transparent opacity-70 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" style={{ top: '0rem' }} />
+            <div className="absolute left-0 w-full h-px bg-linear-to-r from-transparent via-(--c-red) to-transparent opacity-70 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" style={{ top: 'calc(1rem + min(70vw, 600px) * 0.625 + 1rem)' }} />
             
             {/* Inner Vertical Framing Grid Lines (Loosened by 1rem) */}
-            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+1rem)] w-[1px] bg-gradient-to-b from-transparent via-[var(--c-red)] to-transparent opacity-80 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-300" />
-            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+1rem)] w-[1px] bg-gradient-to-b from-transparent via-[var(--c-red)] to-transparent opacity-80 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-300" />
+            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+1rem)] w-px bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-80 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-300" />
+            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+1rem)] w-px bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-80 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-300" />
             
             {/* Outer Vertical Framing Grid Lines (Extra HUD Bracket) */}
-            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+3rem)] w-[1px] bg-gradient-to-b from-transparent via-[var(--c-red)] to-transparent opacity-40 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-[400ms]" />
-            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+3rem)] w-[1px] bg-gradient-to-b from-transparent via-[var(--c-red)] to-transparent opacity-40 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-[400ms]" />
+            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+3rem)] w-px bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-40 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-400" />
+            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+3rem)] w-px bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-40 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-400" />
           </div>
 
           {/* Fading edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-linear-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-linear-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
 
           <div 
             className="location-gallery flex overflow-x-auto gap-4 px-[10%] md:px-[25%] pb-4 md:pb-8 pt-4 hide-scrollbar snap-x snap-mandatory select-none"
@@ -216,7 +216,7 @@ export default function LocationSection() {
             {images.map((img, i) => (
               <div 
                 key={i} 
-                className={`loc-item snap-center flex-shrink-0 relative transition-all duration-500 ease-out overflow-hidden bg-black border ${i === activeIdx ? 'border-[var(--c-ash)] z-20 scale-100 opacity-100 shadow-2xl' : 'border-[var(--c-border)] z-10 scale-90 opacity-40 hover:opacity-70'}`}
+                className={`loc-item snap-center shrink-0 relative transition-all duration-500 ease-out overflow-hidden bg-black border ${i === activeIdx ? 'border-(--c-ash) z-20 scale-100 opacity-100 shadow-2xl' : 'border-(--c-border) z-10 scale-90 opacity-40 hover:opacity-70'}`}
                 style={{ 
                   width: 'min(70vw, 600px)', 
                   aspectRatio: '16/10'
@@ -243,9 +243,9 @@ export default function LocationSection() {
           {/* Scroll Navigation (Left / Right) */}
           <ScrollReveal revealClass="" className="relative w-full flex flex-col justify-center items-center mt-1 md:mt-2 z-20">
             {/* Single Fading Framing Line (Stays at bottom) */}
-            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--c-red)] to-transparent opacity-60 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" />
+            <div className="absolute bottom-0 left-0 w-full h-px bg-linear-to-r from-transparent via-(--c-red) to-transparent opacity-60 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" />
 
-            <div className="flex items-center justify-between w-[250px] md:w-[400px] relative z-10 mb-2 md:mb-3">
+            <div className="flex items-center justify-between w-62.5 md:w-100 relative z-10 mb-2 md:mb-3">
               <button 
                 onClick={() => scrollTo(Math.max(0, activeIdx - 1))}
                 className={`group flex items-center transition-all duration-300 ${activeIdx === 0 ? 'opacity-30' : 'opacity-80 hover:opacity-100'}`}
@@ -268,12 +268,12 @@ export default function LocationSection() {
                  aria-label="Scroll track"
               >
                 {/* Background Track Line (Inactive Progress) */}
-                <div className="w-full h-[2px] bg-[var(--c-dim)] opacity-40 transition-opacity group-hover/track:opacity-80" />
+                <div className="w-full h-0.5 bg-(--c-dim) opacity-40 transition-opacity group-hover/track:opacity-80" />
                 
                 {/* Proportional thumb indicator */}
                 <div 
                   ref={thumbRef}
-                  className="absolute h-[2px] md:h-[3px] bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)] rounded-full will-change-[left]"
+                  className="absolute h-0.5 md:h-0.75 bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)] rounded-full will-change-[left]"
                   style={{ 
                     width: `${100 / images.length}%`,
                     left: `${(activeIdx / images.length) * 100}%` 
