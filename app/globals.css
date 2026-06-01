@@ -40,6 +40,17 @@ html {
   color: var(--c-ash);
   font-family: var(--font-submenu);
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* ── Background layer — scrolls with content, HD via repeating texture (no mobile jitter) ── */

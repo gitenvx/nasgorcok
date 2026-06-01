@@ -37,7 +37,7 @@ export default function Home() {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   return (
-    <div className="min-h-screen flex flex-col relative" style={{ backgroundColor: "#0a0a0a", color: "#e8e0d0" }}>
+    <div className="min-h-screen flex flex-col relative w-full overflow-x-hidden" style={{ backgroundColor: "#0a0a0a", color: "#e8e0d0" }}>
 
       {/* ── Background tetap — div terpisah untuk performa mobile ── */}
       <div
