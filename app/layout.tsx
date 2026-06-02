@@ -10,6 +10,7 @@ import "@/lib/self-ping";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/next"
 import BackToTop from "@/components/BackToTop";
+import NextTopLoader from 'nextjs-toploader';
 
 /**\n * Metadata untuk SEO dan Open Graph
 n * Mencakup title, description, keywords, robots config, dan OpenGraph settings
@@ -68,6 +69,24 @@ export default function RootLayout({
         <link rel="preload" href="/fonts/re9_small.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
       </head>
       <body className="min-h-screen overflow-x-hidden relative">
+        {/* Progress Bar Khusus Initial Load */}
+        <div id="initial-loader" suppressHydrationWarning style={{ position: 'fixed', top: 0, left: 0, height: '3px', background: 'var(--c-red)', zIndex: 99999, width: '0%', transition: 'width 0.5s ease-out, opacity 0.3s', boxShadow: '0 0 10px var(--c-red), 0 0 5px var(--c-red)' }} />
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function() {
+            var loader = document.getElementById('initial-loader');
+            if (loader) {
+              loader.style.width = '30%';
+              var slowLoad = setTimeout(function() { loader.style.width = '70%'; }, 500);
+              window.addEventListener('load', function() {
+                clearTimeout(slowLoad);
+                loader.style.width = '100%';
+                setTimeout(function() { loader.style.opacity = '0'; }, 400);
+              });
+            }
+          })();
+        `}} />
+        
+        <NextTopLoader color="var(--c-red)" showSpinner={false} height={3} shadow="0 0 10px var(--c-red),0 0 5px var(--c-red)" />
         <div className="film-grain" aria-hidden="true" />
         {children}
         <BackToTop />

@@ -44,10 +44,6 @@ export default function KontakColumn() {
           <TfiEmail className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
           <span>{KONTAK.email}</span>
         </div>
-        <div className="menu-item">
-          <CiLocationOn className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
-          <span>{KONTAK.alamat}</span>
-        </div>
       </div>
 
       {/* QRIS + Love Animation */}

@@ -162,7 +162,7 @@ export default function Home() {
                 {NASI_GORENG.map(item => (
                   <li key={item} className="menu-item">
                     <span className="menu-dot" aria-hidden="true" />
-                    {item}
+                    <span className="capitalize">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -175,7 +175,7 @@ export default function Home() {
                 {MIE_CAPCAY.map(item => (
                   <li key={item} className="menu-item">
                     <span className="menu-dot" aria-hidden="true" />
-                    {item}
+                    <span className="capitalize">{item}</span>
                   </li>
                 ))}
               </ul>

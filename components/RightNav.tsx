@@ -77,7 +77,7 @@ export default function RightNav() {
           <button
             key={index}
             onClick={() => scrollTo(item.id)}
-            className="group relative flex items-center justify-end text-right text-(--c-ash) hover:text-white transition-colors"
+            className="group relative flex items-center justify-end text-right text-(--c-ash) hover:text-white transition-colors pl-4 py-1"
             style={{ 
               fontSize: "clamp(0.75rem, 1.2vw, 1rem)",
               letterSpacing: "0.05em"

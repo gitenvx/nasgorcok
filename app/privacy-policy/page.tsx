@@ -25,7 +25,7 @@ export default function PrivacyPolicyPage() {
       <DustOverlay />
       
       {/* ── Content Container ── */}
-      <div className="relative z-10 flex flex-col min-h-screen">
+      <div className="relative z-10 flex flex-col min-h-screen mb-8">
         
         {/* Header (Logo & Back Button) */}
         <header

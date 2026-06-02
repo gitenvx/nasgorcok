@@ -20,6 +20,23 @@ export default function StorySection() {
   const DURATION = 5000; // 5 seconds per slide
 
   const progressRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.2 } // Jalan pas 20% bagian ini kelihatan di layar
+    );
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
+    };
+  }, []);
 
   const clearProgress = () => {
     if (progressRef.current) clearInterval(progressRef.current);
@@ -52,6 +69,11 @@ export default function StorySection() {
 
   // Start progress bar + auto-advance
   useEffect(() => {
+    if (!isInView) {
+      clearProgress();
+      return;
+    }
+
     setProgress(0);
     clearProgress();
 
@@ -72,10 +94,10 @@ export default function StorySection() {
 
     return clearProgress;
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active, total]);
+  }, [active, total, isInView]);
 
   return (
-    <section className="relative overflow-hidden w-full py-4 mt-2" aria-label="Story">
+    <section ref={sectionRef} className="relative overflow-hidden w-full py-4 mt-2" aria-label="Story">
       <div className="max-w-350 mx-auto px-4 md:px-8 lg:px-12 relative z-10 flex flex-col lg:block lg:min-h-187.5">
         
         {/* ── MOBILE TITLE (Only visible on small screens, placed at the very top) ── */}

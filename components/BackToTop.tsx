@@ -28,7 +28,7 @@ export default function BackToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className={`lg:hidden fixed bottom-2 right-2 z-90 flex items-center justify-center w-10 h-10 transition-all duration-500 pointer-events-auto group ${
+      className={`lg:hidden fixed bottom-2 right-8 z-90 flex items-center justify-center w-10 h-10 transition-all duration-500 pointer-events-auto group ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
       }`}
       style={{ 

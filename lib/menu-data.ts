@@ -66,7 +66,6 @@ export const KONTAK = {
   instagram: "@nasgorcokcom",
   telegram: "@nasgorcok",
   website:   "https://nasgorcok.com",
-  alamat: "-8.618119,115.240907",
   email: "admin@nasgorcok.com"
 };
 
@@ -92,7 +91,7 @@ export const ABOUT = {
  * @const
  */
 export const TICKER_ITEMS = [
-  "Dibuat dengan cinta oleh MohFathuloh",
+  "Dibuat dengan cinta oleh MFA",
   "udah isi ayam swear",
   "harga inbox",
   "100% halal",
@@ -131,7 +130,8 @@ export const STORY = {
  */
 export const LOCATION_DATA = {
   title: "Location",
-  description: "Lapak saya sekarang di depan Indomaret, lokasi lengkapnya bisa cari kordinat ini di Gmaps: -8.618119,115.240907",
+  lokasi: "-8.618119,115.240907",
+  description: "Lapak saya sekarang di depan Indomaret, lokasi lengkapnya bisa cari kordinat ini di Google Maps!",
   images: [
     "/img/story/story-1.webp",
     "/img/story/story-2.webp",

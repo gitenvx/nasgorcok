@@ -31,8 +31,8 @@ export default function MenuColumn({ title, items, hasDivider }: MenuColumnProps
       <ul className="space-y-0.5 hover-text">
         {items.map(item => (
           <li key={item} className="menu-item">
-            <span className="menu-dot" aria-hidden="true" />
-            {item}
+            <span className="text-(--c-red) font-bold animate-pulse" aria-hidden="true">&lt;/&gt;</span>
+            <span className="capitalize">{item}</span>
           </li>
         ))}
       </ul>

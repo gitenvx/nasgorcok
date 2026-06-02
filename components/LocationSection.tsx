@@ -4,7 +4,7 @@ import Image from "next/image";
 import { LOCATION_DATA } from "@/lib/menu-data";
 import JitterTitle from "@/components/JitterTitle";
 import ScrollReveal from "@/components/ScrollReveal";
-
+import { CiLocationOn } from "react-icons/ci";
 export default function LocationSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
@@ -176,7 +176,9 @@ export default function LocationSection() {
           <div className="location-desc max-w-2xl text-left">
             <div className="text-zoom-reveal" style={{ transformOrigin: "left center" }}>
               <p className="about-tagline re-textbox">
-                {LOCATION_DATA.description}
+                {LOCATION_DATA.description}<br/>
+                <CiLocationOn className="inline-block text-(--c-red) mr-1.5" style={{ fontSize: "1.2em", verticalAlign: "-0.2em" }} />
+                {LOCATION_DATA.lokasi}
               </p>
             </div>
           </div>
@@ -188,16 +190,16 @@ export default function LocationSection() {
           {/* ── Blueprint Grid Overlay (Framing Center Image) ── */}
           <div className="absolute inset-0 pointer-events-none z-0 block overflow-hidden opacity-80">
             {/* Horizontal Grid Lines (Loosened by 1rem around active image) */}
-            <div className="absolute left-0 w-full h-px bg-linear-to-r from-transparent via-(--c-red) to-transparent opacity-70 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" style={{ top: '0rem' }} />
-            <div className="absolute left-0 w-full h-px bg-linear-to-r from-transparent via-(--c-red) to-transparent opacity-70 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" style={{ top: 'calc(1rem + min(70vw, 600px) * 0.625 + 1rem)' }} />
+            <div className="absolute left-0 w-full h-px bg-linear-to-r from-transparent via-purple-500 to-transparent opacity-70 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" style={{ top: '0rem' }} />
+            <div className="absolute left-0 w-full h-px bg-linear-to-r from-transparent via-purple-500 to-transparent opacity-70 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" style={{ top: 'calc(1rem + min(70vw, 600px) * 0.625 + 1rem)' }} />
             
             {/* Inner Vertical Framing Grid Lines (Loosened by 1rem) */}
-            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+1rem)] w-px bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-80 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-300" />
-            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+1rem)] w-px bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-80 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-300" />
+            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+1rem)] w-px bg-linear-to-b from-transparent via-purple-500 to-transparent opacity-80 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-300" />
+            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+1rem)] w-px bg-linear-to-b from-transparent via-purple-500 to-transparent opacity-80 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-300" />
             
             {/* Outer Vertical Framing Grid Lines (Extra HUD Bracket) */}
-            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+3rem)] w-px bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-40 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-400" />
-            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+3rem)] w-px bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-40 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-400" />
+            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+3rem)] w-px bg-linear-to-b from-transparent via-purple-500 to-transparent opacity-40 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-400" />
+            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+3rem)] w-px bg-linear-to-b from-transparent via-purple-500 to-transparent opacity-40 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-400" />
           </div>
 
           {/* Fading edges */}
@@ -246,7 +248,7 @@ export default function LocationSection() {
           {/* Scroll Navigation (Left / Right) */}
           <ScrollReveal revealClass="" className="relative w-full flex flex-col justify-center items-center mt-1 md:mt-2 z-20">
             {/* Single Fading Framing Line (Stays at bottom) */}
-            <div className="absolute bottom-0 left-0 w-full h-px bg-linear-to-r from-transparent via-(--c-red) to-transparent opacity-60 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" />
+            <div className="absolute bottom-0 left-0 w-full h-px bg-linear-to-r from-transparent via-purple-500 to-transparent opacity-60 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" />
 
             <div className="flex items-center justify-between w-62.5 md:w-100 relative z-10 mb-2 md:mb-3">
               <button 
