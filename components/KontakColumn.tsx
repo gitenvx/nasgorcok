@@ -96,6 +96,7 @@ export default function KontakColumn() {
                   src="/img/qris.webp"
                   alt="QRIS Pembayaran"
                   fill
+                  quality={60}
                   className="object-contain"
                   sizes="164px"
                   priority

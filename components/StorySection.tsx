@@ -235,7 +235,8 @@ export default function StorySection() {
                       fill
                       className="object-cover object-center"
                       style={{ objectFit: 'cover' }}
-                      sizes="(max-width: 1024px) 100vw, 65vw"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      quality={60}
                       priority={i === 0}
                     />
                     {/* Shadow Overlay for cards behind */}

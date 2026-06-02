@@ -69,11 +69,14 @@ export default function Home() {
 
         {/* ── NAVBAR mentahan ── */}
         <header className="relative w-full z-50 flex flex-col items-center justify-center pt-20 md:pt-10 pb-0 pointer-events-none">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src="/img/logo/nasgor.webp"
             alt="Nasi Goreng"
-            fetchPriority="high"
+            priority
+            quality={60}
+            width={1200}
+            height={400}
+            sizes="(max-width: 768px) 80vw, 400px"
             className="select-none pointer-events-auto"
             style={{
               height: "clamp(8rem, 25vw, 11rem)",
@@ -262,14 +265,16 @@ export default function Home() {
             src="/img/logo/nasgor.webp" 
             alt="NasgorCok Logo" 
             width={300} 
-            height={300} 
+            height={100}
+            quality={60}
             className="opacity-80 hover:opacity-100 transition-opacity duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)] grayscale hover:grayscale-0" 
           />
           <Image 
             src="/img/logo/mamasucok.webp" 
             alt="Mamas Ucok Logo" 
             width={150} 
-            height={150} 
+            height={150}
+            quality={60}
             className="-mt-6 opacity-80 hover:opacity-100 transition-opacity duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)] grayscale hover:grayscale-0" 
           />
         </div>

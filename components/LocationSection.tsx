@@ -1,5 +1,6 @@
 "use client";
 import React, { useRef, useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { LOCATION_DATA } from "@/lib/menu-data";
 import JitterTitle from "@/components/JitterTitle";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -230,11 +231,13 @@ export default function LocationSection() {
                   }
                 }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
+                <Image 
                   src={img} 
-                  alt={`Location ${i+1}`} 
-                  className={`w-full h-full object-cover transition-all duration-700 pointer-events-none ${i === activeIdx ? '' : 'grayscale-[0.8]'}`}
+                  alt={`Location ${i+1}`}
+                  fill
+                  sizes="(max-width: 768px) 70vw, 600px"
+                  quality={60}
+                  className={`object-cover transition-all duration-700 pointer-events-none ${i === activeIdx ? '' : 'grayscale-[0.8]'}`}
                 />
               </div>
             ))}
