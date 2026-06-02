@@ -4,7 +4,8 @@ const nextConfig: NextConfig = {
   output: "standalone",
   devIndicators: false,
   images: {
-    qualities: [60, 75, 90],
+    formats: ["image/avif", "image/webp"],
+    qualities: [50, 60, 75, 90, 100],
   },
 };
 

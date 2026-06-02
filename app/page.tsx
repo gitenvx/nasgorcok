@@ -77,10 +77,11 @@ export default function Home() {
             alt="Nasi Goreng"
             priority
             fetchPriority="high"
-            quality={60}
-            width={1200}
-            height={400}
-            sizes="(max-width: 768px) 80vw, 400px"
+            loading="eager"
+            quality={100}
+            width={600}
+            height={200}
+            sizes="(max-width: 768px) 80vw, 300px"
             className="select-none pointer-events-auto"
             style={{
               height: "clamp(8rem, 25vw, 11rem)",
@@ -265,22 +266,28 @@ export default function Home() {
         
         {/* ── FOOTER LOGOS ── */}
         <div className="mb-6 flex flex-col items-center gap-0">
-          <Image 
-            src="/img/logo/nasgor.webp" 
-            alt="NasgorCok Logo" 
-            width={300} 
-            height={100}
-            quality={60}
-            className="opacity-80 hover:opacity-100 transition-opacity duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)] grayscale hover:grayscale-0" 
-          />
-          <Image 
-            src="/img/logo/mamasucok.webp" 
-            alt="Mamas Ucok Logo" 
-            width={150} 
-            height={150}
-            quality={60}
-            className="-mt-6 opacity-80 hover:opacity-100 transition-opacity duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)] grayscale hover:grayscale-0" 
-          />
+          <div className="w-[200px] md:w-[300px]">
+            <Image 
+              src="/img/logo/nasgor.webp" 
+              alt="NasgorCok Logo" 
+              width={300} 
+              height={100}
+              quality={100}
+              className="w-full h-auto opacity-80 hover:opacity-100 transition-opacity duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)] grayscale hover:grayscale-0"
+              style={{ width: "100%", height: "auto" }}
+            />
+          </div>
+          <div className="w-[100px] md:w-[150px] -mt-4 md:-mt-6">
+            <Image 
+              src="/img/logo/mamasucok.webp" 
+              alt="Mamas Ucok Logo" 
+              width={150} 
+              height={150}
+              quality={100}
+              className="w-full h-auto opacity-80 hover:opacity-100 transition-opacity duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)] grayscale hover:grayscale-0"
+              style={{ width: "100%", height: "auto" }}
+            />
+          </div>
         </div>
         
         {/* ── COPYRIGHT & POLICIES ── */}

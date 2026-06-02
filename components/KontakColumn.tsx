@@ -86,14 +86,15 @@ export default function KontakColumn() {
               padding:    8,
               boxShadow:  "4px 4px 12px rgba(0,0,0,0.6)",
             }}>
-              <div style={{ position: "relative", width: 164, height: 164 }}>
+              <div className="relative w-[164px] h-[164px]">
                 <Image
                   src="/img/qris.webp"
                   alt="QRIS Pembayaran"
-                  fill
-                  quality={60}
+                  width={164}
+                  height={164}
+                  quality={100}
                   className="object-contain"
-                  sizes="164px"
+                  style={{ width: "100%", height: "auto" }}
                   priority
                 />
               </div>

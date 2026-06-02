@@ -238,7 +238,7 @@ export default function LocationSection() {
                   alt={`Location ${i+1}`}
                   fill
                   sizes="(max-width: 768px) 70vw, 600px"
-                  quality={60}
+                  quality={100}
                   className={`object-cover transition-all duration-700 pointer-events-none ${i === activeIdx ? '' : 'grayscale-[0.8]'}`}
                 />
               </div>
