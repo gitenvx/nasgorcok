@@ -980,6 +980,14 @@ body {
   pointer-events: none;
   z-index: 9999;
   animation: grainNoise 0.5s steps(1) infinite;
+  transform: translateZ(0); /* Hardware acceleration */
+}
+
+/* Disable or hide film grain on mobile to prevent extreme scroll lag when zoomed */
+@media (max-width: 768px) {
+  .film-grain {
+    display: none;
+  }
 }
 
 @keyframes grainNoise {
