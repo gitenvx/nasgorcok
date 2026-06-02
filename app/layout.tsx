@@ -63,7 +63,6 @@ export default function RootLayout({
         <link rel="preload" href="/img/common/bg/btn-bg.webp" as="image" type="image/webp" />
         {/* Preload logos */}
         <link rel="preload" href="/img/logo/nasgor.webp" as="image" type="image/webp" />
-        <link rel="preload" href="/img/logo/mamasucok.webp" as="image" type="image/webp" />
         {/* Preload custom fonts */}
         <link rel="preload" href="/fonts/re9_big.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/re9_small.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />

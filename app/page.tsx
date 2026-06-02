@@ -73,6 +73,7 @@ export default function Home() {
           <img
             src="/img/logo/nasgor.webp"
             alt="Nasi Goreng"
+            fetchPriority="high"
             className="select-none pointer-events-auto"
             style={{
               height: "clamp(8rem, 25vw, 11rem)",
