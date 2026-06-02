@@ -76,7 +76,7 @@ export default function StorySection() {
 
   return (
     <section className="relative overflow-hidden w-full py-4 mt-2" aria-label="Story">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12 relative z-10 flex flex-col lg:block lg:min-h-[750px]">
+      <div className="max-w-350 mx-auto px-4 md:px-8 lg:px-12 relative z-10 flex flex-col lg:block lg:min-h-187.5">
         
         {/* ── MOBILE TITLE (Only visible on small screens, placed at the very top) ── */}
         <div className="block lg:hidden w-full mb-0 md:mb-1 relative z-20">
@@ -87,16 +87,16 @@ export default function StorySection() {
         <ScrollReveal revealClass="anim-col-2" className="relative lg:absolute lg:-top-4 lg:right-8 lg:w-[65%] w-full mb-0 z-10 flex flex-col">
           
           {/* IG Story Style Progress Bar (Outside photo, centered horizontally) */}
-          <div className="order-0 lg:order-0 w-[90%] max-w-[400px] mx-auto flex gap-1 md:gap-1.5 mb-1 lg:mb-2 z-30">
+          <div className="order-0 lg:order-0 w-[90%] max-w-100 mx-auto flex gap-1 md:gap-1.5 mb-1 lg:mb-2 z-30">
             {STORY.slides.map((_, i) => (
               <button
                 key={`ig-${i}`}
                 onClick={() => goTo(i)}
-                className="relative h-[2px] md:h-[3px] flex-1 bg-[rgba(232,224,208,0.2)] hover:bg-[rgba(232,224,208,0.35)] transition-colors overflow-hidden cursor-pointer"
+                className="relative h-0.5 md:h-0.75 flex-1 bg-[rgba(232,224,208,0.2)] hover:bg-[rgba(232,224,208,0.35)] transition-colors overflow-hidden cursor-pointer"
                 aria-label={`Go to slide ${i + 1}`}
               >
                 <div 
-                  className={`absolute top-0 left-0 bottom-0 bg-[var(--c-red)] ${i === active ? 'transition-[width] duration-50 ease-linear' : 'transition-all duration-300'}`}
+                  className={`absolute top-0 left-0 bottom-0 bg-(--c-red) ${i === active ? 'transition-[width] duration-50 ease-linear' : 'transition-all duration-300'}`}
                   style={{ 
                     width: i < active ? '100%' : i === active ? `${progress}%` : '0%' 
                   }} 
@@ -107,7 +107,7 @@ export default function StorySection() {
 
 
           {/* Custom Pagination: IMAGES 1 2 3 (Above photo on mobile, below on PC) */}
-          <div className="order-1 lg:order-2 mb-4 lg:mb-0 lg:mt-4 w-full flex justify-center lg:justify-end z-30 font-mono text-[var(--c-ash)] select-none">
+          <div className="order-1 lg:order-2 mb-4 lg:mb-0 lg:mt-4 w-full flex justify-center lg:justify-end z-30 font-mono text-(--c-ash) select-none">
             <div className="flex items-center gap-1 md:gap-4">
               <span className="tracking-[0.2em] text-[8px] md:text-[10px] opacity-75 uppercase mr-1 text-white">IMAGE</span>
               <div className="flex items-center gap-1 md:gap-2">
@@ -157,7 +157,7 @@ export default function StorySection() {
                       className={`z-10 text-[8px] md:text-[10px] font-mono font-bold transition-all duration-300 ${
                         isActive
                           ? "text-white scale-110"
-                          : "text-[var(--c-ash)]/50 group-hover:text-white"
+                          : "text-(--c-ash)/50 group-hover:text-white"
                       }`}
                     >
                       {i + 1}
@@ -169,7 +169,7 @@ export default function StorySection() {
                 if (i < STORY.slides.length - 1) {
                   return [
                     btn,
-                    <span key={`dash-${i}`} className="text-[var(--c-ash)]/40 text-[8px] md:text-[10px] select-none font-bold">
+                    <span key={`dash-${i}`} className="text-(--c-ash)/40 text-[8px] md:text-[10px] select-none font-bold">
                       -
                     </span>
                   ];
@@ -181,7 +181,7 @@ export default function StorySection() {
         </div>
         
           <div 
-            className="order-2 lg:order-1 relative w-full aspect-[4/3] md:aspect-video lg:aspect-[4/3] max-w-[800px] mx-auto mt-4 lg:mt-8"
+            className="order-2 lg:order-1 relative w-full aspect-4/3 md:aspect-video lg:aspect-4/3 max-w-200 mx-auto mt-4 lg:mt-8"
             onTouchStart={onTouchStart}
             onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
@@ -244,7 +244,7 @@ export default function StorySection() {
                       style={{ opacity: overlayOpacity }} 
                     />
                     {/* Subtle Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 z-20" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent opacity-60 z-20" />
                   </div>
                 </div>
               );
@@ -254,13 +254,13 @@ export default function StorySection() {
         </ScrollReveal>
 
         {/* ── TEXT CONTENT (Overlaps the image on Desktop & Mobile) ── */}
-        <ScrollReveal revealClass="anim-col-1" className="relative z-20 lg:w-[85%] lg:pt-[320px] pointer-events-none -mt-8 md:-mt-12 lg:mt-0">
+        <ScrollReveal revealClass="anim-col-1" className="relative z-20 lg:w-[85%] lg:pt-80 pointer-events-none -mt-8 md:-mt-12 lg:mt-0">
           {/* PC ONLY TITLE */}
           <div className="hidden lg:block">
             <JitterTitle text={STORY.title} className="text-left mb-16 lg:mb-40" />
           </div>
           
-          <div className="flex flex-col gap-[2px] lg:gap-[3px] max-w-4xl">
+          <div className="flex flex-col gap-0.5 lg:gap-0.75 max-w-4xl">
             {STORY.desc.map((paragraph, i) => (
               <div key={i} className="text-left">
                 <span 
