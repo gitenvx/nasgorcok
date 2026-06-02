@@ -268,7 +268,7 @@ export default function LocationSection() {
                  onPointerMove={onPointerMove}
                  onPointerUp={onPointerUp}
                  onPointerCancel={onPointerUp}
-                 aria-label="Scroll track"
+                 aria-hidden="true"
               >
                 {/* Background Track Line (Inactive Progress) */}
                 <div className="w-full h-0.5 bg-(--c-dim) opacity-40 transition-opacity group-hover/track:opacity-80" />
