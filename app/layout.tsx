@@ -45,6 +45,16 @@ export const metadata: Metadata = {
   },
 };
 
+import { Roboto_Condensed } from "next/font/google";
+
+const robotoCondensed = Roboto_Condensed({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-roboto-condensed",
+});
+
 /**
  * Komponen RootLayout - Root layout untuk semua halaman
  * Setup HTML lang, body className, dan render children dengan analytics
@@ -57,7 +67,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" className="scroll-smooth">
+    <html lang="id" className={`scroll-smooth ${robotoCondensed.variable}`}>
       <head>
         {/* Preload background images */}
         <link rel="preload" href="/img/common/bg/bg.webp" as="image" type="image/webp" />

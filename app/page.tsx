@@ -1,7 +1,10 @@
 "use client";
 import { useRef } from "react";
+import dynamic from 'next/dynamic';
 import Image from "next/image";
-import RightNav from "@/components/RightNav";
+
+// Dynamic imports for below-the-fold and non-essential overlays
+const RightNav = dynamic(() => import('@/components/RightNav'), { ssr: false });
 import {
   SiPython, SiNodedotjs, SiTypescript,
   SiGithub, SiDocker, SiGit,
@@ -10,18 +13,18 @@ import { VscVscode } from "react-icons/vsc";
 import { FaWindows, FaUbuntu } from "react-icons/fa";
 import MenuColumn    from "@/components/MenuColumn";
 import KontakColumn  from "@/components/KontakColumn";
-import DustOverlay from "@/components/DustOverlay";
 import TickerBar     from "@/components/TickerBar";
-// import CrackOverlay  from "@/components/CrackOverlay";
-import AudioAutoplay from "@/components/AudioAutoplay";
-import LyricsDisplay from "@/components/LyricsDisplay";
-// import LoveAnimation from "@/components/LoveAnimation";
-import AboutSection from "@/components/AboutSection";
-import StorySection from "@/components/StorySection";
-import LocationSection from "@/components/LocationSection";
-import LatestCommit from "@/components/LatestCommit";
 import ScrollReveal  from "@/components/ScrollReveal";
-import CookieConsent from "@/components/CookieConsent";
+
+const DustOverlay = dynamic(() => import('@/components/DustOverlay'), { ssr: false });
+const AudioAutoplay = dynamic(() => import('@/components/AudioAutoplay'), { ssr: false });
+const LyricsDisplay = dynamic(() => import('@/components/LyricsDisplay'), { ssr: false });
+const CookieConsent = dynamic(() => import('@/components/CookieConsent'), { ssr: false });
+
+const AboutSection = dynamic(() => import('@/components/AboutSection'));
+const StorySection = dynamic(() => import('@/components/StorySection'));
+const LocationSection = dynamic(() => import('@/components/LocationSection'));
+const LatestCommit = dynamic(() => import('@/components/LatestCommit'));
 import { NAMA_WARUNG, NASI_GORENG, MIE_CAPCAY, KATA } from "@/lib/menu-data";
 
 const LOGOS_CENTER = [SiPython, SiNodedotjs, SiTypescript, SiGit, SiGithub, SiDocker, VscVscode, FaUbuntu, FaWindows];
@@ -73,6 +76,7 @@ export default function Home() {
             src="/img/logo/nasgor.webp"
             alt="Nasi Goreng"
             priority
+            fetchPriority="high"
             quality={60}
             width={1200}
             height={400}

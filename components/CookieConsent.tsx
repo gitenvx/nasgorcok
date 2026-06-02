@@ -109,28 +109,50 @@ export default function CookieConsent() {
         [ SYSTEM MESSAGE: COOKIES REQUESTED ]
       </div>
 
-      {/* Bidang teks typewriter */}
-      <p
-        style={{
-          minHeight: "36px",
-          lineHeight: "1.6",
-          letterSpacing: "0.05em",
-          margin: "0 0 16px 0",
-          textTransform: "uppercase",
-          color: "rgba(232, 224, 208, 0.85)",
-        }}
-      >
-        {text}
-        <span
+      {/* Bidang teks typewriter dengan placeholder transparan untuk mencegah CLS (layout shift) */}
+      <div style={{ position: "relative" }}>
+        {/* Placeholder teks penuh agar tinggi kontainer konsisten sejak awal */}
+        <p
           style={{
-            animation: "blink-cursor 0.8s infinite",
-            fontWeight: "bold",
-            color: "var(--c-border, #cca266)",
+            lineHeight: "1.6",
+            letterSpacing: "0.05em",
+            margin: "0 0 16px 0",
+            textTransform: "uppercase",
+            color: "transparent",
+            pointerEvents: "none",
+            userSelect: "none",
+          }}
+          aria-hidden="true"
+        >
+          {fullText}_
+        </p>
+        
+        {/* Teks typewriter yang sebenarnya */}
+        <p
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            lineHeight: "1.6",
+            letterSpacing: "0.05em",
+            margin: 0,
+            textTransform: "uppercase",
+            color: "rgba(232, 224, 208, 0.85)",
           }}
         >
-          _
-        </span>
-      </p>
+          {text}
+          <span
+            style={{
+              animation: "blink-cursor 0.8s infinite",
+              fontWeight: "bold",
+              color: "var(--c-border, #cca266)",
+            }}
+          >
+            _
+          </span>
+        </p>
+      </div>
 
       {/* Baris pilihan tombol aksi */}
       <div style={{ display: "flex", justifyContent: "flex-end", gap: "16px" }}>

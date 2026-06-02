@@ -56,7 +56,7 @@ export default function LatestCommit() {
       <div className="absolute inset-0 bg-[linear-gradient(rgba(232,224,208,0.05)_1px,transparent_1px)] bg-size-[100%_4px] pointer-events-none opacity-30" />
       
       <div className="text-(--c-ash) opacity-100 text-[11px] uppercase tracking-widest mb-3 font-mono flex items-center gap-2 border-b border-[rgba(232,224,208,0.2)] pb-2 relative z-10">
-        <SiGithub className="text-lg" />
+        <SiGithub className="text-lg" aria-hidden="true" />
         <span>SYSTEM LOG: LATEST COMMIT</span>
         <span className="w-1.5 h-1.5 rounded-full bg-[#00ff66] animate-pulse ml-auto shadow-[0_0_5px_#00ff66]" />
       </div>
