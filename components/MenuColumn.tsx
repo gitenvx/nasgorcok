@@ -32,7 +32,7 @@ export default function MenuColumn({ title, items, hasDivider }: MenuColumnProps
         {items.map(item => (
           <li key={item} className="menu-item">
             <span className="text-(--c-red) font-bold animate-pulse" aria-hidden="true">&lt;/&gt;</span>
-            <span className="capitalize">{item}</span>
+            {item}
           </li>
         ))}
       </ul>

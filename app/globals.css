@@ -237,7 +237,6 @@ body {
   position: relative;
   width: fit-content;
   cursor: default;
-  text-transform: capitalize;
 }
 
 /* Underline animasi */
