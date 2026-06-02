@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { FaWhatsapp, FaInstagram, FaGlobe, FaTelegram } from "react-icons/fa";
 import { TfiEmail } from "react-icons/tfi";
-import { CiLocationOn } from "react-icons/ci";
 import { KONTAK } from "@/lib/menu-data";
 //import LoveAnimation from "@/components/LoveAnimation";
 

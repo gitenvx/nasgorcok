@@ -664,7 +664,7 @@ body {
   font-size: clamp(0.75rem, 1.4vw, 0.9rem);
   line-height: 1.9;
   letter-spacing: 0.02em;
-  color: #0a0a0a;
+  color: #000000;
 
   /* Highlight hanya selebar teks per baris */
   background: rgba(255, 255, 255, 0.85);
