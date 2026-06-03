@@ -25,35 +25,35 @@ export default function KontakColumn() {
 
       <div className="space-y-1 mb-4 hover-text">
         <a href={`https://wa.me/62${KONTAK.whatsapp.replace(/-/g, '').substring(1)}?text=${encodeURIComponent('Mamas Ucok, nasgor buka hari ini?')}`} target="_blank" rel="noopener noreferrer" className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
-          <div className="flex items-center gap-[10px]">
+          <div className="flex items-center gap-2.5">
             <FaWhatsapp className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
             <span>{KONTAK.whatsapp}</span>
           </div>
           <FiExternalLink className="opacity-40 text-[0.8em]" />
         </a>
         <a href={`https://t.me/${KONTAK.telegram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
-          <div className="flex items-center gap-[10px]">
+          <div className="flex items-center gap-2.5">
             <FaTelegram className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
             <span>{KONTAK.telegram}</span>
           </div>
           <FiExternalLink className="opacity-40 text-[0.8em]" />
         </a>
         <a href={`https://instagram.com/${KONTAK.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
-          <div className="flex items-center gap-[10px]">
+          <div className="flex items-center gap-2.5">
             <FaInstagram className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
             <span>{KONTAK.instagram}</span>
           </div>
           <FiExternalLink className="opacity-40 text-[0.8em]" />
         </a>
         <a href={KONTAK.website} target="_blank" rel="noopener noreferrer" className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
-          <div className="flex items-center gap-[10px]">
+          <div className="flex items-center gap-2.5">
             <FaGlobe className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
             <span>{KONTAK.website}</span>
           </div>
           <FiExternalLink className="opacity-40 text-[0.8em]" />
         </a>
         <a href={`mailto:${KONTAK.email}`} className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
-          <div className="flex items-center gap-[10px]">
+          <div className="flex items-center gap-2.5">
             <TfiEmail className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
             <span>{KONTAK.email}</span>
           </div>
@@ -102,7 +102,7 @@ export default function KontakColumn() {
               padding:    8,
               boxShadow:  "4px 4px 12px rgba(0,0,0,0.6)",
             }}>
-              <div className="relative w-[164px] h-[164px]">
+              <div className="relative w-41 h-41">
                 <Image
                   src="/img/qris.webp"
                   alt="QRIS Pembayaran"

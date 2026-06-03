@@ -81,7 +81,7 @@ export default function CookieConsent() {
       </div>
 
       <div className="p-4 relative">
-        {/* Placeholder teks penuh agar tinggi kontainer konsisten sejak awal */}
+        {/* Placeholder teks penuh agar tinggi knotainer konsisten sejak awal */}
         <p
           className="leading-relaxed tracking-wider mb-4 uppercase text-transparent pointer-events-none select-none text-xs sm:text-sm"
           aria-hidden="true"
@@ -112,7 +112,7 @@ export default function CookieConsent() {
           </button>
           <button
             onClick={handleAccept}
-            className="bg-[var(--c-red)] border border-[var(--c-red)] text-[#e8e0d0] font-bold px-3 py-1.5 text-[10px] sm:text-xs tracking-widest uppercase transition-all duration-200 hover:opacity-80 shadow-[0_0_10px_var(--c-red)]"
+            className="bg-(--c-red) border border-(--c-red) text-[#e8e0d0] font-bold px-3 py-1.5 text-[10px] sm:text-xs tracking-widest uppercase transition-all duration-200 hover:opacity-80 shadow-[0_0_10px_var(--c-red)]"
           >
             [ TERIMA ]
           </button>
