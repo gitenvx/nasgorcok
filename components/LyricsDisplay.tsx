@@ -106,6 +106,7 @@ export default function LyricsDisplay({ audioRef }: Props) {
       <button
         onClick={togglePlay}
         aria-label={isPlaying ? "Pause music" : "Play music"}
+        className={`lyric-btn ${isPlaying ? 'is-playing' : ''}`}
         style={{
           display:        "flex",
           alignItems:     "center",
@@ -115,7 +116,6 @@ export default function LyricsDisplay({ audioRef }: Props) {
           height:         "30px",
           background:     isPlaying ? "var(--c-red)" : "transparent",
           border:         "1px solid var(--c-border)",
-          color:          "white",
           cursor:         "pointer",
           flexShrink:     0,
           transition:     "background 0.2s ease",

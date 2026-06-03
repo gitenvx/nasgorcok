@@ -66,6 +66,16 @@
 }
 
 /* ══════════════════════════════════════
+   LYRIC BUTTON
+   ══════════════════════════════════════ */
+.lyric-btn {
+  color: white;
+}
+[data-theme='light'] .lyric-btn:not(.is-playing) {
+  color: var(--c-red);
+}
+
+/* ══════════════════════════════════════
    BASE
    ══════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; }
