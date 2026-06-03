@@ -5,25 +5,37 @@ import { LOCATION_DATA } from "@/lib/menu-data";
 import JitterTitle from "@/components/JitterTitle";
 import ScrollReveal from "@/components/ScrollReveal";
 import { CiLocationOn } from "react-icons/ci";
+import { FiExternalLink } from "react-icons/fi";
+
 export default function LocationSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
   const thumbRef = useRef<HTMLDivElement>(null);
-  const [activeIdx, setActiveIdx] = useState(1); // Default center image
+  const [activeIdx, setActiveIdx] = useState(1);
   const [isScrubbing, setIsScrubbing] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeftPos, setScrollLeftPos] = useState(0);
   const [hasDragged, setHasDragged] = useState(false);
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+  const pauseTimeout = useRef<NodeJS.Timeout | null>(null);
+  const rafRef = useRef<number | null>(null);
+  const exactScrollLeft = useRef<number | null>(null);
+  const tickerDir = useRef(1);
 
   const images = LOCATION_DATA.images;
 
-  // Handle manual scroll to snap to nearest image and update active index (Debounced for 120FPS smoothness)
+  const triggerPause = useCallback(() => {
+    setIsPaused(true);
+    if (pauseTimeout.current) clearTimeout(pauseTimeout.current);
+    pauseTimeout.current = setTimeout(() => setIsPaused(false), 1500);
+  }, []);
+
   const handleScroll = () => {
     if (!scrollRef.current) return;
 
-    // 60fps Butter Smooth Scroll Thumb Update (Direct DOM, No React State Lag)
     if (thumbRef.current) {
       const container = scrollRef.current;
       const maxScroll = container.scrollWidth - container.clientWidth;
@@ -60,16 +72,18 @@ export default function LocationSection() {
       if (activeIdx !== closestIndex) {
         setActiveIdx(closestIndex);
       }
-    }, 30); // 30ms debounce for buttery smooth drag
+    }, 30);
   };
 
   const scrollTo = (index: number) => {
     if (!scrollRef.current) return;
+    triggerPause();
     const container = scrollRef.current;
+    container.style.scrollSnapType = 'x mandatory';
+    container.style.scrollBehavior = 'smooth';
     const items = container.querySelectorAll(".loc-item");
     if (items[index]) {
       const item = items[index] as HTMLElement;
-      // Center the item
       const scrollPosition = item.offsetLeft - (container.clientWidth / 2) + (item.clientWidth / 2);
       container.scrollTo({
         left: scrollPosition,
@@ -114,11 +128,10 @@ export default function LocationSection() {
     if (scrollRef.current) {
       scrollRef.current.style.scrollSnapType = 'x mandatory';
       scrollRef.current.style.scrollBehavior = 'smooth';
-      handleScroll(); // Trigger snap to nearest image
+      handleScroll();
     }
   }, []);
 
-  // Posisikan otomatis foto kedua (index 1) ke tengah saat pertama kali dimuat
   useEffect(() => {
     const timer = setTimeout(() => {
       scrollTo(1);
@@ -127,41 +140,80 @@ export default function LocationSection() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Drag logic for mouse
+  // Smooth continuous ticker
+  useEffect(() => {
+    if (isDragging || isScrubbing || isPaused || isHovered) {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      exactScrollLeft.current = null;
+      return;
+    }
+
+    const animateScroll = () => {
+      if (scrollRef.current) {
+        const container = scrollRef.current;
+        container.style.scrollSnapType = 'none';
+        container.style.scrollBehavior = 'auto';
+
+        if (exactScrollLeft.current === null) {
+          exactScrollLeft.current = container.scrollLeft;
+        }
+
+        // Use 1px per frame to avoid sub-pixel rounding jitter (true 60fps)
+        exactScrollLeft.current += 1 * tickerDir.current;
+        container.scrollLeft = exactScrollLeft.current;
+
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        
+        if (container.scrollLeft >= maxScroll - 1) {
+          tickerDir.current = -1;
+          exactScrollLeft.current = maxScroll - 1;
+        } else if (container.scrollLeft <= 1) {
+          tickerDir.current = 1;
+          exactScrollLeft.current = 1;
+        }
+      }
+      rafRef.current = requestAnimationFrame(animateScroll);
+    };
+
+    rafRef.current = requestAnimationFrame(animateScroll);
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [isDragging, isScrubbing, isPaused, isHovered]);
+
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!scrollRef.current) return;
     setIsDragging(true);
     setHasDragged(false);
     setStartX(e.pageX - scrollRef.current.offsetLeft);
     setScrollLeftPos(scrollRef.current.scrollLeft);
-    // Disable scroll snapping during drag
     scrollRef.current.style.scrollSnapType = 'none';
     scrollRef.current.style.scrollBehavior = 'auto';
   };
 
   const handleMouseLeave = () => {
+    setIsHovered(false);
     if (!isDragging || !scrollRef.current) return;
     setIsDragging(false);
-    // Re-enable scroll snapping
     scrollRef.current.style.scrollSnapType = 'x mandatory';
     scrollRef.current.style.scrollBehavior = 'smooth';
-    handleScroll(); // Trigger snap to nearest
+    handleScroll();
   };
 
   const handleMouseUp = () => {
     if (!isDragging || !scrollRef.current) return;
     setIsDragging(false);
-    // Re-enable scroll snapping
     scrollRef.current.style.scrollSnapType = 'x mandatory';
     scrollRef.current.style.scrollBehavior = 'smooth';
-    handleScroll(); // Trigger snap to nearest
+    handleScroll();
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging || !scrollRef.current) return;
     e.preventDefault();
     const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5; // Natural speed multiplier
+    const walk = (x - startX) * 1.5;
     if (Math.abs(walk) > 5 && !hasDragged) setHasDragged(true);
     scrollRef.current.scrollLeft = scrollLeftPos - walk;
   };
@@ -177,8 +229,17 @@ export default function LocationSection() {
             <div className="text-zoom-reveal" style={{ transformOrigin: "left center" }}>
               <p className="about-tagline re-textbox">
                 {LOCATION_DATA.description}<br/>
-                <CiLocationOn className="inline-block text-(--c-red) mr-1.5" style={{ fontSize: "1.2em", verticalAlign: "-0.2em" }} />
-                {LOCATION_DATA.lokasi}
+                <a 
+                  href={`https://www.google.com/maps?q=${LOCATION_DATA.lokasi}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:opacity-80 transition-opacity cursor-pointer inline-block mt-1 group"
+                  title="Buka di Google Maps"
+                >
+                  <CiLocationOn className="inline-block text-(--c-red) mr-1.5" style={{ fontSize: "1.2em", verticalAlign: "-0.2em" }} />
+                  <span className="group-hover:underline">{LOCATION_DATA.lokasi}</span>
+                  <FiExternalLink className="inline-block ml-1.5 opacity-60" style={{ fontSize: "0.9em", verticalAlign: "-0.1em" }} />
+                </a>
               </p>
             </div>
           </div>
@@ -189,28 +250,25 @@ export default function LocationSection() {
           
           {/* ── Blueprint Grid Overlay (Framing Center Image) ── */}
           <div className="absolute inset-0 pointer-events-none z-0 block overflow-hidden opacity-80">
-            {/* Horizontal Grid Lines (Loosened by 1rem around active image) */}
-            <div className="absolute left-0 w-full h-px bg-linear-to-r from-transparent via-purple-500 to-transparent opacity-70 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" style={{ top: '0rem' }} />
-            <div className="absolute left-0 w-full h-px bg-linear-to-r from-transparent via-purple-500 to-transparent opacity-70 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" style={{ top: 'calc(1rem + min(70vw, 600px) * 0.625 + 1rem)' }} />
+            {/* Horizontal Grid Lines */}
+            <div className="absolute left-0 w-full h-[2px] bg-linear-to-r from-transparent via-(--c-red) to-transparent opacity-70 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" style={{ top: '0rem' }} />
+            <div className="absolute left-0 w-full h-[2px] bg-linear-to-r from-transparent via-(--c-red) to-transparent opacity-70 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" style={{ top: 'calc(1rem + min(70vw, 600px) * 0.625 + 1rem)' }} />
             
-            {/* Inner Vertical Framing Grid Lines (Loosened by 1rem) */}
-            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+1rem)] w-px bg-linear-to-b from-transparent via-purple-500 to-transparent opacity-80 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-300" />
-            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+1rem)] w-px bg-linear-to-b from-transparent via-purple-500 to-transparent opacity-80 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-300" />
+            {/* Inner Vertical Framing Grid Lines */}
+            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+1rem)] w-[2px] bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-80 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-300" />
+            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+1rem)] w-[2px] bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-80 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-300" />
             
-            {/* Outer Vertical Framing Grid Lines (Extra HUD Bracket) */}
-            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+3rem)] w-px bg-linear-to-b from-transparent via-purple-500 to-transparent opacity-40 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-400" />
-            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+3rem)] w-px bg-linear-to-b from-transparent via-purple-500 to-transparent opacity-40 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-400" />
+            {/* Outer Vertical Framing Grid Lines */}
+            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+3rem)] w-[2px] bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-40 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-400" />
+            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+3rem)] w-[2px] bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-40 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-400" />
           </div>
-
-          {/* Fading edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-linear-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-linear-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
 
           <div 
             className="location-gallery flex overflow-x-auto gap-4 px-[10%] md:px-[25%] pb-4 md:pb-8 pt-4 hide-scrollbar snap-x snap-mandatory select-none"
             ref={scrollRef}
             onScroll={handleScroll}
             onMouseDown={handleMouseDown}
+            onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={handleMouseLeave}
             onMouseUp={handleMouseUp}
             onMouseMove={handleMouseMove}
@@ -219,7 +277,7 @@ export default function LocationSection() {
             {images.map((img, i) => (
               <div 
                 key={i} 
-                className={`loc-item snap-center shrink-0 relative transition-all duration-500 ease-out overflow-hidden bg-black border ${i === activeIdx ? 'border-(--c-ash) z-20 scale-100 opacity-100 shadow-2xl' : 'border-(--c-border) z-10 scale-90 opacity-40 hover:opacity-70'}`}
+                className={`loc-item snap-center shrink-0 relative transition-all duration-500 ease-out overflow-hidden bg-black border-[3px] border-[#e8e0d0] ${i === activeIdx ? 'z-20 scale-100 opacity-100 shadow-2xl' : 'z-10 scale-90 opacity-40 hover:opacity-70'}`}
                 style={{ 
                   width: 'min(70vw, 600px)', 
                   aspectRatio: '16/10'
@@ -245,10 +303,9 @@ export default function LocationSection() {
             ))}
           </div>
 
-          {/* Scroll Navigation (Left / Right) */}
+          {/* Scroll Navigation */}
           <ScrollReveal revealClass="" className="relative w-full flex flex-col justify-center items-center mt-1 md:mt-2 z-20">
-            {/* Single Fading Framing Line (Stays at bottom) */}
-            <div className="absolute bottom-0 left-0 w-full h-px bg-linear-to-r from-transparent via-purple-500 to-transparent opacity-60 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" />
+            <div className="absolute bottom-0 left-0 w-full h-[2px] bg-linear-to-r from-transparent via-(--c-red) to-transparent opacity-60 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" />
 
             <div className="flex items-center justify-between w-62.5 md:w-100 relative z-10 mb-2 md:mb-3">
               <button 
@@ -258,10 +315,9 @@ export default function LocationSection() {
                 aria-label="Previous location"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/img/common/icon/arrow.webp" alt="Left" className={`w-6 md:w-10 h-auto transition-transform ${activeIdx === 0 ? '' : 'group-hover:-translate-x-2'}`} />
+                <img src="/img/common/icon/arrow.webp" alt="Left" className={`w-6 md:w-10 h-auto invert-on-light transition-transform ${activeIdx === 0 ? '' : 'group-hover:-translate-x-2'}`} />
               </button>
               
-              {/* Scroll Track & Thumb */}
               <div 
                  ref={progressBarRef}
                  className="relative flex-1 h-8 flex items-center cursor-pointer select-none group/track mx-4 touch-none"
@@ -272,13 +328,10 @@ export default function LocationSection() {
                  onPointerCancel={onPointerUp}
                  aria-hidden="true"
               >
-                {/* Background Track Line (Inactive Progress) */}
                 <div className="w-full h-0.5 bg-(--c-dim) opacity-40 transition-opacity group-hover/track:opacity-80" />
-                
-                {/* Proportional thumb indicator */}
                 <div 
                   ref={thumbRef}
-                  className="absolute h-0.5 md:h-0.75 bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)] rounded-full will-change-[left]"
+                  className="absolute h-0.5 md:h-0.75 bg-[var(--c-red)] shadow-[0_0_8px_var(--c-red)] rounded-full will-change-[left]"
                   style={{ 
                     width: `${100 / images.length}%`,
                     left: `${(activeIdx / images.length) * 100}%` 
@@ -293,10 +346,42 @@ export default function LocationSection() {
                 aria-label="Next location"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/img/common/icon/arrow.webp" alt="Right" className={`w-6 md:w-10 h-auto scale-x-[-1] transition-transform ${activeIdx === images.length - 1 ? '' : 'group-hover:translate-x-2'}`} />
+                <img src="/img/common/icon/arrow.webp" alt="Right" className={`w-6 md:w-10 h-auto scale-x-[-1] invert-on-light transition-transform ${activeIdx === images.length - 1 ? '' : 'group-hover:translate-x-2'}`} />
               </button>
             </div>
           </ScrollReveal>
+        </ScrollReveal>
+
+        {/* Google Maps Embed */}
+        <ScrollReveal revealClass="anim-col-4" className="mt-8 relative -mx-4 md:-mx-8 flex flex-col items-center">
+          <a 
+            href={`https://www.google.com/maps?q=${LOCATION_DATA.lokasi}`} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-(--c-ash) text-(--c-void) px-3 py-1.5 hover:opacity-80 transition-opacity cursor-pointer group mb-4 shadow-md"
+            title="Buka di Google Maps"
+          >
+            <CiLocationOn className="text-(--c-red)" style={{ fontSize: "1.3em" }} />
+            <span className="font-mono text-sm sm:text-base tracking-wide group-hover:underline">Pergi ke Maps</span>
+            <FiExternalLink className="opacity-70" style={{ fontSize: "1em" }} />
+          </a>
+          <div className="pb-4 md:pb-8 flex justify-center z-10 relative px-4 w-full pointer-events-auto">
+            <div 
+              className="relative transition-all duration-500 ease-out overflow-hidden bg-black border-[3px] border-[#e8e0d0] shadow-2xl w-full"
+              style={{ maxWidth: '800px', aspectRatio: '16/9' }}
+            >
+              <iframe
+                src={`https://maps.google.com/maps?q=${LOCATION_DATA.lokasi}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                width="100%"
+                height="100%"
+                className="map-dark-filter"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
         </ScrollReveal>
 
       </div>

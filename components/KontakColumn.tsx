@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { FaWhatsapp, FaInstagram, FaGlobe, FaTelegram } from "react-icons/fa";
 import { TfiEmail } from "react-icons/tfi";
+import { FiExternalLink } from "react-icons/fi";
 import { KONTAK } from "@/lib/menu-data";
 //import LoveAnimation from "@/components/LoveAnimation";
 
@@ -23,26 +24,41 @@ export default function KontakColumn() {
       </div>
 
       <div className="space-y-1 mb-4 hover-text">
-        <div className="menu-item">
-          <FaWhatsapp className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
-          <span>{KONTAK.whatsapp}</span>
-        </div>
-        <div className="menu-item">
-          <FaTelegram className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
-          <span>{KONTAK.telegram}</span>
-        </div>
-        <div className="menu-item">
-          <FaInstagram className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
-          <span>{KONTAK.instagram}</span>
-        </div>
-        <div className="menu-item">
-          <FaGlobe className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
-          <span>{KONTAK.website}</span>
-        </div>
-        <div className="menu-item">
-          <TfiEmail className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
-          <span>{KONTAK.email}</span>
-        </div>
+        <a href={`https://wa.me/62${KONTAK.whatsapp.replace(/-/g, '').substring(1)}?text=${encodeURIComponent('Mamas Ucok, nasgor buka hari ini?')}`} target="_blank" rel="noopener noreferrer" className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
+          <div className="flex items-center gap-[10px]">
+            <FaWhatsapp className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
+            <span>{KONTAK.whatsapp}</span>
+          </div>
+          <FiExternalLink className="opacity-40 text-[0.8em]" />
+        </a>
+        <a href={`https://t.me/${KONTAK.telegram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
+          <div className="flex items-center gap-[10px]">
+            <FaTelegram className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
+            <span>{KONTAK.telegram}</span>
+          </div>
+          <FiExternalLink className="opacity-40 text-[0.8em]" />
+        </a>
+        <a href={`https://instagram.com/${KONTAK.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
+          <div className="flex items-center gap-[10px]">
+            <FaInstagram className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
+            <span>{KONTAK.instagram}</span>
+          </div>
+          <FiExternalLink className="opacity-40 text-[0.8em]" />
+        </a>
+        <a href={KONTAK.website} target="_blank" rel="noopener noreferrer" className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
+          <div className="flex items-center gap-[10px]">
+            <FaGlobe className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
+            <span>{KONTAK.website}</span>
+          </div>
+          <FiExternalLink className="opacity-40 text-[0.8em]" />
+        </a>
+        <a href={`mailto:${KONTAK.email}`} className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
+          <div className="flex items-center gap-[10px]">
+            <TfiEmail className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
+            <span>{KONTAK.email}</span>
+          </div>
+          <FiExternalLink className="opacity-40 text-[0.8em]" />
+        </a>
       </div>
 
       {/* QRIS + Love Animation */}
@@ -66,7 +82,7 @@ export default function KontakColumn() {
               fontFamily:    "var(--font-mono)",
               fontSize:      "0.58rem",
               color:         "rgba(232,224,208,0.7)",
-              background:    "rgba(10,10,10,0.9)",
+              background:    "var(--c-box)",
               padding:       "1px 6px",
               border:        "1px solid rgba(232,224,208,0.2)",
               letterSpacing: "0.1em",
@@ -82,7 +98,7 @@ export default function KontakColumn() {
             <span className="qris-corner qris-corner-br" />
             <div style={{
               border:     "1px solid rgba(232,224,208,0.18)",
-              background: "rgba(10,10,10,0.8)",
+              background: "var(--c-box)",
               padding:    8,
               boxShadow:  "4px 4px 12px rgba(0,0,0,0.6)",
             }}>

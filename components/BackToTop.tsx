@@ -32,7 +32,7 @@ export default function BackToTop() {
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
       }`}
       style={{ 
-        backgroundColor: "rgba(10,10,10,0.85)",
+        backgroundColor: "var(--c-box)",
         backdropFilter: "blur(4px)",
         border: "1px solid var(--c-border)",
         boxShadow: "0 4px 12px rgba(0,0,0,0.8)" 
@@ -40,7 +40,7 @@ export default function BackToTop() {
       aria-label="Back to top"
     >
       <span 
-        className="text-(--c-ash) text-2xl font-mono leading-none transition-transform group-hover:-translate-y-1 group-hover:text-white" 
+        className="text-(--c-ash) text-2xl font-mono leading-none transition-transform group-hover:-translate-y-1 group-hover:text-(--c-red)" 
         style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.9)" }}
       >
         &uarr;

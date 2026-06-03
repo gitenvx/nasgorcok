@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import DustOverlay from "@/components/DustOverlay";
+import RightNav from "@/components/RightNav";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Nasi Goreng Cok",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="min-h-screen flex flex-col relative" style={{ backgroundColor: "#0a0a0a", color: "#e8e0d0" }}>
+    <div className="min-h-screen flex flex-col relative bg-(--c-void) text-(--c-ash)">
       {/* ── Background tetap ── */}
       <div
         className="fixed-bg"
@@ -29,7 +30,7 @@ export default function PrivacyPolicyPage() {
         
         {/* Header (Logo & Back Button) */}
         <header
-          className="flex flex-col items-center justify-center px-3 md:px-2 pt-6 pb-2"
+          className="flex flex-col items-center justify-center px-3 md:px-2 pt-20 md:pt-6 pb-2"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -45,17 +46,17 @@ export default function PrivacyPolicyPage() {
 
         <div className="flex-1 max-w-4xl mx-auto px-6 py-8 md:py-12 w-full">
           <div className="mb-8">
-            <Link href="/" className="btn-bg hover-text inline-block px-4 py-2 font-bold text-sm" style={{ color: "#000" }}>
+            <Link href="/" className="btn-bg hover-text inline-block px-4 py-2 font-bold text-sm">
               [ &lt; RETURN TO BASE ]
             </Link>
           </div>
 
-          <div className="p-6 md:p-10 border shadow-lg" style={{ borderColor: "var(--c-border)", backgroundColor: "rgba(10,10,10,0.85)", backdropFilter: "blur(5px)" }}>
+          <div className="p-6 md:p-10 border shadow-lg" style={{ borderColor: "var(--c-border)", backgroundColor: "var(--c-box)", backdropFilter: "blur(5px)" }}>
             <h1 className="text-2xl md:text-3xl font-bold mb-6" style={{ color: "var(--c-red)", letterSpacing: "0.1em" }}>
               [ PRIVACY POLICY ]
             </h1>
           
-          <div className="space-y-6 text-sm md:text-base leading-relaxed" style={{ color: "rgba(232,224,208,0.85)" }}>
+          <div className="space-y-6 text-sm md:text-base leading-relaxed">
             <p>
               <strong>Effective Date:</strong> {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
             </p>
@@ -101,13 +102,16 @@ export default function PrivacyPolicyPage() {
 
           {/* Bottom Back Button */}
           <div className="mt-8">
-            <Link href="/" className="btn-bg hover-text inline-block px-4 py-2 font-bold text-sm" style={{ color: "#000" }}>
+            <Link href="/" className="btn-bg hover-text inline-block px-4 py-2 font-bold text-sm">
               [ &lt; RETURN TO BASE ]
             </Link>
           </div>
         </div>
+        </div>
       </div>
-      </div>
+      
+      {/* ── Right Navigation & Theme Toggle ── */}
+      <RightNav />
     </div>
   );
 }

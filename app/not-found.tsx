@@ -2,10 +2,11 @@
 import Link from "next/link";
 import DustOverlay from "@/components/DustOverlay";
 import JitterTitle from "@/components/JitterTitle";
+import RightNav from "@/components/RightNav";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col relative items-center justify-center" style={{ backgroundColor: "#0a0a0a", color: "#e8e0d0" }}>
+    <div className="min-h-screen flex flex-col relative items-center justify-center bg-(--c-void) text-(--c-ash)">
       {/* ── Background tetap ── */}
       <div
         className="fixed-bg"
@@ -32,13 +33,12 @@ export default function NotFound() {
             style={{
               height: "clamp(5rem, 15vw, 5.5rem)",
               width: "auto",
-              filter: "drop-shadow(0px 0px 4px rgba(204, 26, 26, 0.5))",
             }}
           />
         </header>
 
         {/* 404 Box inside dark background */}
-        <div className="flex flex-col items-center text-center p-8 md:p-16 border shadow-2xl max-w-2xl mx-auto w-full" style={{ borderColor: "var(--c-border)", backgroundColor: "rgba(10,10,10,0.85)", backdropFilter: "blur(5px)" }}>
+        <div className="flex flex-col items-center text-center p-8 md:p-16 border shadow-2xl max-w-2xl mx-auto w-full" style={{ borderColor: "var(--c-border)", backgroundColor: "var(--c-box)", backdropFilter: "blur(5px)" }}>
 
         {/* 404 Text */}
         <JitterTitle text="ERROR 404" className="text-4xl md:text-5xl mb-4" />
@@ -49,11 +49,14 @@ export default function NotFound() {
 
         {/* Back Button */}
         <div>
-          <Link href="/" className="btn-bg hover-text inline-block px-6 py-3 font-bold text-sm md:text-base" style={{ color: "#000" }}>
+          <Link href="/" className="btn-bg hover-text inline-block px-6 py-3 font-bold text-sm md:text-base">
             [ &lt; RETURN TO BASE ]
           </Link>
         </div>
       </div>
+      
+      {/* ── Right Navigation & Theme Toggle ── */}
+      <RightNav />
     </div>
   </div>
   );

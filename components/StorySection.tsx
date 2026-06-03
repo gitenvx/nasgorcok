@@ -114,7 +114,7 @@ export default function StorySection() {
               <button
                 key={`ig-${i}`}
                 onClick={() => goTo(i)}
-                className="relative h-0.5 md:h-0.75 flex-1 bg-[rgba(232,224,208,0.2)] hover:bg-[rgba(232,224,208,0.35)] transition-colors overflow-hidden cursor-pointer"
+                className="relative h-0.5 md:h-0.75 flex-1 bg-[var(--c-border)] hover:bg-[var(--c-dim)] transition-colors overflow-hidden cursor-pointer"
                 aria-label={`Go to slide ${i + 1}`}
               >
                 <div 
@@ -131,7 +131,7 @@ export default function StorySection() {
           {/* Custom Pagination: IMAGES 1 2 3 (Above photo on mobile, below on PC) */}
           <div className="order-1 lg:order-2 mb-4 lg:mb-0 lg:mt-4 w-full flex justify-center lg:justify-end z-30 font-mono text-(--c-ash) select-none">
             <div className="flex items-center gap-1 md:gap-4">
-              <span className="tracking-[0.2em] text-[8px] md:text-[10px] opacity-75 uppercase mr-1 text-white">IMAGE</span>
+              <span className="tracking-[0.2em] text-[8px] md:text-[10px] opacity-75 uppercase mr-1 text-(--c-ash)">IMAGE</span>
               <div className="flex items-center gap-1 md:gap-2">
               {STORY.slides.map((_, i) => {
                 const isActive = i === active;
@@ -154,9 +154,9 @@ export default function StorySection() {
                         cy="18"
                         r={radius}
                         fill="transparent"
-                        stroke="rgba(232, 224, 208, 0.25)"
+                        stroke="var(--c-border)"
                         strokeWidth="2.5"
-                        className="transition-colors duration-300 group-hover:stroke-[rgba(232, 224, 208, 0.45)]"
+                        className="transition-colors duration-300 group-hover:stroke-[var(--c-dim)]"
                       />
                       {/* Active progress circle */}
                       {isActive && (
@@ -178,8 +178,8 @@ export default function StorySection() {
                     <span
                       className={`z-10 text-[8px] md:text-[10px] font-mono font-bold transition-all duration-300 ${
                         isActive
-                          ? "text-white scale-110"
-                          : "text-(--c-ash)/50 group-hover:text-white"
+                          ? "text-(--c-ash) scale-110"
+                          : "text-(--c-ash)/50 group-hover:text-(--c-ash)"
                       }`}
                     >
                       {i + 1}
@@ -236,13 +236,12 @@ export default function StorySection() {
                 translateX = 24;
                 translateY = -24;
                 zIndex = 10;
-                overlayOpacity = 0.85; // Darken the third card heavily
               }
               
               return (
                 <div
                   key={i}
-                  className="absolute inset-0 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] border-[3px] border-[rgba(232,224,208,0.35)] overflow-hidden bg-[#050505] shadow-2xl"
+                  className="absolute inset-0 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] border-[3px] border-[#e8e0d0] overflow-hidden bg-[#050505] shadow-2xl"
                   style={{
                     transform: `translate(${translateX}px, ${translateY}px)`,
                     zIndex: zIndex,

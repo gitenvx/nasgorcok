@@ -113,8 +113,8 @@ export default function LyricsDisplay({ audioRef }: Props) {
           width:          "30px",
           minWidth:       "30px",
           height:         "30px",
-          background:     isPlaying ? "var(--c-red)" : "rgba(232,224,208,0.12)",
-          border:         "1px solid rgba(232,224,208,0.3)",
+          background:     isPlaying ? "var(--c-red)" : "transparent",
+          border:         "1px solid var(--c-border)",
           color:          "var(--c-ash)",
           cursor:         "pointer",
           flexShrink:     0,
@@ -144,12 +144,11 @@ export default function LyricsDisplay({ audioRef }: Props) {
               display:         "inline",
               textTransform:   "uppercase",
               fontSize:        isActive ? "clamp(1rem, 2vw, 1rem)" : "clamp(0.9rem, 1.8vw, 1.1rem)",
-              color:           isActive ? "rgba(232,224,208,1)" : isPast ? "rgba(232,224,208,0.25)" : "rgba(232,224,208,0.5)",
-              backgroundColor: isActive ? "rgba(204,26,26,1)" : "transparent",
-              padding:         isActive ? "0 4px" : "0",
-              textShadow:      isActive
-                ? "0 0 8px rgba(255,255,255,0.9), 1px 1px 0 #000, -1px -1px 0 #000"
-                : "none",
+              color:           "var(--c-ash)",
+              opacity:         isActive ? 1 : isPast ? 0.3 : 0.6,
+              backgroundColor: isActive ? "var(--c-red)" : "transparent",
+              padding:         isActive ? "2px 8px" : "0",
+              textShadow:      "none",
               transition: "color 0.15s ease, background-color 0.15s ease, font-size 0.1s ease",
             }}>
               {w.word}{" "}
@@ -160,7 +159,8 @@ export default function LyricsDisplay({ audioRef }: Props) {
             fontFamily:    "var(--font-title)",
             fontSize:      "clamp(0.9rem, 1.8vw, 1.1rem)",
             letterSpacing: "0.15em",
-            color:         "rgba(232,224,208,0.6)",
+            color:         "var(--c-ash)",
+            opacity:       0.6,
           }}>
             {isPlaying ? "♪" : "TAP ▶ TO PLAY MUSIC"}
           </span>

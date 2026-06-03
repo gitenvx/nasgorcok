@@ -110,7 +110,7 @@ export default function AboutSection() {
                   inset: 0,
                   pointerEvents: 'none',
                   zIndex: 10,
-                  boxShadow: 'inset 0 10px 0 0 #0a0a0a, inset -10px 0 0 0 #0a0a0a, inset 0 -30px 0 0 #0a0a0a, inset 30px 0 0 0 #0a0a0a',
+                  boxShadow: 'inset 0 10px 0 0 var(--c-void), inset -10px 0 0 0 var(--c-void), inset 0 -30px 0 0 var(--c-void), inset 30px 0 0 0 var(--c-void)',
                   filter: 'url(#grunge-edge-filter)',
                   transform: 'scale(1.05)', /* Prevent outer edges from bleeding */
                 }} 
@@ -120,7 +120,7 @@ export default function AboutSection() {
 
           {/* ── Content (Overlay on Video) ── */}
           <ScrollReveal revealClass="anim-slide-right">
-            <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 pt-95 md:pt-12 pb-12">
+            <div className="relative z-10 max-w-7xl mx-auto pl-10 pr-4 md:px-12 pt-95 md:pt-12 pb-12">
               <p className="about-desc text-[rgba(232,224,208,0.85)] leading-relaxed tracking-wide text-sm md:text-base max-w-2xl">
                 {ABOUT.description}
               </p>
@@ -142,7 +142,7 @@ export default function AboutSection() {
             marginTop: '-8px', // Center the 16px splatter exactly on the line
 
             left: 0,
-            backgroundColor: '#0a0a0a',
+            backgroundColor: 'var(--c-void)',
             filter: 'url(#grunge-spill-filter-top)',
             transform: 'scaleX(1.05)',
           }} 
@@ -160,7 +160,7 @@ export default function AboutSection() {
           style={{
             bottom: '-25px', // Straddles the bottom edge, extending outwards
             left: 0,
-            backgroundColor: '#0a0a0a',
+            backgroundColor: 'var(--c-void)',
             filter: 'url(#grunge-spill-filter)',
             transform: 'scaleX(1.05)', // Prevent straight edges on left/right
           }} 

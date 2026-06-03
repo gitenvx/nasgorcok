@@ -17,7 +17,7 @@ const generateStaticFrame = (count: number, seedStart: number) => {
     const w = (random(seedStart + i * 3) * 30 + 10).toFixed(1); // Lebar 10-40px
     const h = (random(seedStart + i * 4) * 4 + 2).toFixed(1);   // Tinggi 2-6px
     const alpha = (random(seedStart + i * 5) * 0.4 + 0.1).toFixed(2);
-    blocks += `<rect x="${x}%" y="${y}%" width="${w}px" height="${h}px" fill="rgba(150,150,150,${alpha})" />`;
+    blocks += `<rect x="${x}%" y="${y}%" width="${w}px" height="${h}px" fill="rgba(255,255,255,${alpha})" />`;
   }
   const svg = `<svg xmlns="http://www.w3.org/2000/svg">${blocks}</svg>`;
   return `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`;
@@ -39,7 +39,7 @@ export default function DustOverlay() {
   const frame4 = generateStaticFrame(5, 4000);
 
   return (
-    <div className="fixed inset-0 z-2 pointer-events-none mix-blend-screen opacity-80 overflow-hidden">
+    <div className="fixed inset-0 z-2 pointer-events-none mix-blend-difference opacity-70 overflow-hidden">
       <style>{`
         .static-noise-layer {
           position: absolute;

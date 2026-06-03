@@ -32,7 +32,7 @@ export default function LatestCommit() {
 
   if (loading) {
     return (
-      <div className="mt-8 border border-(--c-border) p-4 text-center bg-[rgba(10,10,10,0.4)]">
+      <div className="mt-8 border border-(--c-border) p-4 text-center bg-(--c-box)">
         <span className="text-(--c-ash) opacity-50 font-mono text-xs animate-pulse tracking-widest">[ INITIALIZING GITHUB LINK... ]</span>
       </div>
     );
@@ -46,39 +46,55 @@ export default function LatestCommit() {
     );
   }
 
-  const date = new Date(commit.commit.author.date).toLocaleDateString("id-ID", {
-    day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit"
-  });
+  const dateStr = new Date(commit.commit.author.date).toString();
 
   return (
-    <div className="mt-8 border border-(--c-border) bg-[rgba(10,10,10,0.6)] p-4 relative overflow-hidden group">
-      {/* Decorative scanline */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(232,224,208,0.05)_1px,transparent_1px)] bg-size-[100%_4px] pointer-events-none opacity-30" />
-      
-      <div className="text-(--c-ash) opacity-100 text-[11px] uppercase tracking-widest mb-3 font-mono flex items-center gap-2 border-b border-[rgba(232,224,208,0.2)] pb-2 relative z-10">
-        <SiGithub className="text-lg" aria-hidden="true" />
-        <span>SYSTEM LOG: LATEST COMMIT</span>
-        <span className="w-1.5 h-1.5 rounded-full bg-[#00ff66] animate-pulse ml-auto shadow-[0_0_5px_#00ff66]" />
+    <div className="mt-6 rounded-xl overflow-hidden border border-(--c-border) bg-(--c-box) text-(--c-ash) relative group w-full max-w-4xl mx-auto shadow-[0_10px_30px_var(--c-border)]" style={{ fontFamily: 'var(--font-submenu)' }}>
+      {/* Title bar */}
+      <div className="flex items-center px-3 py-1.5 border-b border-(--c-border) relative z-10" style={{ backgroundColor: 'rgba(128,128,128,0.05)' }}>
+        {/* Window controls (red, yellow, green) */}
+        <div className="flex gap-1.5">
+          <div className="w-2 h-2 rounded-full bg-[#ff5f56]"></div>
+          <div className="w-2 h-2 rounded-full bg-[#ffbd2e]"></div>
+          <div className="w-2 h-2 rounded-full bg-[#27c93f]"></div>
+        </div>
+        {/* Title */}
+        <div className="flex-1 text-center text-[10px] md:text-xs font-semibold flex items-center justify-center gap-2 opacity-60 tracking-widest">
+          <SiGithub className="text-xs md:text-sm" /> bash — nasgorcok
+        </div>
+        <div className="w-8"></div> {/* Spacer to center title */}
       </div>
       
-      <p className="text-(--c-ash) font-mono text-sm mb-4 line-clamp-2 leading-relaxed relative z-10">
-        <span className="text-(--c-red) mr-2 font-bold">&gt;</span> 
-        {commit.commit.message}
-      </p>
-      
-      <div className="flex justify-between items-end relative z-10">
-        <div className="flex flex-col gap-0.5">
-          <span className="text-[9px] text-(--c-ash) opacity-60 font-mono tracking-widest">signed-off-by: {commit.commit.author.name}</span>
-          <span className="text-[9px] text-(--c-ash) opacity-60 font-mono tracking-widest">date: {date}</span>
+      {/* Terminal content */}
+      <div className="px-3 py-2 md:px-4 md:py-3 overflow-x-auto hide-scrollbar relative z-10">
+        <div className="mb-1.5 text-xs md:text-sm tracking-wide">
+          <span className="font-bold">gitenvx</span>
+          <span className="opacity-70">:</span>
+          <span className="text-(--c-red) font-bold">~/nasgorcok</span>
+          <span className="opacity-70 ml-1">$ git log -1</span>
         </div>
-        <a 
-          href={commit.html_url} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="text-[10px] text-(--c-ash) hover:text-[#0a0a0a] transition-all duration-300 font-mono tracking-wider border border-(--c-border) px-3 py-1.5 hover:bg-(--c-border) hover:shadow-[0_0_10px_rgba(204,162,102,0.5)]"
-        >
-          [ VIEW DETAIL ]
-        </a>
+        
+        <div className="text-xs md:text-sm">
+          <div className="flex flex-col opacity-90 leading-tight">
+            <span className="font-bold opacity-100 text-(--c-red)">commit {commit.sha}</span>
+            <span>Author: {commit.commit.author.name}</span>
+            <span>Date:   {dateStr}</span>
+          </div>
+          <div className="pt-1.5 pl-3 whitespace-pre-wrap leading-snug border-l-2 border-(--c-border) mt-1.5 opacity-100" style={{ fontSize: 'clamp(0.8rem, 1.2vw, 0.9rem)' }}>
+            {commit.commit.message}
+          </div>
+        </div>
+        
+        <div className="mt-3 flex justify-end relative z-10">
+          <a 
+            href={commit.html_url} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-[10px] md:text-xs text-(--c-ash) hover:text-(--c-box) transition-all duration-300 tracking-wider border border-(--c-border) px-3 py-1 hover:bg-(--c-ash) hover:shadow-[0_0_10px_rgba(204,162,102,0.5)] font-bold"
+          >
+            [ VIEW ON GITHUB ]
+          </a>
+        </div>
       </div>
     </div>
   );

@@ -124,7 +124,10 @@ export default function Home() {
         <main id="menu" className="flex-1 pb-10">
 
           {/* Tampilan Desktop */}
-          <div className="hidden md:grid md:grid-cols-3 h-full">
+          <div 
+            className="hidden md:grid md:grid-cols-3 h-full border-y md:border border-[var(--c-border)] md:mx-4 lg:mx-8 shadow-[0_0_30px_var(--c-border)] relative z-10"
+            style={{ backgroundColor: "var(--c-box)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }}
+          >
             <div>
               <MenuColumn title="[ Nasi Goreng ]" items={NASI_GORENG} />
               <div className="px-4 md:px-5 mt-4">
@@ -146,22 +149,30 @@ export default function Home() {
             </div>
 
             {/* Kolom Kanan — QRIS (bikin span 2 row biar nggak kepotong baris baru) */}
-            <div className="row-span-2">
+            <div className="row-span-2 border-l-0 md:border-l border-[var(--c-border)]">
               <KontakColumn />
             </div>
 
             {/* Baris baru khusus Desktop yang membentang di bawah Kolom 1 & 2 */}
-            <div className="col-span-2 px-4 md:px-5 mt-4">
+            <div className="col-span-2 px-4 md:px-5 mt-4 pb-4">
               <LatestCommit />
             </div>
           </div>
 
           {/* MULAI Tampilan Mobile */}
-          <div className="md:hidden flex flex-col px-2">
+          <div 
+            className="md:hidden flex flex-col px-2 border-y border-[var(--c-border)] mt-4 shadow-[0_0_30px_var(--c-border)] relative z-10"
+            style={{ backgroundColor: "var(--c-box)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }}
+          >
 
             <div className="border-b" style={{ borderColor: "var(--c-border)" }}>
               <div className="m-3">
-                <span className="menu-header btn-bg hover-text">[ Nasi Goreng ]</span>
+                <div 
+                  className="menu-header btn-bg hover-text" 
+                  style={{ display: "block", width: "100%", textAlign: "center" }}
+                >
+                  [ Nasi Goreng ]
+                </div>
               </div>
               <ul className="px-5 pb-5 space-y-1">
                 {NASI_GORENG.map(item => (
@@ -174,7 +185,12 @@ export default function Home() {
             </div>
             <div className="border-b" style={{ borderColor: "var(--c-border)" }}>
               <div className="m-3">
-                <span className="menu-header btn-bg hover-text">[ Mie &gt; Capcay &gt; Kwetiau ]</span>
+                <div 
+                  className="menu-header btn-bg hover-text" 
+                  style={{ display: "block", width: "100%", textAlign: "center" }}
+                >
+                  [ Mie &gt; Capcay &gt; Kwetiau ]
+                </div>
               </div>
               <ul className="px-5 pb-5 space-y-1">
                 {MIE_CAPCAY.map(item => (
@@ -251,11 +267,11 @@ export default function Home() {
 
       {/* TICKER FOOTER merekat di bawah secara natural */}
       <div
-        className="relative w-full z-30 main-footer flex flex-col items-center pb-8 mt-16 md:mt-24"
+        className="relative w-full z-30 main-footer flex flex-col items-center pb-8 mt-16 md:mt-24 border-t border-[var(--c-border)] shadow-[0_-10px_30px_var(--c-border)]"
         style={{
-          backdropFilter:       "blur(2px)",
-          WebkitBackdropFilter: "blur(2px)",
-          background:           "rgba(10,10,10,0.40)",
+          backdropFilter:       "blur(0px)",
+          WebkitBackdropFilter: "blur(0px)",
+          background:           "var(--c-footer-bg)",
         }}
       >
         <div className="w-full border-b border-[rgba(232,224,208,0.15)] mb-8 bg-black/20">
@@ -284,7 +300,7 @@ export default function Home() {
               width={150} 
               height={150}
               quality={100}
-              className="w-full h-auto opacity-80 hover:opacity-100 transition-opacity duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)] grayscale hover:grayscale-0"
+              className="w-full h-auto opacity-80 hover:opacity-100 transition-opacity duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)] grayscale hover:grayscale-0 invert-on-light"
               style={{ width: "100%", height: "auto" }}
             />
           </div>
@@ -292,11 +308,11 @@ export default function Home() {
         
         {/* ── COPYRIGHT & POLICIES ── */}
         <div className="flex flex-col items-center gap-2 text-center px-4">
-          <span className="text-sm text-white font-medium">
+          <span className="text-sm text-(--c-ash) font-medium">
             © {new Date().getFullYear()} Mohammad Fathuloh. All rights reserved.
           </span>
           <div className="flex justify-center gap-6 mt-1 text-xs">
-            <a href="/privacy-policy" className="hover-text text-white/80 hover:text-white transition-colors duration-300">Privacy Policy</a>
+            <a href="/privacy-policy" className="hover-text text-(--c-ash) opacity-80 hover:opacity-100 transition-opacity duration-300">Privacy Policy</a>
           </div>
         </div>
       </div>
