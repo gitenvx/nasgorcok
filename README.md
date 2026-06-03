@@ -17,6 +17,9 @@ Built with **Next.js 15** + **TailwindCSS v4** + **TypeScript**.
 - **Lyrics sync** — lirik real-time sinkron audio, kata aktif highlight merah + glow
 - **QRIS frame** — border kamera/polaroid ala RE9 dengan label pojok
 - **Ticker footer** — scrolling text + copyright auto-update tahun
+- **Dark/Light Mode** — switch tema (sun/moon toggle), warna & peta auto adapt
+- **Interactive Maps** — embed Google Maps iframe langsung
+- **Ticker Gallery** — galeri foto lokasi jalan otomatis (60fps ping-pong smooth)
 - **Responsive** — PC = 3 kolom, Mobile = stack langsung (tanpa accordion)
 - **react-icons** — semua brand logo tanpa file PNG
 - **Docker ready** — multi-stage build, Heroku + VPS support
@@ -274,10 +277,4 @@ Docker container (127.0.0.1:3000, tidak expose publik)
 Next.js standalone
 ```
 
----
 
-## 🗒️ Copyright
-
-© 2025 Mohammad Fathuloh — dibuat untuk keperluan warung sendiri.
-Terinspirasi desain Resident Evil Requiem (Capcom) — tidak berafiliasi.
-Font dari DeviantArt — cek lisensi sebelum penggunaan komersial.
