@@ -1,7 +1,7 @@
 # 🍳 Nasi Goreng Mamas Ucok
 
 Web menu digital warung nasi goreng, terinspirasi desain sinematik Resident Evil Requiem.
-Built with **Next.js 15** + **TailwindCSS v4** + **TypeScript**.
+Built with **Next.js 16** + **TailwindCSS v4** + **TypeScript**.
 
 ---
 
@@ -37,7 +37,6 @@ nasgorcok/
 │
 ├── components/
 │   ├── AudioAutoplay.tsx  ← audio bg + trigger lyrics
-│   ├── CrackOverlay.tsx   ← SVG scratch/goresan overlay
 │   ├── KontakColumn.tsx   ← kontak + QRIS frame
 │   ├── LyricsDisplay.tsx  ← lirik sinkron real-time
 │   ├── MenuColumn.tsx     ← kolom menu reusable
