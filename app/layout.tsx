@@ -83,8 +83,8 @@ export default function RootLayout({
       <body className="min-h-screen overflow-x-hidden relative">
         <ThemeProvider
           attribute="data-theme"
-          defaultTheme="dark"
-          enableSystem={false}
+          defaultTheme="system"
+          enableSystem={true}
           disableTransitionOnChange
         >
           {/* Progress Bar Khusus Initial Load */}
