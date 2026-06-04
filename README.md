@@ -107,14 +107,27 @@ apt install -y docker-compose-plugin git
 git clone https://github.com/USERNAME/nasgorcok.git /var/www/nasgorcok
 cd /var/www/nasgorcok
 
-# 3. Nyalain Docker-nya
+# 3. Nyalain Docker (Udah Sepaket sama Traefik Auto-SSL!)
 docker compose up -d --build
-
-# 4. Pasang Nginx + SSL otomatis (Pakai script andalanku)
-chmod +x nginx.sh
-bash nginx.sh
-# Nanti tinggal pencet enter buat pakai domain yang udah abang arahin ke server.
 ```
+
+Udah! Gak perlu repot ngurusin Nginx atau jalanin Certbot manual. Di dalem file `docker-compose.yml` udah aku set pakai **Traefik**, dia bakal otomatis nyariin sertifikat HTTPS (Gembok Hijau) dari Let's Encrypt buat domain abang.
+
+---
+
+## ☁️ Setup Domain di Cloudflare (PENTING)
+
+Karena abang pakai domain dari Cloudflare, ada ritual khususnya nih biar Traefik gak bentrok pas minta sertifikat HTTPS:
+
+1. Buka menu **DNS** di dashboard Cloudflare abang.
+2. Tambahin *A Record* buat nama domain (`nasgorcok.com` dan `www`) ke IP VPS abang.
+3. **PENTING:** Pastiin status **Proxy status**-nya dibikin ⚪ **DNS only** (awan abu-abu) DULU! Jangan di-oranye-in.
+4. Terus jalanin Dockernya (`docker compose up -d`). Traefik butuh baca IP asli buat verifikasi sertifikat SSL.
+5. Tunggu sekitar 1 menitan. Kalau webnya udah bisa dibuka dan gemboknya ijo, balik lagi ke Cloudflare.
+6. Masuk ke menu **SSL/TLS** -> ganti modenya jadi **Full (strict)**.
+7. Balik ke DNS, nyalain lagi awannya jadi 🟠 **Proxied** (oranye) biar webnya kebal serangan DDoS.
+
+Aman sentosa deh! 🛡️
 
 Kira-kira begitu bang penjelasan singkat daleman warung digital aku. Kalau ada kode yang berantakan atau *bug*, maklumin aja namanya juga koki nasi goreng yang ngerangkap ngoding. 😂
 
