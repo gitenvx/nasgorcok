@@ -1,279 +1,121 @@
 # 🍳 Nasi Goreng Mamas Ucok
 
-Web menu digital warung nasi goreng, terinspirasi desain sinematik Resident Evil Requiem.
-Built with **Next.js 16** + **TailwindCSS v4** + **TypeScript**.
+Halo bosku! Kenalin, aku Ucok 'Muhammad Fathuloh' (lahir 1999, biasa dipanggil 'Tulloh'). Sehari-hari aku ini jualan nasi goreng jalanan kaki lima, tapi kebetulan juga nyambi jadi *programmer freelance* (walaupun masih sering *copas* dan terus belajar, hehe).
+
+Repo ini isinya *source code* buat **Web Menu Digital Warung Nasi Goreng** punya aku sendiri. Tema desainnya sengaja aku bikin agak beda, terinspirasi dari antarmuka game Resident Evil (bergaya sinematik, gelap, dan agak *grunge*). Walaupun cuma web warung nasi goreng, tapi teknologinya lumayan kekinian bang: **Next.js 16**, **TailwindCSS v4**, sama **TypeScript**.
 
 ---
 
-## ✨ Fitur
+## ✨ Fitur Keren Warung Ini
 
-- **Opening animation** — judul glitch masuk per-huruf, RE box reveal merah, kolom fade-up bertahap
-- **Scratch overlay** — goresan putih SVG pure CSS, animasi reveal + flicker terus-menerus
-- **BG Grid + Pixel Snow** — grid kotak + butiran putih kelap-kelip
-- **H1 Scanline effect** — highlight sweep + scanline bergerak di judul
-- **Red dot pulse** — titik merah animasi pulse + glow di tiap item menu
-- **Menu underline hover** — underline muncul dari kiri, hilang dari kanan
-- **Audio autoplay** — musik background, play saat interaksi pertama user
-- **Lyrics sync** — lirik real-time sinkron audio, kata aktif highlight merah + glow
-- **QRIS frame** — border kamera/polaroid ala RE9 dengan label pojok
-- **Ticker footer** — scrolling text + copyright auto-update tahun
-- **Dark/Light Mode** — switch tema (sun/moon toggle), warna & peta auto adapt
-- **Interactive Maps** — embed Google Maps iframe langsung
-- **Ticker Gallery** — galeri foto lokasi jalan otomatis (60fps ping-pong smooth)
-- **Responsive** — PC = 3 kolom, Mobile = stack langsung (tanpa accordion)
-- **react-icons** — semua brand logo tanpa file PNG
-- **Docker ready** — multi-stage build, Heroku + VPS support
+- **Background Grid & Salju Pixel** — Latar belakangnya kotak-kotak grid ditambah butiran putih yang kelap-kelip statis.
+- **Efek Scanline di H1** — Kalau abang perhatiin judul "NASIGORENG", ada garis *scanline* yang jalan terus dari atas ke bawah.
+- **Lirik Audio Real-time** — Begitu pengunjung berinteraksi (nge-klik atau *scroll*), bakal muter lagu lofi/ambience, dan liriknya bakal sinkron per-kata kayak mesin karaoke! Kata yang lagi dinyanyiin bakal nyala merah.
+- **QRIS Ala Kamera Polaroid** — Frame buat bayar pakai QRIS aku modif bentuknya kayak kotak bidik kamera di RE9.
+- **Dark / Light Mode** — Pengunjung bebas pilih mau tema gelap (standar) atau terang. Warna dan peta Google Maps-nya bakal otomatis nyesuaiin.
+- **Galeri Foto Ping-pong** — Ada deretan foto warung/jalanan yang geser sendiri (*scrolling*) super mulus di 60fps.
+- **Halaman Blog** — Disediain halaman khusus (`/blog`) buat nulis cerita dan bacotan *markdown* dengan tampilan *code block* estetik ala Carbon.
+- **Responsif** — Buka di layar PC/Laptop menunya jejer 3 kolom, buka di HP langsung rapi numpuk ke bawah biar gampang dibaca.
+- **Siap Docker & VPS** — *Deploy* gampang banget, udah aku siapin script buat *Nginx* dan *Docker*-nya.
 
 ---
 
-## 📁 Struktur Project
+## 📁 Ngintip Daleman Project (Struktur)
 
-```
+Buat abang-abang programmer yang penasaran mau ngulik, ini isi dapurnya:
+
+```text
 nasgorcok/
 ├── app/
-│   ├── globals.css        ← semua CSS: variabel, animasi, komponen
-│   ├── layout.tsx         ← root layout + metadata + favicon
-│   └── page.tsx           ← halaman utama
+│   ├── globals.css        ← Semua gaya CSS, animasi, dan variabel warna.
+│   ├── layout.tsx         ← Pondasi utama web, metadata SEO, sama favicon.
+│   ├── page.tsx           ← Halaman utama warung (nampilin menu).
+│   └── blog/              ← Tempat nampilin daftar & isi cerita blog.
 │
 ├── components/
-│   ├── AudioAutoplay.tsx  ← audio bg + trigger lyrics
-│   ├── KontakColumn.tsx   ← kontak + QRIS frame
-│   ├── LyricsDisplay.tsx  ← lirik sinkron real-time
-│   ├── MenuColumn.tsx     ← kolom menu reusable
-│   └── TickerBar.tsx      ← footer ticker + copyright
+│   ├── AudioAutoplay.tsx  ← Pemutar musik & *trigger* lirik otomatis.
+│   ├── KontakColumn.tsx   ← Kolom info kontak + gambar QRIS.
+│   ├── LyricsDisplay.tsx  ← Mesin karaokenya (lirik sinkron).
+│   ├── MenuColumn.tsx     ← Komponen buat nampilin daftar menu makanan.
+│   ├── TickerBar.tsx      ← Teks berjalan di bagian bawah (*footer*).
+│   └── MarkdownRenderer.tsx ← Tukang sulap dari *markdown* jadi desain keren.
 │
 ├── lib/
-│   └── menu-data.ts       ← ⭐ EDIT INI untuk ubah semua konten
+│   ├── menu-data.ts       ← ⭐ BUKA INI KALAU MAU UBAH HARGA/MENU.
+│   └── blog.ts            ← Buat ngebaca dan ngambil file *markdown* blog.
 │
 ├── public/
-│   ├── audio/
-│   │   ├── bg.mp3         ← file audio background
-│   │   └── lyrics.json    ← hasil generate dari lirik.py (auto)
-│   ├── img/
-│   │   ├── bg.jpg         ← background utama
-│   │   ├── btn-bg.png     ← background box "mamas ucok" + header menu
-│   │   └── qris.png       ← foto QRIS
-│   └── fonts/
-│       ├── display.ttf    ← font grunge judul NASIGORENG
-│       └── mono.ttf       ← font monospace isi menu
+│   ├── audio/             ← Isi lagu mp3 dan file json lirik hasil *generate*.
+│   ├── img/               ← Semua foto background, logo, dan QRIS kumpul di sini.
+│   └── fonts/             ← Font *grunge* dan monospace kesayangan.
 │
-├── lirik.py               ← script generate lyrics.json dari audio
-├── Dockerfile             ← multi-stage build
-├── docker-compose.yml     ← VPS deploy
-├── nginx.sh               ← 1-command Nginx + SSL setup
-├── heroku.yml             ← Heroku container deploy
-├── start.sh               ← entry point container
-└── next.config.ts         ← output standalone
+├── content/blog/          ← Folder buat nyimpen file-file cerita blog (.md).
+├── lirik.py               ← Script Python buat ngubah audio jadi lirik JSON.
+└── Dockerfile dll         ← Surat-surat berharga buat keperluan deploy ke VPS.
 ```
 
 ---
 
-## 🎨 Asset yang perlu disiapkan
+## ✏️ Cara Ganti Menu & Harga
 
-```
-public/
-├── img/
-│   ├── bg.jpg        ← foto nasi goreng / texture gelap
-│   ├── btn-bg.png    ← gambar background box teks (distretch 100%)
-│   └── qris.png      ← foto QRIS pembayaran
-└── fonts/
-    ├── display.ttf   ← font grunge untuk judul besar
-    └── mono.ttf      ← font monospace untuk isi menu
-```
+Gak perlu pusing bongkar-bongkar kode komponennya bang. Semua data menu, harga, sama info kontak udah aku kumpulin rapi di satu file khusus: **`lib/menu-data.ts`**. 
 
-> **btn-bg.png** → gambar yang di-stretch jadi background box "mamas ucok"
-> dan semua header `[ Nasi Goreng ]`, `[ Mie ]`, `[ Kontak ]`
+Tinggal buka file itu, ubah teks atau harganya, simpan, otomatis webnya langsung update!
 
 ---
 
-## ✏️ Edit Konten Menu
+## 🎵 Bikin Lirik Karaoke (Audio Setup)
 
-Semua konten ada di **satu file**: `lib/menu-data.ts`
+Aku pakai AI (Whisper) buat ngenalin suara penyanyi dari lagunya, terus dia bakal nge-generate lirik otomatis biar pas sama detiknya. Kalau abang mau ganti lagunya pakai lagu kesukaan abang:
 
-```ts
-export const NAMA_WARUNG = "mamas ucok";
-
-export const NASI_GORENG = [
-  "telur dadar",
-  "telur ceplok",
-  // tambah item di sini
-];
-
-export const KONTAK = {
-  whatsapp:  "0851-8300-9087",
-  instagram: "@gitenvx",
-  website:   "nasgorcok.com",
-};
-
-export const TICKER_ITEMS = [
-  "> udah isi ayam swear",
-  "harga inbox",
-  // tambah teks ticker di sini
-];
-```
+1. Install dulu perlengkapannya (Python):
+   ```bash
+   pip install openai-whisper
+   # Jangan lupa install ffmpeg (wajib) di OS abang.
+   ```
+2. Ganti file `bg.mp3` yang ada di folder `public/audio/` pakai lagu abang.
+3. Jalanin scriptnya:
+   ```bash
+   python lirik.py
+   ```
+Tungguin bentar, nanti otomatis file `lyrics.json`-nya ke-update dengan sendirinya! Mantap kan?
 
 ---
 
-## 🎵 Setup Lirik Audio
+## 💻 Buat Jalanin di Laptop Abang (Local Dev)
 
-Install dependensi:
-```bash
-pip install openai-whisper
-```
-
-Install ffmpeg (wajib):
-```bash
-# Windows
-winget install ffmpeg
-
-# Ubuntu
-apt install ffmpeg
-```
-
-Jalankan transcribe:
-```bash
-python lirik.py
-```
-
-Output: `public/audio/lyrics.json` — timestamp per kata, otomatis disync ke audio.
-
----
-
-## 🔧 Kustomisasi Tampilan
-
-### Warna — `app/globals.css`
-```css
-:root {
-  --c-void:   #0a0a0a;   /* background utama */
-  --c-ash:    #e8e0d0;   /* warna teks */
-  --c-red:    #cc1a1a;   /* aksen merah */
-  --c-border: rgba(232, 224, 208, 0.18);
-}
-```
-
-### Grid background — keliatan/samar
-```css
-.bg-grid {
-  background-image:
-    linear-gradient(rgba(255,255,255,0.10) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px);
-}
-```
-Naikkan `0.10` untuk lebih keliatan, turunkan untuk lebih samar.
-
-### Volume audio — `components/AudioAutoplay.tsx`
-```ts
-audio.volume = 0.45;  // 0.0 sampai 1.0
-```
-
-### Jumlah kata lirik — `components/LyricsDisplay.tsx`
-```ts
-const BEFORE = 3;  // kata sebelum aktif
-const AFTER  = 4;  // kata sesudah aktif
-```
-
-### Logo tech (react-icons) — `app/page.tsx`
-```tsx
-import { SiPython, SiDocker, SiRust } from "react-icons/si"
-import { FaWindows, FaApple }          from "react-icons/fa"
-```
-Cari semua icon: https://react-icons.github.io/react-icons/
-
----
-
-## 💻 Development Lokal
+Kalau mau nyoba jalanin dan ngoprek kodenya di laptop sendiri, urutannya gini:
 
 ```bash
-npm install
-npm run dev       # → http://localhost:3000
-npm run build     # build production
-npm start         # jalankan production
+npm install       # Download semua bumbu dan wajan (dependency)
+npm run dev       # Buka warung lokal di http://localhost:3000
+npm run build     # Bungkus kode biar padat buat dibawa ke server asli (Production)
 ```
 
 ---
 
-## 🐳 Deploy VPS + Docker
+## 🐳 Cara Gampang Deploy ke VPS (Docker)
 
-### Persiapan VPS (Ubuntu 24.04)
+Kebetulan aku juga nulis script kecil-kecilan buat gampangin *deploy* ke server Ubuntu (VPS):
 
 ```bash
+# 1. Install Docker dulu di server
 curl -fsSL https://get.docker.com | bash
 apt install -y docker-compose-plugin git
-```
 
-### Clone & jalankan
-
-```bash
+# 2. Ambil kodenya dari Github abang
 git clone https://github.com/USERNAME/nasgorcok.git /var/www/nasgorcok
 cd /var/www/nasgorcok
+
+# 3. Nyalain Docker-nya
 docker compose up -d --build
-```
 
-### Setup Nginx + SSL — 1 command
-
-```bash
+# 4. Pasang Nginx + SSL otomatis (Pakai script andalanku)
 chmod +x nginx.sh
 bash nginx.sh
-# enter = pakai domain default nasgorcok.com
+# Nanti tinggal pencet enter buat pakai domain yang udah abang arahin ke server.
 ```
 
-Script otomatis install Nginx, buat config, setup SSL Let's Encrypt, reload.
+Kira-kira begitu bang penjelasan singkat daleman warung digital aku. Kalau ada kode yang berantakan atau *bug*, maklumin aja namanya juga koki nasi goreng yang ngerangkap ngoding. 😂
 
-### Firewall
-
-```bash
-ufw allow 22    # SSH
-ufw allow 80    # HTTP
-ufw allow 443   # HTTPS
-ufw deny 3000   # blokir akses langsung ke container
-ufw enable
-```
-
-### Update kode
-
-```bash
-cd /var/www/nasgorcok
-git pull
-docker compose up -d --build
-```
-
----
-
-## ☁️ Deploy Heroku
-
-```bash
-heroku login
-heroku create nasgorcok
-heroku stack:set container
-git push heroku main
-heroku logs --tail
-```
-
----
-
-## 🌐 Cloudflare DNS
-
-| Type | Name | Value | Proxy |
-|------|------|-------|-------|
-| A | `@` | `IP_VPS` | DNS Only dulu (abu) |
-| A | `www` | `IP_VPS` | DNS Only dulu (abu) |
-
-Setelah SSL selesai → nyalakan proxy (oranye) → SSL/TLS → **Full (strict)**.
-
----
-
-## 🏗️ Arsitektur
-
-```
-Internet
-    ↓
-Cloudflare (CDN + DDoS protection)
-    ↓
-Nginx host (port 80/443 + SSL)
-    ↓
-Docker container (127.0.0.1:3000, tidak expose publik)
-    ↓
-Next.js standalone
-```
-
-
+Semoga *source code* ini bermanfaat, entah buat bahan belajar atau mau dipake buat usaha abang-abang sendiri. **Salam dari dapur Mamas Ucok! 🍽️**
