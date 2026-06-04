@@ -129,7 +129,7 @@ export default function StorySection() {
 
 
           {/* Custom Pagination: IMAGES 1 2 3 (Above photo on mobile, below on PC) */}
-          <div className="order-1 lg:order-2 mb-4 lg:mb-0 lg:mt-4 w-full flex justify-center lg:justify-end z-30 font-mono text-(--c-ash) select-none">
+          <div className="order-1 lg:order-2 mb-4 lg:mb-0 lg:mt-4 w-full flex justify-center lg:justify-center z-30 font-mono text-(--c-ash) select-none">
             <div className="flex items-center gap-1 md:gap-4">
               <span className="tracking-[0.2em] text-[10px] md:text-xs opacity-75 uppercase mr-1 text-(--c-ash)">IMAGE</span>
               <div className="flex items-center gap-1 md:gap-2">
