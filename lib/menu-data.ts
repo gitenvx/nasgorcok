@@ -111,9 +111,11 @@ export const TICKER_ITEMS = [
 export const STORY = {
   title: "Story",
   desc: [
-    "Dari gerobak kecil di pinggir jalan, Mamas Ucok memulai perjalanannya.",
-    "Bumbu rahasia, api besar, dan tekad sederhana bikin nasi goreng yang nggak cuma kenyang,",
-    "tapi juga nempel di hati.",
+    "Hello world, aku Ucok 'Muhammad Fathuloh', lahir tahun 1999, bisa dipanggil 'Tulloh' juga.",
+    "Aku adalah koki nasi goreng jalanan kaki lima, sekaligus programmer freelance yang cupu masih belajar, di bidang bot Telegram dan Website.",
+    "Aku memutuskan berhenti sekolah lalu diajak sepupu ikut jualan nasi goreng, setelah punya ilmu dan modal akupun sekarang bisa punya warung nasgor sendiri.",
+    "Aku belajar koding secara otodidak, menonton tutorial, membaca dokumentasi, hobi yang tidak disengaja karena waktu aku hampir stress ditolak cewek yang aku cintai.",
+    "Cerita lengkapnya mungkin nanti aku tulis di dalam Blog disini."
   ],
   slides: [
     { img: "/img/story/story-1.webp" },

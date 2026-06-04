@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 /* ══════════════════════════════════════
    FONT FACES — taruh TTF di public/fonts/
@@ -27,6 +28,9 @@
   --c-dim:    rgba(232, 224, 208, 0.5);
   --c-box:    rgba(10, 10, 10, 0.5);
   --c-footer-bg: rgba(10, 10, 10, 0.4);
+  --c-heading: #ffffff;
+  --c-card-shadow: 0 10px 30px rgba(255, 255, 255, 0.05);
+  --c-card-shadow-hover: 0 10px 30px rgba(204, 26, 26, 0.3);
   --font-title: "GrungeDisplay", "Impact", "Arial Black", sans-serif;
   --font-mono:  "MenuMono", "Courier New", monospace;
   --font-submenu: var(--font-roboto-condensed), "Roboto Condensed", sans-serif;
@@ -40,6 +44,9 @@
   --c-dim:    rgba(17, 17, 17, 0.6);
   --c-box:    rgba(232, 224, 208, 0.5);
   --c-footer-bg: rgba(232, 224, 208, 0.4);
+  --c-heading: #111111;
+  --c-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  --c-card-shadow-hover: 0 10px 30px rgba(204, 26, 26, 0.5);
 }
 
 [data-theme='light'] .fixed-bg {
@@ -88,6 +95,39 @@ html {
   overflow-x: hidden;
   width: 100%;
 }
+
+/* Force markdown headings to use re9_small (font-mono) and white text */
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  font-family: var(--font-mono) !important;
+  color: var(--c-heading) !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  white-space: normal !important;
+}
+
+/* Remove default backticks from Tailwind Typography code blocks */
+.prose code::before,
+.prose code::after {
+  content: "" !important;
+}
+
+/* Force line number color so it doesn't get syntax highlighted */
+.react-syntax-highlighter-line-number {
+  color: #777 !important;
+}
+[data-theme='light'] .react-syntax-highlighter-line-number {
+  color: #999 !important;
+}
+
+/* Custom shadow for blog cards to support dynamic dark/light mode */
+.blog-card-shadow {
+  box-shadow: var(--c-card-shadow) !important;
+}
+.blog-card-shadow:hover,
+.group:hover .blog-card-shadow {
+  box-shadow: var(--c-card-shadow-hover) !important;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -491,9 +531,9 @@ body {
 
 [data-theme='light'] .bg-grid {
   background-image:
-    radial-gradient(circle at 0 0, rgba(0,0,0,0.2) 2px, transparent 2.5px),
-    linear-gradient(rgba(0,0,0,0.2) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,0.2) 1px, transparent 1px);
+    radial-gradient(circle at 0 0, rgba(0,0,0,0.05) 2px, transparent 2.5px),
+    linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
 }
 
 

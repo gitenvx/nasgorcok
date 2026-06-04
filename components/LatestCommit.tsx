@@ -46,7 +46,26 @@ export default function LatestCommit() {
     );
   }
 
-  const dateStr = new Date(commit.commit.author.date).toString();
+  const formatCommitDate = (dateString: string) => {
+    const d = new Date(dateString);
+    const utcMs = d.getTime();
+    // Offset +8 hours for WITA
+    const nd = new Date(utcMs + (8 * 60 * 60 * 1000));
+    
+    const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    
+    const dayName = days[nd.getUTCDay()];
+    const date = nd.getUTCDate();
+    const monthName = months[nd.getUTCMonth()];
+    const year = nd.getUTCFullYear();
+    const hours = String(nd.getUTCHours()).padStart(2, '0');
+    const minutes = String(nd.getUTCMinutes()).padStart(2, '0');
+    
+    return `${dayName}, ${date} ${monthName} ${year} ${hours}:${minutes} WITA GMT+8`;
+  };
+
+  const dateStr = formatCommitDate(commit.commit.author.date);
 
   return (
     <div className="mt-6 rounded-xl overflow-hidden border border-(--c-border) bg-(--c-box) text-(--c-ash) relative group w-full max-w-4xl mx-auto shadow-[0_10px_30px_var(--c-border)]" style={{ fontFamily: 'var(--font-submenu)' }}>
@@ -60,7 +79,7 @@ export default function LatestCommit() {
         </div>
         {/* Title */}
         <div className="flex-1 text-center text-[10px] md:text-xs font-semibold flex items-center justify-center gap-2 opacity-60 tracking-widest">
-          <SiGithub className="text-xs md:text-sm" /> bash — nasgorcok
+          <SiGithub className="text-xs md:text-sm" /> What's New
         </div>
         <div className="w-8"></div> {/* Spacer to center title */}
       </div>
@@ -77,7 +96,7 @@ export default function LatestCommit() {
         <div className="text-xs md:text-sm">
           <div className="flex flex-col opacity-90 leading-tight">
             <span className="font-bold opacity-100 text-(--c-red)">commit {commit.sha}</span>
-            <span>Author: {commit.commit.author.name}</span>
+            <span>Authored: {commit.commit.author.name}</span>
             <span>Date:   {dateStr}</span>
           </div>
           <div className="pt-1.5 pl-3 whitespace-pre-wrap leading-snug border-l-2 border-(--c-border) mt-1.5 opacity-100" style={{ fontSize: 'clamp(0.8rem, 1.2vw, 0.9rem)' }}>

@@ -25,6 +25,7 @@ const AboutSection = dynamic(() => import('@/components/AboutSection'));
 const StorySection = dynamic(() => import('@/components/StorySection'));
 const LocationSection = dynamic(() => import('@/components/LocationSection'));
 const LatestCommit = dynamic(() => import('@/components/LatestCommit'));
+const BlogPreviewSection = dynamic(() => import('@/components/BlogPreviewSection'));
 import { NAMA_WARUNG, NASI_GORENG, MIE_CAPCAY, KATA } from "@/lib/menu-data";
 
 const LOGOS_CENTER = [SiPython, SiNodedotjs, SiTypescript, SiGit, SiGithub, SiDocker, VscVscode, FaUbuntu, FaWindows];
@@ -40,7 +41,7 @@ export default function Home() {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   return (
-    <div className="min-h-screen flex flex-col relative w-full overflow-x-hidden" style={{ backgroundColor: "#0a0a0a", color: "#e8e0d0" }}>
+    <div className="min-h-screen flex flex-col relative w-full overflow-x-hidden" style={{ backgroundColor: "var(--c-void)", color: "var(--c-ash)" }}>
 
       {/* ── Background tetap — div terpisah untuk performa mobile ── */}
       <div
@@ -125,7 +126,7 @@ export default function Home() {
 
           {/* Tampilan Desktop */}
           <div 
-            className="hidden md:grid md:grid-cols-3 h-full border-y md:border border-[var(--c-border)] md:mx-4 lg:mx-8 shadow-[0_0_30px_var(--c-border)] relative z-10"
+            className="hidden md:grid md:grid-cols-3 h-full border-y md:border border-(--c-border) md:mx-4 lg:mx-8 shadow-[0_0_30px_var(--c-border)] relative z-10"
             style={{ backgroundColor: "var(--c-box)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }}
           >
             <div>
@@ -149,7 +150,7 @@ export default function Home() {
             </div>
 
             {/* Kolom Kanan — QRIS (bikin span 2 row biar nggak kepotong baris baru) */}
-            <div className="row-span-2 border-l-0 md:border-l border-[var(--c-border)]">
+            <div className="row-span-2 border-l-0 md:border-l border-(--c-border)">
               <KontakColumn />
             </div>
 
@@ -161,7 +162,7 @@ export default function Home() {
 
           {/* MULAI Tampilan Mobile */}
           <div 
-            className="md:hidden flex flex-col px-2 border-y border-[var(--c-border)] mt-4 shadow-[0_0_30px_var(--c-border)] relative z-10"
+            className="md:hidden flex flex-col px-2 border-y border-(--c-border) mt-4 shadow-[0_0_30px_var(--c-border)] relative z-10"
             style={{ backgroundColor: "var(--c-box)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }}
           >
 
@@ -255,6 +256,11 @@ export default function Home() {
             <LocationSection />
           </ScrollReveal>
 
+          {/* Bagian Blog Preview */}
+          <ScrollReveal>
+            <BlogPreviewSection />
+          </ScrollReveal>
+
           {/* Animasi Cinta — tengah di atas footer
           <div className="flex justify-center pb-6">
             <LoveAnimation />
@@ -267,7 +273,7 @@ export default function Home() {
 
       {/* TICKER FOOTER merekat di bawah secara natural */}
       <div
-        className="relative w-full z-30 main-footer flex flex-col items-center pb-8 mt-16 md:mt-24 border-t border-[var(--c-border)] shadow-[0_-10px_30px_var(--c-border)]"
+        className="relative w-full z-30 main-footer flex flex-col items-center pb-8 mt-16 md:mt-24 border-t border-(--c-border) shadow-[0_-10px_30px_var(--c-border)]"
         style={{
           backdropFilter:       "blur(0px)",
           WebkitBackdropFilter: "blur(0px)",
@@ -282,7 +288,7 @@ export default function Home() {
         
         {/* ── FOOTER LOGOS ── */}
         <div className="mb-6 flex flex-col items-center gap-0">
-          <div className="w-[200px] md:w-[300px]">
+          <div className="w-50 md:w-75">
             <Image 
               src="/img/logo/nasgor.webp" 
               alt="NasgorCok Logo" 
@@ -293,7 +299,7 @@ export default function Home() {
               style={{ width: "100%", height: "auto" }}
             />
           </div>
-          <div className="w-[100px] md:w-[150px] -mt-4 md:-mt-6">
+          <div className="w-25 md:w-37.5 -mt-4 md:-mt-6">
             <Image 
               src="/img/logo/mamasucok.webp" 
               alt="Mamas Ucok Logo" 

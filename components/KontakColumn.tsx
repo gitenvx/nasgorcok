@@ -27,35 +27,35 @@ export default function KontakColumn() {
         <a href={`https://wa.me/62${KONTAK.whatsapp.replace(/-/g, '').substring(1)}?text=${encodeURIComponent('Mamas Ucok, nasgor buka hari ini?')}`} target="_blank" rel="noopener noreferrer" className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
           <div className="flex items-center gap-2.5">
             <FaWhatsapp className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
-            <span>{KONTAK.whatsapp}</span>
+            <span>WhatsApp</span>
           </div>
           <FiExternalLink className="opacity-40 text-[0.8em]" />
         </a>
         <a href={`https://t.me/${KONTAK.telegram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
           <div className="flex items-center gap-2.5">
             <FaTelegram className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
-            <span>{KONTAK.telegram}</span>
+            <span>Telegram</span>
           </div>
           <FiExternalLink className="opacity-40 text-[0.8em]" />
         </a>
         <a href={`https://instagram.com/${KONTAK.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
           <div className="flex items-center gap-2.5">
             <FaInstagram className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
-            <span>{KONTAK.instagram}</span>
+            <span>Instagram</span>
           </div>
           <FiExternalLink className="opacity-40 text-[0.8em]" />
         </a>
         <a href={KONTAK.website} target="_blank" rel="noopener noreferrer" className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
           <div className="flex items-center gap-2.5">
             <FaGlobe className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
-            <span>{KONTAK.website}</span>
+            <span>Website</span>
           </div>
           <FiExternalLink className="opacity-40 text-[0.8em]" />
         </a>
         <a href={`mailto:${KONTAK.email}`} className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
           <div className="flex items-center gap-2.5">
             <TfiEmail className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
-            <span>{KONTAK.email}</span>
+            <span>Email</span>
           </div>
           <FiExternalLink className="opacity-40 text-[0.8em]" />
         </a>

@@ -20,13 +20,16 @@ export default function RightNav() {
     { id: "menu", label: "Produk", hasDot: true },
     { id: "about", label: "About", hasDot: false },
     { id: "story", label: "Story", hasDot: false },
-    { id: "locations", label: "Location", hasDot: true }
+    { id: "locations", label: "Location", hasDot: true },
+    { id: "blog", label: "Blog", hasDot: true }
   ];
 
   const scrollTo = (id: string) => {
     if (id === "top") {
-      if (window.location.pathname !== "/") {
-        window.location.href = "/";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (id === "blog") {
+      if (window.location.pathname !== "/blog") {
+        window.location.href = "/blog";
       } else {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
@@ -154,7 +157,7 @@ export default function RightNav() {
               const grid = 40;
               const w = document.documentElement.clientWidth;
               const h = window.innerHeight;
-              const left = Math.floor(w / grid) * grid - (grid * 1); // 1 kotak dari kanan
+              const left = Math.floor(w / grid) * grid - (grid * 2); // 2 kotak dari kanan
               const top = Math.floor(h / grid) * grid - (grid * 2);  // 2 kotak dari bawah (geser ke atas 1)
               el.style.left = `${left}px`;
               el.style.top = `${top}px`;

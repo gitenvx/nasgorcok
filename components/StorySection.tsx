@@ -131,7 +131,7 @@ export default function StorySection() {
           {/* Custom Pagination: IMAGES 1 2 3 (Above photo on mobile, below on PC) */}
           <div className="order-1 lg:order-2 mb-4 lg:mb-0 lg:mt-4 w-full flex justify-center lg:justify-end z-30 font-mono text-(--c-ash) select-none">
             <div className="flex items-center gap-1 md:gap-4">
-              <span className="tracking-[0.2em] text-[8px] md:text-[10px] opacity-75 uppercase mr-1 text-(--c-ash)">IMAGE</span>
+              <span className="tracking-[0.2em] text-[10px] md:text-xs opacity-75 uppercase mr-1 text-(--c-ash)">IMAGE</span>
               <div className="flex items-center gap-1 md:gap-2">
               {STORY.slides.map((_, i) => {
                 const isActive = i === active;
@@ -143,7 +143,7 @@ export default function StorySection() {
                   <button
                     key={`btn-${i}`}
                     onClick={() => goTo(i)}
-                    className="relative w-5 h-5 md:w-7 md:h-7 flex items-center justify-center cursor-pointer group transition-transform duration-300 active:scale-95"
+                    className="relative w-6 h-6 md:w-8 md:h-8 flex items-center justify-center cursor-pointer group transition-transform duration-300 active:scale-95"
                     aria-label={`Go to image ${i + 1}`}
                   >
                     {/* SVG Circular Progress Indicator */}
@@ -176,7 +176,7 @@ export default function StorySection() {
                     </svg>
                     {/* Slide Number */}
                     <span
-                      className={`z-10 text-[8px] md:text-[10px] font-mono font-bold transition-all duration-300 ${
+                      className={`z-10 text-[10px] md:text-xs font-mono font-bold transition-all duration-300 ${
                         isActive
                           ? "text-(--c-ash) scale-110"
                           : "text-(--c-ash)/50 group-hover:text-(--c-ash)"
@@ -191,7 +191,7 @@ export default function StorySection() {
                 if (i < STORY.slides.length - 1) {
                   return [
                     btn,
-                    <span key={`dash-${i}`} className="text-(--c-ash)/40 text-[8px] md:text-[10px] select-none font-bold">
+                    <span key={`dash-${i}`} className="text-(--c-ash)/40 text-[10px] md:text-xs select-none font-bold">
                       -
                     </span>
                   ];
