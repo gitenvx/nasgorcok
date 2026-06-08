@@ -1,26 +1,25 @@
-# 🍳 Nasi Goreng Mamas Ucok
+# Web Nasi Goreng Mamas Ucok
 
-Halo bosku! Kenalin, aku Ucok 'Muhammad Fathuloh' (lahir 1999, biasa dipanggil 'Tulloh'). Sehari-hari aku ini jualan nasi goreng jalanan kaki lima, tapi kebetulan juga nyambi jadi *programmer freelance* (walaupun masih sering *copas* dan terus belajar, hehe).
+Hello world! Kenalin, aku Ucok 'Muhammad Fathuloh' (lahir 1999, biasa dipanggil 'Tulloh'). Sehari-hari aku ini jualan nasi goreng jalanan kaki lima, tapi kebetulan juga nyambi jadi *programmer freelance* (walaupun masih sering *copas* dan terus belajar, hehe).
 
 Repo ini isinya *source code* buat **Web Menu Digital Warung Nasi Goreng** punya aku sendiri. Tema desainnya sengaja aku bikin agak beda, terinspirasi dari antarmuka game Resident Evil (bergaya sinematik, gelap, dan agak *grunge*). Walaupun cuma web warung nasi goreng, tapi teknologinya lumayan kekinian bang: **Next.js 16**, **TailwindCSS v4**, sama **TypeScript**.
 
 ---
 
-## ✨ Fitur Keren Warung Ini
+## Fitur Keren Warung Ini
 
 - **Background Grid & Salju Pixel** — Latar belakangnya kotak-kotak grid ditambah butiran putih yang kelap-kelip statis.
-- **Efek Scanline di H1** — Kalau abang perhatiin judul "NASIGORENG", ada garis *scanline* yang jalan terus dari atas ke bawah.
 - **Lirik Audio Real-time** — Begitu pengunjung berinteraksi (nge-klik atau *scroll*), bakal muter lagu lofi/ambience, dan liriknya bakal sinkron per-kata kayak mesin karaoke! Kata yang lagi dinyanyiin bakal nyala merah.
 - **QRIS Ala Kamera Polaroid** — Frame buat bayar pakai QRIS aku modif bentuknya kayak kotak bidik kamera di RE9.
 - **Dark / Light Mode** — Pengunjung bebas pilih mau tema gelap (standar) atau terang. Warna dan peta Google Maps-nya bakal otomatis nyesuaiin.
 - **Galeri Foto Ping-pong** — Ada deretan foto warung/jalanan yang geser sendiri (*scrolling*) super mulus di 60fps.
 - **Halaman Blog** — Disediain halaman khusus (`/blog`) buat nulis cerita dan bacotan *markdown* dengan tampilan *code block* estetik ala Carbon.
 - **Responsif** — Buka di layar PC/Laptop menunya jejer 3 kolom, buka di HP langsung rapi numpuk ke bawah biar gampang dibaca.
-- **Siap Docker & VPS** — *Deploy* gampang banget, udah aku siapin script buat *Nginx* dan *Docker*-nya.
+- **Siap Docker & VPS** — *Deploy* gampang banget, udah aku siapin script.
 
 ---
 
-## 📁 Ngintip Daleman Project (Struktur)
+## Ngintip Daleman Project (Struktur)
 
 Buat abang-abang programmer yang penasaran mau ngulik, ini isi dapurnya:
 
@@ -41,7 +40,7 @@ nasgorcok/
 │   └── MarkdownRenderer.tsx ← Tukang sulap dari *markdown* jadi desain keren.
 │
 ├── lib/
-│   ├── menu-data.ts       ← ⭐ BUKA INI KALAU MAU UBAH HARGA/MENU.
+│   ├── menu-data.ts       ← BUKA INI KALAU MAU UBAH MENU/DLL.
 │   └── blog.ts            ← Buat ngebaca dan ngambil file *markdown* blog.
 │
 ├── public/
@@ -56,7 +55,7 @@ nasgorcok/
 
 ---
 
-## ✏️ Cara Ganti Menu & Harga
+## Cara Ganti Menu & DLL
 
 Gak perlu pusing bongkar-bongkar kode komponennya bang. Semua data menu, harga, sama info kontak udah aku kumpulin rapi di satu file khusus: **`lib/menu-data.ts`**. 
 
@@ -64,7 +63,7 @@ Tinggal buka file itu, ubah teks atau harganya, simpan, otomatis webnya langsung
 
 ---
 
-## 🎵 Bikin Lirik Karaoke (Audio Setup)
+## Bikin Lirik Karaoke (Audio Setup)
 
 Aku pakai AI (Whisper) buat ngenalin suara penyanyi dari lagunya, terus dia bakal nge-generate lirik otomatis biar pas sama detiknya. Kalau abang mau ganti lagunya pakai lagu kesukaan abang:
 
@@ -82,7 +81,7 @@ Tungguin bentar, nanti otomatis file `lyrics.json`-nya ke-update dengan sendirin
 
 ---
 
-## 💻 Buat Jalanin di Laptop Abang (Local Dev)
+## Buat Jalanin di Laptop Abang (Local Dev)
 
 Kalau mau nyoba jalanin dan ngoprek kodenya di laptop sendiri, urutannya gini:
 
@@ -94,41 +93,40 @@ npm run build     # Bungkus kode biar padat buat dibawa ke server asli (Producti
 
 ---
 
-## 🐳 Cara Gampang Deploy ke VPS (Docker)
+## Cara Gampang Deploy ke VPS (Docker)
 
 Kebetulan aku juga nulis script kecil-kecilan buat gampangin *deploy* ke server Ubuntu (VPS):
 
 ```bash
 # 1. Install Docker dulu di server
-curl -fsSL https://get.docker.com | bash
-apt install -y docker-compose-plugin git
+apt install -y docker-compose
 
 # 2. Ambil kodenya dari Github abang
-git clone https://github.com/USERNAME/nasgorcok.git /var/www/nasgorcok
-cd /var/www/nasgorcok
+git clone https://github.com/USERNAME/nasgorcok.git
+cd nasgorcok
 
 # 3. Nyalain Docker (Udah Sepaket sama Traefik Auto-SSL!)
-docker compose up -d --build
+docker compose-up -d --build
 ```
 
 Udah! Gak perlu repot ngurusin Nginx atau jalanin Certbot manual. Di dalem file `docker-compose.yml` udah aku set pakai **Traefik**, dia bakal otomatis nyariin sertifikat HTTPS (Gembok Hijau) dari Let's Encrypt buat domain abang.
 
 ---
 
-## ☁️ Setup Domain di Cloudflare (PENTING)
+## Setup Domain di Cloudflare (PENTING)
 
 Karena abang pakai domain dari Cloudflare, ada ritual khususnya nih biar Traefik gak bentrok pas minta sertifikat HTTPS:
 
 1. Buka menu **DNS** di dashboard Cloudflare abang.
 2. Tambahin *A Record* buat nama domain (`nasgorcok.com` dan `www`) ke IP VPS abang.
 3. **PENTING:** Pastiin status **Proxy status**-nya dibikin ⚪ **DNS only** (awan abu-abu) DULU! Jangan di-oranye-in.
-4. Terus jalanin Dockernya (`docker compose up -d`). Traefik butuh baca IP asli buat verifikasi sertifikat SSL.
+4. Terus jalanin Dockernya (`docker-compose up -d`). Traefik butuh baca IP asli buat verifikasi sertifikat SSL.
 5. Tunggu sekitar 1 menitan. Kalau webnya udah bisa dibuka dan gemboknya ijo, balik lagi ke Cloudflare.
 6. Masuk ke menu **SSL/TLS** -> ganti modenya jadi **Full (strict)**.
 7. Balik ke DNS, nyalain lagi awannya jadi 🟠 **Proxied** (oranye) biar webnya kebal serangan DDoS.
 
-Aman sentosa deh! 🛡️
+Aman sentosa deh!
 
-Kira-kira begitu bang penjelasan singkat daleman warung digital aku. Kalau ada kode yang berantakan atau *bug*, maklumin aja namanya juga koki nasi goreng yang ngerangkap ngoding. 😂
+Kira-kira begitu bang penjelasan singkat daleman warung digital aku. Kalau ada kode yang berantakan atau *bug*, maklumin aja namanya juga koki nasi goreng yang ngerangkap ngoding.
 
-Semoga *source code* ini bermanfaat, entah buat bahan belajar atau mau dipake buat usaha abang-abang sendiri. **Salam dari dapur Mamas Ucok! 🍽️**
+Semoga *source code* ini bermanfaat, entah buat bahan belajar atau mau dipake buat usaha abang-abang sendiri. **Salam dari Mamas Ucok!**
