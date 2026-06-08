@@ -15,7 +15,7 @@ Repo ini isinya *source code* buat **Web Menu Digital Warung Nasi Goreng** punya
 - **Galeri Foto Ping-pong** — Ada deretan foto warung/jalanan yang geser sendiri (*scrolling*) super mulus di 60fps.
 - **Halaman Blog** — Disediain halaman khusus (`/blog`) buat nulis cerita dan bacotan *markdown* dengan tampilan *code block* estetik ala Carbon.
 - **Responsif** — Buka di layar PC/Laptop menunya jejer 3 kolom, buka di HP langsung rapi numpuk ke bawah biar gampang dibaca.
-- **Siap Docker & VPS** — *Deploy* gampang banget, udah aku siapin script.
+- **Siap Docker & VPS** — *Deploy* gampang banget, dari build langsung atau lewat Docker Hub.
 
 ---
 
@@ -95,21 +95,30 @@ npm run build     # Bungkus kode biar padat buat dibawa ke server asli (Producti
 
 ## Cara Gampang Deploy ke VPS (Docker)
 
-Kebetulan aku juga nulis script kecil-kecilan buat gampangin *deploy* ke server Ubuntu (VPS):
+Image udah otomatis ke-push ke [Docker Hub](https://hub.docker.com/r/yourtulloh/nasgorcok) tiap ada push ke `master`, makasih GitHub Actions. Tinggal pull and run di server:
 
 ```bash
-# 1. Install Docker dulu di server
-apt install -y docker-compose
+# 1. Install Docker & compose di VPS
+apt update && apt install -y docker.io docker-compose-v2
 
-# 2. Ambil kodenya dari Github abang
-git clone https://github.com/USERNAME/nasgorcok.git
+# 2. Tarik file compose & jalanin
+curl -O https://raw.githubusercontent.com/yourtulloh/nasgorcok/master/docker-compose.yml
+mkdir letsencrypt
+docker compose pull
+docker compose up -d
+```
+
+Atau cara lama (build dari source):
+
+```bash
+git clone https://github.com/yourtulloh/nasgorcok.git
 cd nasgorcok
-
-# 3. Nyalain Docker (Udah Sepaket sama Traefik Auto-SSL!)
-docker compose-up -d --build
+docker compose up -d --build
 ```
 
 Udah! Gak perlu repot ngurusin Nginx atau jalanin Certbot manual. Di dalem file `docker-compose.yml` udah aku set pakai **Traefik**, dia bakal otomatis nyariin sertifikat HTTPS (Gembok Hijau) dari Let's Encrypt buat domain abang.
+
+> **Catatan:** Kalau abang mau update, tinggal `git pull && docker compose up -d --build` (build lokal) atau `docker compose pull && docker compose up -d` (pake image dari Docker Hub). Dua-duanya gampang!
 
 ---
 

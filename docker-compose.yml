@@ -23,7 +23,8 @@ services:
 
   # Nasgorcok Web App
   app:
-    build: .
+    image: yourtulloh/nasgorcok:latest
+    pull_policy: always
     container_name: nasgorcok
     restart: unless-stopped
     environment:
