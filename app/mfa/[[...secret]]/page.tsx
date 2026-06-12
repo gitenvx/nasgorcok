@@ -209,7 +209,7 @@ export default function OTPPage() {
                       <div className="flex flex-col items-center shrink-0 relative mb-6">
                         <div 
                           onClick={handleCopy}
-                          className={`text-4xl sm:text-5xl md:text-7xl font-bold font-(--font-submenu) tracking-[0.1em] md:tracking-[0.2em] cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95 ${errorMsg || !totp ? "text-(--c-ash) opacity-30" : "text-(--c-red)"} whitespace-nowrap`}
+                          className={`text-4xl sm:text-5xl md:text-7xl font-bold tracking-widest md:tracking-[0.2em] cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95 ${errorMsg || !totp ? "text-(--c-ash) opacity-30" : "text-(--c-red)"} whitespace-nowrap`}
                           style={{ 
                             textShadow: !errorMsg && totp ? "0 0 15px rgba(204,26,26,0.5), 0 0 30px rgba(204,26,26,0.3)" : "none"
                           }}
@@ -222,15 +222,15 @@ export default function OTPPage() {
                       {/* PREV & NEXT CARDS */}
                       <div className="flex flex-row justify-center items-center gap-4 md:gap-8 w-full px-2 mt-4 opacity-70">
                         {/* PREV CARD */}
-                        <div className="flex flex-col items-center justify-center border border-[var(--c-border)] p-3 md:p-4 w-1/2 max-w-[150px] bg-[rgba(0,0,0,0.3)]">
+                        <div className="flex flex-col items-center justify-center border border-(--c-border) p-3 md:p-4 w-1/2 max-w-37.5 bg-[rgba(0,0,0,0.3)]">
                           <span className="text-[10px] md:text-xs font-(--font-submenu) tracking-widest uppercase mb-1 text-(--c-ash) opacity-50">PREV</span>
-                          <span className="text-sm md:text-lg font-bold font-(--font-submenu) tracking-widest text-(--c-ash)">{codes.prev}</span>
+                          <span className="text-sm md:text-lg font-bold tracking-widest text-(--c-ash)">{codes.prev}</span>
                         </div>
 
                         {/* NEXT CARD */}
-                        <div className="flex flex-col items-center justify-center border border-[var(--c-border)] p-3 md:p-4 w-1/2 max-w-[150px] bg-[rgba(0,0,0,0.3)]">
+                        <div className="flex flex-col items-center justify-center border border-(--c-border) p-3 md:p-4 w-1/2 max-w-37.5 bg-[rgba(0,0,0,0.3)]">
                           <span className="text-[10px] md:text-xs font-(--font-submenu) tracking-widest uppercase mb-1 text-(--c-ash) opacity-50">NEXT</span>
-                          <span className="text-sm md:text-lg font-bold font-(--font-submenu) tracking-widest text-(--c-ash)">{codes.next}</span>
+                          <span className="text-sm md:text-lg font-bold tracking-widest text-(--c-ash)">{codes.next}</span>
                         </div>
                       </div>
 
