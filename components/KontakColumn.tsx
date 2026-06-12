@@ -13,6 +13,35 @@ import { KONTAK } from "@/lib/menu-data";
  * @returns JSX element berisi daftar kontak dengan icon dan QR code QRIS
  */
 export default function KontakColumn() {
+  // Simple obfuscation for bot protection
+  const handleLinkClick = (e: React.MouseEvent, type: string) => {
+    e.preventDefault();
+    let rawUrl = '';
+    
+    if (type === 'wa') {
+      rawUrl = `https://wa.me/62${KONTAK.whatsapp.replace(/-/g, '').substring(1)}?text=${encodeURIComponent('Mamas Ucok, nasgor buka hari ini?')}`;
+    } else if (type === 'tg') {
+      rawUrl = `https://t.me/${KONTAK.telegram.replace('@', '')}`;
+    } else if (type === 'ig') {
+      rawUrl = `https://instagram.com/${KONTAK.instagram.replace('@', '')}`;
+    } else if (type === 'web') {
+      rawUrl = KONTAK.website;
+    } else if (type === 'email') {
+      rawUrl = `mailto:${KONTAK.email}`;
+    }
+
+    if (!rawUrl) return;
+
+    // Encode to base64 then decode to execute (basic client-side bot evasion)
+    const encoded = btoa(rawUrl);
+    
+    if (type === 'email') {
+      window.location.href = atob(encoded);
+    } else {
+      window.open(atob(encoded), '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
     <div className="col-divider flex flex-col py-4 px-4 md:px-5">
 
@@ -24,35 +53,35 @@ export default function KontakColumn() {
       </div>
 
       <div className="space-y-1 mb-4 hover-text">
-        <a href={`https://wa.me/62${KONTAK.whatsapp.replace(/-/g, '').substring(1)}?text=${encodeURIComponent('Mamas Ucok, nasgor buka hari ini?')}`} target="_blank" rel="noopener noreferrer" className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
+        <a onClick={(e) => handleLinkClick(e, 'wa')} className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
           <div className="flex items-center gap-2.5">
             <FaWhatsapp className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
             <span>WhatsApp</span>
           </div>
           <FiExternalLink className="opacity-40 text-[0.8em]" />
         </a>
-        <a href={`https://t.me/${KONTAK.telegram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
+        <a onClick={(e) => handleLinkClick(e, 'tg')} className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
           <div className="flex items-center gap-2.5">
             <FaTelegram className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
             <span>Telegram</span>
           </div>
           <FiExternalLink className="opacity-40 text-[0.8em]" />
         </a>
-        <a href={`https://instagram.com/${KONTAK.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
+        <a onClick={(e) => handleLinkClick(e, 'ig')} className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
           <div className="flex items-center gap-2.5">
             <FaInstagram className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
             <span>Instagram</span>
           </div>
           <FiExternalLink className="opacity-40 text-[0.8em]" />
         </a>
-        <a href={KONTAK.website} target="_blank" rel="noopener noreferrer" className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
+        <a onClick={(e) => handleLinkClick(e, 'web')} className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
           <div className="flex items-center gap-2.5">
             <FaGlobe className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
             <span>Website</span>
           </div>
           <FiExternalLink className="opacity-40 text-[0.8em]" />
         </a>
-        <a href={`mailto:${KONTAK.email}`} className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
+        <a onClick={(e) => handleLinkClick(e, 'email')} className="menu-item cursor-pointer flex items-center justify-between w-full pr-2">
           <div className="flex items-center gap-2.5">
             <TfiEmail className="shrink-0 opacity-80" style={{ fontSize: "1em" }} />
             <span>Email</span>
