@@ -775,6 +775,12 @@ body {
     drop-shadow(0 0 15px rgba(255,255,255,0.5));
 }
 
+/* Light theme — dark bg instead of white */
+[data-theme='light'] .re-textbox {
+  background: rgba(10, 10, 10, 0.88) !important;
+  color: #e8e0d0 !important;
+}
+
 
 /* ══════════════════════════════════════════════
    ABOUT SECTION (RE Requiem style)

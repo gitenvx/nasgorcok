@@ -114,7 +114,7 @@ export default function StorySection() {
               <button
                 key={`ig-${i}`}
                 onClick={() => goTo(i)}
-                className="relative h-0.5 md:h-0.75 flex-1 bg-[var(--c-border)] hover:bg-[var(--c-dim)] transition-colors overflow-hidden cursor-pointer"
+                className="relative h-0.5 md:h-0.75 flex-1 bg-(--c-border) hover:bg-(--c-dim) transition-colors overflow-hidden cursor-pointer"
                 aria-label={`Go to slide ${i + 1}`}
               >
                 <div 
@@ -156,7 +156,7 @@ export default function StorySection() {
                         fill="transparent"
                         stroke="var(--c-border)"
                         strokeWidth="2.5"
-                        className="transition-colors duration-300 group-hover:stroke-[var(--c-dim)]"
+                        className="transition-colors duration-300 group-hover:stroke-(--c-dim)"
                       />
                       {/* Active progress circle */}
                       {isActive && (
@@ -285,10 +285,9 @@ export default function StorySection() {
           <div className="flex flex-col gap-0.5 lg:gap-0.75 max-w-4xl">
             {STORY.desc.map((paragraph, i) => (
               <div key={i} className="text-left">
-                <span 
+                <span
                   className="re-textbox"
                   style={{
-                    backgroundColor: "rgba(235, 235, 235, 0.95)",
                     lineHeight: "1.5"
                   }}
                 >

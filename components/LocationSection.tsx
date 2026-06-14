@@ -251,16 +251,16 @@ export default function LocationSection() {
           {/* ── Blueprint Grid Overlay (Framing Center Image) ── */}
           <div className="absolute inset-0 pointer-events-none z-0 block overflow-hidden opacity-80">
             {/* Horizontal Grid Lines */}
-            <div className="absolute left-0 w-full h-[2px] bg-linear-to-r from-transparent via-(--c-red) to-transparent opacity-70 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" style={{ top: '0rem' }} />
-            <div className="absolute left-0 w-full h-[2px] bg-linear-to-r from-transparent via-(--c-red) to-transparent opacity-70 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" style={{ top: 'calc(1rem + min(70vw, 600px) * 0.625 + 1rem)' }} />
+            <div className="absolute left-0 w-full h-0.5 bg-linear-to-r from-transparent via-(--c-red) to-transparent opacity-70 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" style={{ top: '0rem' }} />
+            <div className="absolute left-0 w-full h-0.5 bg-linear-to-r from-transparent via-(--c-red) to-transparent opacity-70 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" style={{ top: 'calc(1rem + min(70vw, 600px) * 0.625 + 1rem)' }} />
             
             {/* Inner Vertical Framing Grid Lines */}
-            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+1rem)] w-[2px] bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-80 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-300" />
-            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+1rem)] w-[2px] bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-80 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-300" />
+            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+1rem)] w-0.5 bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-80 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-300" />
+            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+1rem)] w-0.5 bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-80 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-300" />
             
             {/* Outer Vertical Framing Grid Lines */}
-            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+3rem)] w-[2px] bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-40 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-400" />
-            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+3rem)] w-[2px] bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-40 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-400" />
+            <div className="absolute top-0 bottom-0 left-[50%] -translate-x-[calc(min(70vw,600px)/2+3rem)] w-0.5 bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-40 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-400" />
+            <div className="absolute top-0 bottom-0 left-[50%] translate-x-[calc(min(70vw,600px)/2+3rem)] w-0.5 bg-linear-to-b from-transparent via-(--c-red) to-transparent opacity-40 hud-line-y transform scale-y-0 origin-center transition-transform duration-1000 ease-out delay-400" />
           </div>
 
           <div 
@@ -305,7 +305,7 @@ export default function LocationSection() {
 
           {/* Scroll Navigation */}
           <ScrollReveal revealClass="" className="relative w-full flex flex-col justify-center items-center mt-1 md:mt-2 z-20">
-            <div className="absolute bottom-0 left-0 w-full h-[2px] bg-linear-to-r from-transparent via-(--c-red) to-transparent opacity-60 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" />
+            <div className="absolute bottom-0 left-0 w-full h-0.5 bg-linear-to-r from-transparent via-(--c-red) to-transparent opacity-60 hud-line-x transform scale-x-0 origin-center transition-transform duration-1000 ease-out delay-150" />
 
             <div className="flex items-center justify-between w-62.5 md:w-100 relative z-10 mb-2 md:mb-3">
               <button 
@@ -331,7 +331,7 @@ export default function LocationSection() {
                 <div className="w-full h-0.5 bg-(--c-dim) opacity-40 transition-opacity group-hover/track:opacity-80" />
                 <div 
                   ref={thumbRef}
-                  className="absolute h-0.5 md:h-0.75 bg-[var(--c-red)] shadow-[0_0_8px_var(--c-red)] rounded-full will-change-[left]"
+                  className="absolute h-0.5 md:h-0.75 bg-(--c-red) shadow-[0_0_8px_var(--c-red)] rounded-full will-change-[left]"
                   style={{ 
                     width: `${100 / images.length}%`,
                     left: `${(activeIdx / images.length) * 100}%` 
